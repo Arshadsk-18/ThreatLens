@@ -12,6 +12,7 @@ from pathlib import Path
 import httpx
 import pytest
 import respx
+
 from app.schemas import NormalizedCandidate
 from app.services.sources.apple import AppleItunesAdapter
 from app.services.sources.bluesky import BlueskyPublicAdapter

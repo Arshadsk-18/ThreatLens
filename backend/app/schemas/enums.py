@@ -83,7 +83,6 @@ class VerificationMethod(str, Enum):
 class IdentityDecision(str, Enum):
     """Outcome of IdentityGuard and scoring evaluation."""
 
-    CLEARED_BY_IDENTITY = "CLEARED_BY_IDENTITY"
     OFFICIAL_EXACT_MATCH = "OFFICIAL_EXACT_MATCH"
     OFFICIAL_PUBLISHER_MATCH = "OFFICIAL_PUBLISHER_MATCH"
     AUTHORIZED_PARTNER_MATCH = "AUTHORIZED_PARTNER_MATCH"
@@ -99,6 +98,9 @@ class IdentityDecision(str, Enum):
         ):
             return True
         return super().__eq__(other)
+
+    def __ne__(self, other: object) -> bool:
+        return not self.__eq__(other)
 
     def __hash__(self) -> int:
         return hash(self.value)

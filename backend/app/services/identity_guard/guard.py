@@ -37,14 +37,13 @@ from dataclasses import dataclass
 from typing import Any
 from uuid import UUID
 
-from pydantic import BaseModel
-
 from backend.app.services.query_planner.models import (
     BrandCtx,
     IdentityDecision,
     OfficialAssetCtx,
     Relationship,
 )
+from pydantic import BaseModel
 
 
 @dataclass(frozen=True)
@@ -198,17 +197,6 @@ def evaluate_identity_guard(
                     rule="R3_PARTNER",
                     matched_official_asset_id=asset.id,
                     explanation=f"Cleared: partner {key} match '{val}' with registered authorized partner '{asset.display_name}'.",
-                )
-
-        # Check developer_id match if trust_publisher is set for partner
-        if cand_dev_id and asset.trust_publisher:
-            asset_dev_id = _clean_id(asset.developer_id)
-            if asset_dev_id and asset_dev_id == cand_dev_id:
-                return IdentityGuardResult(
-                    decision=IdentityDecision.AUTHORIZED_PARTNER_MATCH,
-                    rule="R3_PARTNER",
-                    matched_official_asset_id=asset.id,
-                    explanation=f"Cleared: published by authorized partner developer ID '{asset.developer_id}'.",
                 )
 
     # 4. No match: proceeds to relevance gate and scoring

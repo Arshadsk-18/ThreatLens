@@ -23,6 +23,7 @@ from pathlib import Path
 from uuid import uuid4
 
 import pytest
+
 from app.schemas import (
     PlannedQuery,
     QueryPlan,

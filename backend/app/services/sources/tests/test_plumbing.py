@@ -12,6 +12,7 @@ from datetime import UTC, datetime
 import httpx
 import pytest
 import respx
+
 from app.schemas import (
     AssetType,
     NormalizedCandidate,

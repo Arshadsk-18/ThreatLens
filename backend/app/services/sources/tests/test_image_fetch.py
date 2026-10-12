@@ -13,12 +13,13 @@ import string
 import httpx
 import pytest
 import respx
+from PIL import Image, ImageDraw
+
 from app.services.image_fetch import (
     fetch_icon_hash,
     is_host_allowlisted,
     is_ip_literal,
 )
-from PIL import Image, ImageDraw
 
 
 def hamming_distance(hex1: str, hex2: str) -> int:

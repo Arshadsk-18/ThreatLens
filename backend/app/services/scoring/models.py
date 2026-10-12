@@ -7,13 +7,12 @@ from enum import Enum
 from typing import Any
 from uuid import UUID
 
-from pydantic import BaseModel, Field
-
 from backend.app.services.normalization.techniques import LookalikeTechnique
 from backend.app.services.query_planner.models import (
     AssetType,
     IdentityDecision,
 )
+from pydantic import BaseModel, Field
 
 
 class Severity(str, Enum):

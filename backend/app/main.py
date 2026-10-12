@@ -4,8 +4,14 @@ Contract Version: 3.0.0
 Single Source of Truth: docs/ARCHITECTURE_API_CONTRACT.md
 """
 
+import sys
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from pathlib import Path
+
+_backend_dir = Path(__file__).resolve().parent.parent
+if str(_backend_dir) not in sys.path:
+    sys.path.insert(0, str(_backend_dir))
 
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError

@@ -699,7 +699,7 @@ class MemoryStore:
                 "relationship": Relationship.AUTHORIZED_PARTNER,
                 "verification_method": VerificationMethod.STORE_LOOKUP,
                 "is_verified": True,
-                "trust_publisher": True,
+                "trust_publisher": False,
                 "is_active": True,
                 "notes": "Partner demo iOS app",
                 "created_at": now,

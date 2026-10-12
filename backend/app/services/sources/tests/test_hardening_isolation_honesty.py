@@ -13,6 +13,7 @@ from uuid import uuid4
 
 import pytest
 import respx
+
 from app.schemas import (
     PlannedQuery,
     QueryPlan,

@@ -27,8 +27,6 @@ from collections.abc import Sequence
 from datetime import UTC, datetime
 from pathlib import Path
 
-from rapidfuzz import fuzz
-
 from backend.app.services.compare.comparison import icon_similarity
 from backend.app.services.query_planner.models import (
     BrandCtx,
@@ -40,6 +38,7 @@ from backend.app.services.scoring.models import (
     NormalizedCandidate,
     SignalResult,
 )
+from rapidfuzz import fuzz
 
 LEXICONS_DIR = Path(__file__).resolve().parent.parent / "lexicons"
 

@@ -9,6 +9,7 @@ from __future__ import annotations
 from uuid import uuid4
 
 import pytest
+
 from app.schemas import PlannedQuery, QueryPlan, SourceMode, SourceStatus
 from app.services.sources.demo import DemoFixtureAdapter, RecordedFixtureAdapter
 

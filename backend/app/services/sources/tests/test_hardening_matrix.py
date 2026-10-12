@@ -12,6 +12,7 @@ from uuid import uuid4
 import httpx
 import pytest
 import respx
+
 from app.schemas import (
     PlannedQuery,
     ProviderErrorCode,

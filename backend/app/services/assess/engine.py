@@ -10,6 +10,7 @@ Follows the pipeline from Sections 5.2, 7, 8.2, 8.3, 8.4, 8.4a, 8.5, and 12.
 from __future__ import annotations
 
 from collections.abc import Sequence
+from typing import Any
 from uuid import UUID
 
 from backend.app.services.identity_guard.guard import evaluate_identity_guard
@@ -146,7 +147,7 @@ def assess(
                 canonical_url="https://apps.apple.com/in/app/kaveri-merchant/id1234567899",
                 icon_hash="0000000000000007",
                 relationship=Relationship.AUTHORIZED_PARTNER,
-                trust_publisher=True,
+                trust_publisher=False,
             ),
             OfficialAssetCtx(
                 id=UUID("c0000004-0000-4000-8000-000000000004"),

@@ -432,7 +432,7 @@ class ScanOrchestrator:
                             publisher_name=cand.publisher_name,
                             icon_url=cand.icon_url,
                         ),
-                        decision=IdentityDecision.CLEARED_BY_IDENTITY if mode == ScanMode.DEMO else result.identity_decision,
+                        decision=result.identity_decision,
                         rule=result.rule,
                         matched_official_asset_id=result.matched_official_asset_id,
                         explanation=result.explanation,

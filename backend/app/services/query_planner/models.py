@@ -7,6 +7,7 @@ Sections 5.4, 7, and 12 of ARCHITECTURE_API_CONTRACT.md.
 from __future__ import annotations
 
 from enum import Enum
+from typing import Any
 from uuid import UUID, uuid4
 
 from pydantic import BaseModel, Field, model_validator
@@ -30,7 +31,6 @@ class VerificationMethod(str, Enum):
 
 
 class IdentityDecision(str, Enum):
-    CLEARED_BY_IDENTITY = "CLEARED_BY_IDENTITY"
     OFFICIAL_EXACT_MATCH = "OFFICIAL_EXACT_MATCH"
     OFFICIAL_PUBLISHER_MATCH = "OFFICIAL_PUBLISHER_MATCH"
     AUTHORIZED_PARTNER_MATCH = "AUTHORIZED_PARTNER_MATCH"
@@ -46,6 +46,9 @@ class IdentityDecision(str, Enum):
         ):
             return True
         return super().__eq__(other)
+
+    def __ne__(self, other: object) -> bool:
+        return not self.__eq__(other)
 
     def __hash__(self) -> int:
         return hash(self.value)
@@ -65,9 +68,8 @@ class BrandCtx(BaseModel):
     @model_validator(mode="before")
     @classmethod
     def _remap_brand_id(cls, data: Any) -> Any:
-        if isinstance(data, dict):
-            if "brand_id" in data and "id" not in data:
-                data["id"] = data["brand_id"]
+        if isinstance(data, dict) and "brand_id" in data and "id" not in data:
+            data["id"] = data["brand_id"]
         return data
 
     @property
@@ -100,9 +102,8 @@ class OfficialAssetCtx(BaseModel):
     @model_validator(mode="before")
     @classmethod
     def _remap_asset_id(cls, data: Any) -> Any:
-        if isinstance(data, dict):
-            if "asset_id" in data and "id" not in data:
-                data["id"] = data["asset_id"]
+        if isinstance(data, dict) and "asset_id" in data and "id" not in data:
+            data["id"] = data["asset_id"]
         return data
 
     @property

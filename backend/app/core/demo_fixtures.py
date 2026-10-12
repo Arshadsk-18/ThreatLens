@@ -49,7 +49,12 @@ def load_demo_fixture_candidates(
                 data = json.load(f)
             fixtures = data.get("fixtures", [])
             if fixtures:
-                return [NormalizedCandidate(**item["candidate"]) for item in fixtures]
+                candidates = []
+                for item in fixtures:
+                    cand_data = dict(item["candidate"])
+                    cand_data["source_mode"] = SourceMode.SIMULATED
+                    candidates.append(NormalizedCandidate(**cand_data))
+                return candidates
         except Exception:
             pass
 
