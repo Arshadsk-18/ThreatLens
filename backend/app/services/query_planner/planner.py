@@ -22,8 +22,8 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 
-from backend.app.services.normalization.name_similarity import normalize_name
-from backend.app.services.query_planner.models import (
+from app.services.normalization.name_similarity import normalize_name
+from app.services.query_planner.models import (
     BrandCtx,
     OfficialAssetCtx,
     PlannedQuery,

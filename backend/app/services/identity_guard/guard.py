@@ -37,13 +37,14 @@ from dataclasses import dataclass
 from typing import Any
 from uuid import UUID
 
-from backend.app.services.query_planner.models import (
+from pydantic import BaseModel
+
+from app.services.query_planner.models import (
     BrandCtx,
     IdentityDecision,
     OfficialAssetCtx,
     Relationship,
 )
-from pydantic import BaseModel
 
 
 @dataclass(frozen=True)

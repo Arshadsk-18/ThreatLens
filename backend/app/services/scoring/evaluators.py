@@ -27,18 +27,19 @@ from collections.abc import Sequence
 from datetime import UTC, datetime
 from pathlib import Path
 
-from backend.app.services.compare.comparison import icon_similarity
-from backend.app.services.query_planner.models import (
+from rapidfuzz import fuzz
+
+from app.services.compare.comparison import icon_similarity
+from app.services.query_planner.models import (
     BrandCtx,
     OfficialAssetCtx,
 )
-from backend.app.services.scoring.models import (
+from app.services.scoring.models import (
     EvidenceGroup,
     EvidenceStatus,
     NormalizedCandidate,
     SignalResult,
 )
-from rapidfuzz import fuzz
 
 LEXICONS_DIR = Path(__file__).resolve().parent.parent / "lexicons"
 

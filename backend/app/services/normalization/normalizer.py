@@ -13,11 +13,12 @@ import unicodedata
 from collections.abc import Sequence
 from dataclasses import dataclass
 
-from backend.app.services.normalization.technique import (
+from rapidfuzz import fuzz
+
+from app.services.normalization.technique import (
     LookalikeTechnique,
     classify_technique,
 )
-from rapidfuzz import fuzz
 
 # Common confusable / homoglyph mapping to Latin ASCII
 # Cyrillic, Greek, fullwidth, and related lookalikes

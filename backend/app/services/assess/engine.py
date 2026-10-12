@@ -13,30 +13,30 @@ from collections.abc import Sequence
 from typing import Any
 from uuid import UUID
 
-from backend.app.services.identity_guard.guard import evaluate_identity_guard
-from backend.app.services.normalization.name_similarity import (
+from app.services.identity_guard.guard import evaluate_identity_guard
+from app.services.normalization.name_similarity import (
     calculate_name_similarity,
     calculate_social_name_similarity,
 )
-from backend.app.services.normalization.techniques import (
+from app.services.normalization.techniques import (
     LookalikeTechnique,
     classify_technique,
 )
-from backend.app.services.query_planner.models import (
+from app.services.query_planner.models import (
     AssetType,
     BrandCtx,
     IdentityDecision,
     OfficialAssetCtx,
     Relationship,
 )
-from backend.app.services.scoring.evaluators import (
+from app.services.scoring.evaluators import (
     DISCLAIMER_TERMS,
     count_lexicon_hits,
     evaluate_app_signals,
     evaluate_social_signals,
     extract_domain,
 )
-from backend.app.services.scoring.models import (
+from app.services.scoring.models import (
     AssessmentResult,
     EvidenceGroup,
     EvidenceStatus,

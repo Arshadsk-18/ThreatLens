@@ -12,7 +12,7 @@ try:
         icon_similarity,
     )
 except (ImportError, ModuleNotFoundError):
-    from backend.app.services.compare.comparison import (
+    from app.services.compare.comparison import (
         FieldComparison,
         compare,
         hamming_distance_phash,

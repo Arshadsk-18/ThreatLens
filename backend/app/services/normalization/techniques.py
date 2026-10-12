@@ -16,7 +16,7 @@ Precedence order:
 from enum import Enum
 from typing import Any
 
-from backend.app.services.normalization.name_similarity import normalize_name
+from app.services.normalization.name_similarity import normalize_name
 
 
 class LookalikeTechnique(str, Enum):

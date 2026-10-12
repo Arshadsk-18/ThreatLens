@@ -10,9 +10,10 @@ from __future__ import annotations
 import difflib
 from typing import Any
 
-from backend.app.services.query_planner.models import OfficialAssetCtx
-from backend.app.services.scoring.models import NormalizedCandidate
 from pydantic import BaseModel, Field
+
+from app.services.query_planner.models import OfficialAssetCtx
+from app.services.scoring.models import NormalizedCandidate
 
 
 class FieldComparison(BaseModel):

@@ -11,14 +11,14 @@ from pathlib import Path
 from typing import Any, Literal
 from uuid import uuid4
 
-from backend.app.services.assess.engine import assess
-from backend.app.services.normalization.name_similarity import calculate_name_similarity
-from backend.app.services.query_planner.models import (
+from app.services.assess.engine import assess
+from app.services.normalization.name_similarity import calculate_name_similarity
+from app.services.query_planner.models import (
     BrandCtx,
     IdentityDecision,
     OfficialAssetCtx,
 )
-from backend.app.services.scoring.models import NormalizedCandidate, ScoringConfig
+from app.services.scoring.models import NormalizedCandidate, ScoringConfig
 
 DATASETS_DIR = Path(__file__).resolve().parent.parent.parent / "eval" / "datasets"
 
