@@ -818,9 +818,10 @@ class InMemoryAssessmentRepo(AssessmentRepo):
                 observed_at=cand.get("last_seen_at"),
                 candidate_asset_id=cand["id"],
             )
-            records.append(rec)
+            records.append((ass.get("created_at") or _utc_now(), rec))
 
-        records.sort(key=lambda r: r.observed_at or _utc_now(), reverse=True)
-        total = len(records)
-        paginated = records[offset : offset + limit]
+        records.sort(key=lambda item: item[0], reverse=True)
+        sorted_records = [r for _, r in records]
+        total = len(sorted_records)
+        paginated = sorted_records[offset : offset + limit]
         return Page(items=paginated, total=total, limit=limit, offset=offset)

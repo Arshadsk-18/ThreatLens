@@ -29,6 +29,8 @@ class UTCDateTime(TypeDecorator):
     def process_bind_param(self, value: Any, dialect: Any) -> Any:
         if value is None:
             return None
+        if isinstance(value, str):
+            value = datetime.fromisoformat(value)
         if not isinstance(value, datetime):
             raise TypeError(f"Expected datetime, got {type(value)}")
         if value.tzinfo is None:
