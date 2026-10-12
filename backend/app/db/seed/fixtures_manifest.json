@@ -1,0 +1,2173 @@
+{
+  "total": 60,
+  "fixtures": [
+    {
+      "id": "c-0001",
+      "intended_label": "cleared_r1",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "1234567890",
+        "secondary_identifiers": {
+          "bundle_id": "com.kaveribank.mobile"
+        },
+        "display_name": "Kaveri Bank",
+        "handle": null,
+        "publisher_name": "Kaveri Bank Ltd",
+        "developer_id": "9000000001",
+        "description": "Official mobile banking application of Kaveri Bank.",
+        "category": "Finance",
+        "external_links": [
+          "https://kaveribank.example"
+        ],
+        "icon_url": "https://assets.example.org/icons/kb_official.png",
+        "icon_hash": "0000000000000000",
+        "canonical_url": "https://apps.apple.com/in/app/kaveri-bank/id1234567890",
+        "created_at_source": "2020-01-15T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 45000,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "kaveri bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0002",
+      "intended_label": "cleared_r1",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "bluesky_public",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:kaveriofficial123",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Bank",
+        "handle": "kaveribank.example",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Official Bluesky handle for Kaveri Bank. Updates and support.",
+        "category": null,
+        "external_links": [
+          "https://kaveribank.example"
+        ],
+        "icon_url": "https://assets.example.org/avatars/kb_bsky.png",
+        "icon_hash": "0000000000000000",
+        "canonical_url": "https://bsky.app/profile/kaveribank.example",
+        "created_at_source": "2023-05-10T00:00:00Z",
+        "followers": 15000,
+        "following": 12,
+        "posts_count": 850,
+        "rating_count": null,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "kaveri bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0003",
+      "intended_label": "cleared_r2",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "1234567891",
+        "secondary_identifiers": {
+          "bundle_id": "com.kaveribank.wealth"
+        },
+        "display_name": "Kaveri Wealth Management",
+        "handle": null,
+        "publisher_name": "Kaveri Bank Ltd",
+        "developer_id": "9000000001",
+        "description": "Portfolio and wealth management services by Kaveri Bank.",
+        "category": "Finance",
+        "external_links": [
+          "https://kaveribank.example/wealth"
+        ],
+        "icon_url": "https://assets.example.org/icons/kb_wealth.png",
+        "icon_hash": "0000000000000000",
+        "canonical_url": "https://apps.apple.com/in/app/kaveri-wealth/id1234567891",
+        "created_at_source": "2022-03-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 3200,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      }
+    },
+    {
+      "id": "c-0004",
+      "intended_label": "cleared_r3",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "1234567899",
+        "secondary_identifiers": {
+          "bundle_id": "com.kaveribank.partner"
+        },
+        "display_name": "Kaveri Merchant Connect",
+        "handle": null,
+        "publisher_name": "Kaveri Partner Solutions",
+        "developer_id": "9000000099",
+        "description": "Authorized partner portal for Kaveri Bank merchant settlement.",
+        "category": "Finance",
+        "external_links": [
+          "https://partner.kaveribank.example"
+        ],
+        "icon_url": "https://assets.example.org/icons/kb_partner.png",
+        "icon_hash": "0000000000000000",
+        "canonical_url": "https://apps.apple.com/in/app/kaveri-merchant/id1234567899",
+        "created_at_source": "2023-01-10T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 890,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0005",
+      "intended_label": "cleared_r1",
+      "asset_type": "ANDROID_APP",
+      "platform": "google_play",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "google_play",
+        "asset_type": "ANDROID_APP",
+        "stable_identifier": "com.kaveribank.android",
+        "secondary_identifiers": {
+          "package_name": "com.kaveribank.android"
+        },
+        "display_name": "Kaveri Bank Mobile",
+        "handle": null,
+        "publisher_name": "Kaveri Bank Ltd",
+        "developer_id": "Kaveri Bank Ltd",
+        "description": "Official Android app for Kaveri Bank customers.",
+        "category": "Finance",
+        "external_links": [
+          "https://kaveribank.example"
+        ],
+        "icon_url": "https://assets.example.org/icons/kb_android.png",
+        "icon_hash": "0000000000000000",
+        "canonical_url": "https://play.google.com/store/apps/details?id=com.kaveribank.android",
+        "created_at_source": "2020-02-20T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 120000,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0006",
+      "intended_label": "benign_g5",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "bluesky_public",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:kaverifanshonest01",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Bank Fans",
+        "handle": "kaverifans.bsky.social",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Unofficial fan page, not affiliated. Community discussions about regional banking history.",
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://assets.example.org/avatars/fan_honest.png",
+        "icon_hash": "000000001f7f7fff",
+        "canonical_url": "https://bsky.app/profile/kaverifans.bsky.social",
+        "created_at_source": "2024-06-01T00:00:00Z",
+        "followers": 2300,
+        "following": 150,
+        "posts_count": 900,
+        "rating_count": null,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "kaveri bank fans"
+        ]
+      }
+    },
+    {
+      "id": "c-0007",
+      "intended_label": "benign_g5",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "bluesky_public",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:kaverifansquotes02",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Bank Enthusiasts",
+        "handle": "kaveriquotes.bsky.social",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Unofficial fan page, not affiliated. Devoted to Kaveri Bank customer experiences and legacy.",
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://assets.example.org/avatars/fan_quotes.png",
+        "icon_hash": "000000001f7f7fff",
+        "canonical_url": "https://bsky.app/profile/kaveriquotes.bsky.social",
+        "created_at_source": "2024-05-15T00:00:00Z",
+        "followers": 1800,
+        "following": 80,
+        "posts_count": 420,
+        "rating_count": null,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "kaveri bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0008",
+      "intended_label": "benign_g4",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "98000008",
+        "secondary_identifiers": {
+          "bundle_id": "com.kaveri.food&drink"
+        },
+        "display_name": "Kaveri Coffee Roasters",
+        "handle": null,
+        "publisher_name": "Coffee Roasters Ltd",
+        "developer_id": "1000000001",
+        "description": "Artisan filter coffee and beans delivered across Karnataka.",
+        "category": "Food & Drink",
+        "external_links": [
+          "https://food&drink.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/c-0008.png",
+        "icon_hash": "000000001f7f7fff",
+        "canonical_url": "https://apps.apple.com/app/id98000008",
+        "created_at_source": "2021-08-10T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 450,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      }
+    },
+    {
+      "id": "c-0009",
+      "intended_label": "benign_g4",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "98000009",
+        "secondary_identifiers": {
+          "bundle_id": "com.kaveri.shopping"
+        },
+        "display_name": "Kaveri Silk & Sarees",
+        "handle": null,
+        "publisher_name": "Kaveri Handlooms",
+        "developer_id": "1000000002",
+        "description": "Traditional pure Mysore silk sarees catalog and store locator.",
+        "category": "Shopping",
+        "external_links": [
+          "https://shopping.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/c-0009.png",
+        "icon_hash": "000000001f7f7fff",
+        "canonical_url": "https://apps.apple.com/app/id98000009",
+        "created_at_source": "2021-08-10T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 450,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      }
+    },
+    {
+      "id": "c-0010",
+      "intended_label": "benign_g4",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "98000010",
+        "secondary_identifiers": {
+          "bundle_id": "com.kaveri.travel"
+        },
+        "display_name": "Kaveri Travel Guides",
+        "handle": null,
+        "publisher_name": "Heritage Trails",
+        "developer_id": "1000000003",
+        "description": "Offline audio guides and trail maps for Kaveri basin historical sites.",
+        "category": "Travel",
+        "external_links": [
+          "https://travel.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/c-0010.png",
+        "icon_hash": "000000001f7f7fff",
+        "canonical_url": "https://apps.apple.com/app/id98000010",
+        "created_at_source": "2021-08-10T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 450,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      }
+    },
+    {
+      "id": "c-0011",
+      "intended_label": "benign_g4",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "98000011",
+        "secondary_identifiers": {
+          "bundle_id": "com.kaveri.utilities"
+        },
+        "display_name": "Kaveri Water Purifiers",
+        "handle": null,
+        "publisher_name": "Kaveri CleanTech",
+        "developer_id": "1000000004",
+        "description": "IoT companion app for residential smart water purifier filters.",
+        "category": "Utilities",
+        "external_links": [
+          "https://utilities.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/c-0011.png",
+        "icon_hash": "000000001f7f7fff",
+        "canonical_url": "https://apps.apple.com/app/id98000011",
+        "created_at_source": "2021-08-10T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 450,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      }
+    },
+    {
+      "id": "c-0012",
+      "intended_label": "benign_g4",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "98000012",
+        "secondary_identifiers": {
+          "bundle_id": "com.kaveri.business"
+        },
+        "display_name": "Kaveri Real Estate",
+        "handle": null,
+        "publisher_name": "Kaveri Properties",
+        "developer_id": "1000000005",
+        "description": "Residential and agricultural land plots in Mysore and Bangalore.",
+        "category": "Business",
+        "external_links": [
+          "https://business.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/c-0012.png",
+        "icon_hash": "000000001f7f7fff",
+        "canonical_url": "https://apps.apple.com/app/id98000012",
+        "created_at_source": "2021-08-10T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 450,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      }
+    },
+    {
+      "id": "c-0013",
+      "intended_label": "benign_g4",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "98000013",
+        "secondary_identifiers": {
+          "bundle_id": "com.kaveri.music"
+        },
+        "display_name": "Kaveri Music Player",
+        "handle": null,
+        "publisher_name": "Deccan Beats",
+        "developer_id": "1000000006",
+        "description": "Offline music player with audio equalization and playlist management.",
+        "category": "Music",
+        "external_links": [
+          "https://music.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/c-0013.png",
+        "icon_hash": "000000001f7f7fff",
+        "canonical_url": "https://apps.apple.com/app/id98000013",
+        "created_at_source": "2021-08-10T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 450,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      }
+    },
+    {
+      "id": "c-0014",
+      "intended_label": "benign_g4",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:kaveriws001",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Wildlife Sanctuary",
+        "handle": "did:plc:kaveriws001",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Conservation updates, flora and fauna photography from sanctuary rangers.",
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://assets.example.org/avatars/c-0014.png",
+        "icon_hash": "000000001f7f7fff",
+        "canonical_url": "https://bluesky.example.com/did:plc:kaveriws001",
+        "created_at_source": "2022-04-12T00:00:00Z",
+        "followers": 1200,
+        "following": 140,
+        "posts_count": 310,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      }
+    },
+    {
+      "id": "c-0015",
+      "intended_label": "benign_g4",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:kaverilit002",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Literary Society",
+        "handle": "did:plc:kaverilit002",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Monthly book reviews, Kannada poetry readings and cultural archives.",
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://assets.example.org/avatars/c-0015.png",
+        "icon_hash": "000000001f7f7fff",
+        "canonical_url": "https://bluesky.example.com/did:plc:kaverilit002",
+        "created_at_source": "2022-04-12T00:00:00Z",
+        "followers": 1200,
+        "following": 140,
+        "posts_count": 310,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      }
+    },
+    {
+      "id": "c-0016",
+      "intended_label": "benign_g4",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "instagram",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "instagram",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "handle:kaveri_photo_club",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Photography Club",
+        "handle": "kaveri_photo_club",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Weekly landscape photography contests along river tributaries.",
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://assets.example.org/avatars/c-0016.png",
+        "icon_hash": "000000001f7f7fff",
+        "canonical_url": "https://instagram.example.com/kaveri_photo_club",
+        "created_at_source": "2022-04-12T00:00:00Z",
+        "followers": 1200,
+        "following": 140,
+        "posts_count": 310,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      }
+    },
+    {
+      "id": "c-0017",
+      "intended_label": "benign_g4",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "x",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "x",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "handle:kaveri_clean",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri River Conservation",
+        "handle": "kaveri_clean",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Citizen volunteers monitoring river water purity and tree plantation drives.",
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://assets.example.org/avatars/c-0017.png",
+        "icon_hash": "000000001f7f7fff",
+        "canonical_url": "https://x.example.com/kaveri_clean",
+        "created_at_source": "2022-04-12T00:00:00Z",
+        "followers": 1200,
+        "following": 140,
+        "posts_count": 310,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      }
+    },
+    {
+      "id": "c-0018",
+      "intended_label": "benign_g4",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "facebook",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "facebook",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "handle:kaveri_sports",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Youth Sports Club",
+        "handle": "kaveri_sports",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Local grassroots football, cricket tournaments and fitness camps.",
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://assets.example.org/avatars/c-0018.png",
+        "icon_hash": "000000001f7f7fff",
+        "canonical_url": "https://facebook.example.com/kaveri_sports",
+        "created_at_source": "2022-04-12T00:00:00Z",
+        "followers": 1200,
+        "following": 140,
+        "posts_count": 310,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      }
+    },
+    {
+      "id": "c-0019",
+      "intended_label": "benign_g4",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:kaveridance003",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Classical Dance Academy",
+        "handle": "did:plc:kaveridance003",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Bharatanatyam training workshops and seasonal performance schedules.",
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://assets.example.org/avatars/c-0019.png",
+        "icon_hash": "000000001f7f7fff",
+        "canonical_url": "https://bluesky.example.com/did:plc:kaveridance003",
+        "created_at_source": "2022-04-12T00:00:00Z",
+        "followers": 1200,
+        "following": 140,
+        "posts_count": 310,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      }
+    },
+    {
+      "id": "c-0020",
+      "intended_label": "impersonation_added_word",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "9876543210",
+        "secondary_identifiers": {
+          "bundle_id": "com.kaveribank.rewards"
+        },
+        "display_name": "Kaveri Bank Rewards",
+        "handle": null,
+        "publisher_name": "KB Rewards Studio",
+        "developer_id": "9000000042",
+        "description": "Official Kaveri Bank rewards catalog. Login to claim cashback, instant loan and redeem credit card points.",
+        "category": "Finance",
+        "external_links": [
+          "https://kb-rewards.example"
+        ],
+        "icon_url": "https://assets.example.org/icons/kb_fake_rewards.png",
+        "icon_hash": "000000000000000f",
+        "canonical_url": "https://apps.apple.com/app/id9876543210",
+        "created_at_source": "2026-09-21T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 12,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri bank rewards"
+        ]
+      }
+    },
+    {
+      "id": "c-0021",
+      "intended_label": "impersonation_homoglyph",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "9876543211",
+        "secondary_identifiers": {
+          "bundle_id": "com.homoglyph.kaveribank"
+        },
+        "display_name": "Kaver\u0456 Bank",
+        "handle": null,
+        "publisher_name": "Kaver\u0456 Mobile Tech",
+        "developer_id": "9000000077",
+        "description": "Fast banking and secure payment transfers for Kaveri account holders.",
+        "category": "Finance",
+        "external_links": [
+          "https://kaveri-fastpay.example"
+        ],
+        "icon_url": "https://assets.example.org/icons/homoglyph.png",
+        "icon_hash": "000000000000000f",
+        "canonical_url": "https://apps.apple.com/app/id9876543211",
+        "created_at_source": "2026-09-10T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 5,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0022",
+      "intended_label": "impersonation_character_swap",
+      "asset_type": "ANDROID_APP",
+      "platform": "google_play",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "google_play",
+        "asset_type": "ANDROID_APP",
+        "stable_identifier": "com.kaveribnak.app",
+        "secondary_identifiers": {},
+        "display_name": "KaveriBnak Mobile",
+        "handle": null,
+        "publisher_name": "KaveriBnak Devs",
+        "developer_id": "dev_swap_01",
+        "description": "Secure online banking login for KaveriBnak retail clients. Verify KYC and claim instant loan.",
+        "category": "Finance",
+        "external_links": [
+          "https://kaveribnak-secure.example"
+        ],
+        "icon_url": "https://assets.example.org/icons/swap.png",
+        "icon_hash": "000000000000000f",
+        "canonical_url": "https://play.google.com/store/apps/details?id=com.kaveribnak.app",
+        "created_at_source": "2026-09-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 18,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveribnak"
+        ]
+      }
+    },
+    {
+      "id": "c-0023",
+      "intended_label": "impersonation_omission",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "9876543213",
+        "secondary_identifiers": {
+          "bundle_id": "com.kaver.bank"
+        },
+        "display_name": "Kaver Bank",
+        "handle": null,
+        "publisher_name": "Kaver Digital Corp",
+        "developer_id": "9000000088",
+        "description": "Mobile banking login and quick fund transfers for Kaver Bank.",
+        "category": "Finance",
+        "external_links": [
+          "https://kaver-bank.example"
+        ],
+        "icon_url": "https://assets.example.org/icons/omission.png",
+        "icon_hash": "000000000000000f",
+        "canonical_url": "https://apps.apple.com/app/id9876543213",
+        "created_at_source": "2026-08-20T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 30,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaver bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0024",
+      "intended_label": "impersonation_spacing",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:kaverispacing99",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri  Bank",
+        "handle": "kaveri-bank.bsky.social",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Official Kaveri  Bank helpdesk. Send message for instant loan approval and account verification.",
+        "category": null,
+        "external_links": [
+          "https://short.example/kb-help"
+        ],
+        "icon_url": "https://assets.example.org/avatars/spacing.png",
+        "icon_hash": "0000000000000007",
+        "canonical_url": "https://bsky.app/profile/kaveri-bank.bsky.social",
+        "created_at_source": "2026-09-28T00:00:00Z",
+        "followers": 45,
+        "following": 5,
+        "posts_count": 8,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri  bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0025",
+      "intended_label": "impersonation_separator",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "x",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "x",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "handle:Kaveri_Bank_Online",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri-Bank-Online",
+        "handle": "Kaveri_Bank_Online",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Customer care support for Kaveri Bank users. Direct message for refund and KYC link assistance.",
+        "category": null,
+        "external_links": [
+          "https://kaveri-support.example"
+        ],
+        "icon_url": "https://assets.example.org/avatars/separator.png",
+        "icon_hash": "0000000000000007",
+        "canonical_url": "https://x.example.com/Kaveri_Bank_Online",
+        "created_at_source": "2026-09-15T00:00:00Z",
+        "followers": 80,
+        "following": 2,
+        "posts_count": 15,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri-bank-online"
+        ]
+      }
+    },
+    {
+      "id": "c-0026",
+      "intended_label": "impersonation_exact_name_reuse",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:kaverifansquiet99",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Bank Fans",
+        "handle": "kaveribankfans.bsky.social",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Unofficial fan page, not affiliated.",
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://assets.example.org/avatars/quiet_attacker.png",
+        "icon_hash": "0000000000000007",
+        "canonical_url": "https://bsky.app/profile/kaveribankfans.bsky.social",
+        "created_at_source": "2026-10-03T00:00:00Z",
+        "followers": 25,
+        "following": 2,
+        "posts_count": 4,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri bank fans"
+        ]
+      }
+    },
+    {
+      "id": "c-0027",
+      "intended_label": "impersonation_added_word",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:kavericareattacker77",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Bank Care",
+        "handle": "kaveribankcare.bsky.social",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "unofficial, plus customer care, KYC update, verify account immediately.",
+        "category": null,
+        "external_links": [
+          "https://tinyurl.example/kaveri-kyc"
+        ],
+        "icon_url": "https://assets.example.org/avatars/loud_attacker.png",
+        "icon_hash": "0000000000000007",
+        "canonical_url": "https://bsky.app/profile/kaveribankcare.bsky.social",
+        "created_at_source": "2026-09-30T00:00:00Z",
+        "followers": 40,
+        "following": 1,
+        "posts_count": 3,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri bank care"
+        ]
+      }
+    },
+    {
+      "id": "c-0028",
+      "intended_label": "impersonation_exact_name_reuse",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "9876543220",
+        "secondary_identifiers": {
+          "bundle_id": "com.unknown.kaveribank"
+        },
+        "display_name": "Kaveri Bank",
+        "handle": null,
+        "publisher_name": "Unknown Developer Ltd",
+        "developer_id": "9000000099",
+        "description": null,
+        "category": "Finance",
+        "external_links": [],
+        "icon_url": null,
+        "icon_hash": null,
+        "canonical_url": "https://apps.apple.com/app/id9876543220",
+        "created_at_source": "2026-09-10T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 0,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0029",
+      "intended_label": "impersonation_repetition",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "instagram",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "instagram",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "handle:kaverrii_bank",
+        "secondary_identifiers": {},
+        "display_name": "Kaverrii Bank",
+        "handle": "kaverrii_bank",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Kaverrii Bank regional offers and personal credit loans.",
+        "category": null,
+        "external_links": [
+          "https://kaverrii.example"
+        ],
+        "icon_url": "https://assets.example.org/avatars/repetition.png",
+        "icon_hash": "0000000000000007",
+        "canonical_url": "https://instagram.example.com/kaverrii_bank",
+        "created_at_source": "2026-09-18T00:00:00Z",
+        "followers": 55,
+        "following": 10,
+        "posts_count": 12,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaverrii bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0030",
+      "intended_label": "impersonation_keyboard_adjacent",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "facebook",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "facebook",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "handle:kaveri.bamk",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Bamk Official",
+        "handle": "kaveri.bamk",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Kaveri Bamk official updates, netbanking customer helpline and cashback rewards.",
+        "category": null,
+        "external_links": [
+          "https://bamk-kaveri.example"
+        ],
+        "icon_url": "https://assets.example.org/avatars/keyboard.png",
+        "icon_hash": "0000000000000007",
+        "canonical_url": "https://facebook.example.com/kaveri.bamk",
+        "created_at_source": "2026-09-22T00:00:00Z",
+        "followers": 60,
+        "following": 8,
+        "posts_count": 9,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri bamk"
+        ]
+      }
+    },
+    {
+      "id": "c-0031",
+      "intended_label": "impersonation_added_word",
+      "asset_type": "ANDROID_APP",
+      "platform": "google_play",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "google_play",
+        "asset_type": "ANDROID_APP",
+        "stable_identifier": "com.fakekaveri.netbanking",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Bank NetBanking",
+        "handle": null,
+        "publisher_name": "KB NetBanking Team",
+        "developer_id": "dev_fake_netbanking",
+        "description": "Login to your Kaveri Bank netbanking account. Fast OTP verification and instant fund clearance.",
+        "category": "Finance",
+        "external_links": [
+          "https://netbanking-kaveribank.example"
+        ],
+        "icon_url": "https://assets.example.org/icons/android_lure.png",
+        "icon_hash": "000000000000000f",
+        "canonical_url": "https://play.google.com/store/apps/details?id=com.fakekaveri.netbanking",
+        "created_at_source": "2026-10-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 22,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "kaveri bank netbanking"
+        ]
+      }
+    },
+    {
+      "id": "c-0032",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_32_kalyani_bank",
+        "secondary_identifiers": {},
+        "display_name": "Kalyani Bank",
+        "handle": "kalyanibank.example",
+        "publisher_name": "Kalyani Bank Enterprises",
+        "developer_id": "dev_32",
+        "description": "Official services and catalogs for Kalyani Bank.",
+        "category": "Utilities",
+        "external_links": [
+          "https://kalyanibank.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_32.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/32",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0033",
+      "intended_label": "not_relevant",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "recorded_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "nr_33_tungabhadra_bank",
+        "secondary_identifiers": {},
+        "display_name": "Tungabhadra Bank",
+        "handle": "tungabhadrabank.example",
+        "publisher_name": "Tungabhadra Bank Enterprises",
+        "developer_id": "dev_33",
+        "description": "Official services and catalogs for Tungabhadra Bank.",
+        "category": "Utilities",
+        "external_links": [
+          "https://tungabhadrabank.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_33.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/33",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": 500,
+        "following": 100,
+        "posts_count": 250,
+        "rating_count": null,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0034",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_34_malaprabha_finance",
+        "secondary_identifiers": {},
+        "display_name": "Malaprabha Finance",
+        "handle": "malaprabhafinance.example",
+        "publisher_name": "Malaprabha Finance Enterprises",
+        "developer_id": "dev_34",
+        "description": "Official services and catalogs for Malaprabha Finance.",
+        "category": "Utilities",
+        "external_links": [
+          "https://malaprabhafinance.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_34.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/34",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0035",
+      "intended_label": "not_relevant",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "nr_35_ghataprabha_credit",
+        "secondary_identifiers": {},
+        "display_name": "Ghataprabha Credit",
+        "handle": "ghataprabhacredit.example",
+        "publisher_name": "Ghataprabha Credit Enterprises",
+        "developer_id": "dev_35",
+        "description": "Official services and catalogs for Ghataprabha Credit.",
+        "category": "Utilities",
+        "external_links": [
+          "https://ghataprabhacredit.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_35.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/35",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": 500,
+        "following": 100,
+        "posts_count": 250,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0036",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "recorded_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_36_sharavathi_savings",
+        "secondary_identifiers": {},
+        "display_name": "Sharavathi Savings",
+        "handle": "sharavathisavings.example",
+        "publisher_name": "Sharavathi Savings Enterprises",
+        "developer_id": "dev_36",
+        "description": "Official services and catalogs for Sharavathi Savings.",
+        "category": "Utilities",
+        "external_links": [
+          "https://sharavathisavings.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_36.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/36",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0037",
+      "intended_label": "not_relevant",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "nr_37_hemavathi_commerce",
+        "secondary_identifiers": {},
+        "display_name": "Hemavathi Commerce",
+        "handle": "hemavathicommerce.example",
+        "publisher_name": "Hemavathi Commerce Enterprises",
+        "developer_id": "dev_37",
+        "description": "Official services and catalogs for Hemavathi Commerce.",
+        "category": "Utilities",
+        "external_links": [
+          "https://hemavathicommerce.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_37.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/37",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": 500,
+        "following": 100,
+        "posts_count": 250,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0038",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_38_netravathi_mutual",
+        "secondary_identifiers": {},
+        "display_name": "Netravathi Mutual",
+        "handle": "netravathimutual.example",
+        "publisher_name": "Netravathi Mutual Enterprises",
+        "developer_id": "dev_38",
+        "description": "Official services and catalogs for Netravathi Mutual.",
+        "category": "Utilities",
+        "external_links": [
+          "https://netravathimutual.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_38.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/38",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0039",
+      "intended_label": "not_relevant",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "recorded_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "nr_39_varada_trust",
+        "secondary_identifiers": {},
+        "display_name": "Varada Trust",
+        "handle": "varadatrust.example",
+        "publisher_name": "Varada Trust Enterprises",
+        "developer_id": "dev_39",
+        "description": "Official services and catalogs for Varada Trust.",
+        "category": "Utilities",
+        "external_links": [
+          "https://varadatrust.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_39.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/39",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": 500,
+        "following": 100,
+        "posts_count": 250,
+        "rating_count": null,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0040",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_40_aghanashini_pay",
+        "secondary_identifiers": {},
+        "display_name": "Aghanashini Pay",
+        "handle": "aghanashinipay.example",
+        "publisher_name": "Aghanashini Pay Enterprises",
+        "developer_id": "dev_40",
+        "description": "Official services and catalogs for Aghanashini Pay.",
+        "category": "Utilities",
+        "external_links": [
+          "https://aghanashinipay.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_40.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/40",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0041",
+      "intended_label": "not_relevant",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "nr_41_horizon_finance",
+        "secondary_identifiers": {},
+        "display_name": "Horizon Finance",
+        "handle": "horizonfinance.example",
+        "publisher_name": "Horizon Finance Enterprises",
+        "developer_id": "dev_41",
+        "description": "Official services and catalogs for Horizon Finance.",
+        "category": "Utilities",
+        "external_links": [
+          "https://horizonfinance.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_41.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/41",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": 500,
+        "following": 100,
+        "posts_count": 250,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0042",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "recorded_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_42_metro_credit",
+        "secondary_identifiers": {},
+        "display_name": "Metro Credit",
+        "handle": "metrocredit.example",
+        "publisher_name": "Metro Credit Enterprises",
+        "developer_id": "dev_42",
+        "description": "Official services and catalogs for Metro Credit.",
+        "category": "Utilities",
+        "external_links": [
+          "https://metrocredit.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_42.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/42",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0043",
+      "intended_label": "not_relevant",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "nr_43_sovereign_pay",
+        "secondary_identifiers": {},
+        "display_name": "Sovereign Pay",
+        "handle": "sovereignpay.example",
+        "publisher_name": "Sovereign Pay Enterprises",
+        "developer_id": "dev_43",
+        "description": "Official services and catalogs for Sovereign Pay.",
+        "category": "Utilities",
+        "external_links": [
+          "https://sovereignpay.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_43.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/43",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": 500,
+        "following": 100,
+        "posts_count": 250,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0044",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_44_pacific_commerce",
+        "secondary_identifiers": {},
+        "display_name": "Pacific Commerce",
+        "handle": "pacificcommerce.example",
+        "publisher_name": "Pacific Commerce Enterprises",
+        "developer_id": "dev_44",
+        "description": "Official services and catalogs for Pacific Commerce.",
+        "category": "Utilities",
+        "external_links": [
+          "https://pacificcommerce.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_44.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/44",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0045",
+      "intended_label": "not_relevant",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "recorded_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "nr_45_indus_valley_goods",
+        "secondary_identifiers": {},
+        "display_name": "Indus Valley Goods",
+        "handle": "indusvalleygoods.example",
+        "publisher_name": "Indus Valley Goods Enterprises",
+        "developer_id": "dev_45",
+        "description": "Official services and catalogs for Indus Valley Goods.",
+        "category": "Utilities",
+        "external_links": [
+          "https://indusvalleygoods.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_45.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/45",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": 500,
+        "following": 100,
+        "posts_count": 250,
+        "rating_count": null,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0046",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_46_southern_freight",
+        "secondary_identifiers": {},
+        "display_name": "Southern Freight",
+        "handle": "southernfreight.example",
+        "publisher_name": "Southern Freight Enterprises",
+        "developer_id": "dev_46",
+        "description": "Official services and catalogs for Southern Freight.",
+        "category": "Utilities",
+        "external_links": [
+          "https://southernfreight.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_46.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/46",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0047",
+      "intended_label": "not_relevant",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "nr_47_ganga_tours",
+        "secondary_identifiers": {},
+        "display_name": "Ganga Tours",
+        "handle": "gangatours.example",
+        "publisher_name": "Ganga Tours Enterprises",
+        "developer_id": "dev_47",
+        "description": "Official services and catalogs for Ganga Tours.",
+        "category": "Utilities",
+        "external_links": [
+          "https://gangatours.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_47.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/47",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": 500,
+        "following": 100,
+        "posts_count": 250,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0048",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "recorded_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_48_yamuna_express",
+        "secondary_identifiers": {},
+        "display_name": "Yamuna Express",
+        "handle": "yamunaexpress.example",
+        "publisher_name": "Yamuna Express Enterprises",
+        "developer_id": "dev_48",
+        "description": "Official services and catalogs for Yamuna Express.",
+        "category": "Utilities",
+        "external_links": [
+          "https://yamunaexpress.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_48.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/48",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0049",
+      "intended_label": "not_relevant",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "nr_49_godavari_crafts",
+        "secondary_identifiers": {},
+        "display_name": "Godavari Crafts",
+        "handle": "godavaricrafts.example",
+        "publisher_name": "Godavari Crafts Enterprises",
+        "developer_id": "dev_49",
+        "description": "Official services and catalogs for Godavari Crafts.",
+        "category": "Utilities",
+        "external_links": [
+          "https://godavaricrafts.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_49.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/49",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": 500,
+        "following": 100,
+        "posts_count": 250,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0050",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_50_narmada_traders",
+        "secondary_identifiers": {},
+        "display_name": "Narmada Traders",
+        "handle": "narmadatraders.example",
+        "publisher_name": "Narmada Traders Enterprises",
+        "developer_id": "dev_50",
+        "description": "Official services and catalogs for Narmada Traders.",
+        "category": "Utilities",
+        "external_links": [
+          "https://narmadatraders.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_50.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/50",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0051",
+      "intended_label": "not_relevant",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "recorded_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "nr_51_tapti_textiles",
+        "secondary_identifiers": {},
+        "display_name": "Tapti Textiles",
+        "handle": "taptitextiles.example",
+        "publisher_name": "Tapti Textiles Enterprises",
+        "developer_id": "dev_51",
+        "description": "Official services and catalogs for Tapti Textiles.",
+        "category": "Utilities",
+        "external_links": [
+          "https://taptitextiles.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_51.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/51",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": 500,
+        "following": 100,
+        "posts_count": 250,
+        "rating_count": null,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0052",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_52_krishna_sweets",
+        "secondary_identifiers": {},
+        "display_name": "Krishna Sweets",
+        "handle": "krishnasweets.example",
+        "publisher_name": "Krishna Sweets Enterprises",
+        "developer_id": "dev_52",
+        "description": "Official services and catalogs for Krishna Sweets.",
+        "category": "Utilities",
+        "external_links": [
+          "https://krishnasweets.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_52.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/52",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0053",
+      "intended_label": "not_relevant",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "nr_53_mahanadi_steel",
+        "secondary_identifiers": {},
+        "display_name": "Mahanadi Steel",
+        "handle": "mahanadisteel.example",
+        "publisher_name": "Mahanadi Steel Enterprises",
+        "developer_id": "dev_53",
+        "description": "Official services and catalogs for Mahanadi Steel.",
+        "category": "Utilities",
+        "external_links": [
+          "https://mahanadisteel.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_53.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/53",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": 500,
+        "following": 100,
+        "posts_count": 250,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0054",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "recorded_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_54_cauvery_handicrafts",
+        "secondary_identifiers": {},
+        "display_name": "Cauvery Handicrafts",
+        "handle": "cauveryhandicrafts.example",
+        "publisher_name": "Cauvery Handicrafts Enterprises",
+        "developer_id": "dev_54",
+        "description": "Official services and catalogs for Cauvery Handicrafts.",
+        "category": "Utilities",
+        "external_links": [
+          "https://cauveryhandicrafts.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_54.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/54",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0055",
+      "intended_label": "not_relevant",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "nr_55_brahmaputra_books",
+        "secondary_identifiers": {},
+        "display_name": "Brahmaputra Books",
+        "handle": "brahmaputrabooks.example",
+        "publisher_name": "Brahmaputra Books Enterprises",
+        "developer_id": "dev_55",
+        "description": "Official services and catalogs for Brahmaputra Books.",
+        "category": "Utilities",
+        "external_links": [
+          "https://brahmaputrabooks.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_55.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/55",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": 500,
+        "following": 100,
+        "posts_count": 250,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0056",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_56_deccan_heritage_press",
+        "secondary_identifiers": {},
+        "display_name": "Deccan Heritage Press",
+        "handle": "deccanheritagepress.example",
+        "publisher_name": "Deccan Heritage Press Enterprises",
+        "developer_id": "dev_56",
+        "description": "Official services and catalogs for Deccan Heritage Press.",
+        "category": "Utilities",
+        "external_links": [
+          "https://deccanheritagepress.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_56.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/56",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0057",
+      "intended_label": "not_relevant",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "recorded_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "nr_57_malabar_spices",
+        "secondary_identifiers": {},
+        "display_name": "Malabar Spices",
+        "handle": "malabarspices.example",
+        "publisher_name": "Malabar Spices Enterprises",
+        "developer_id": "dev_57",
+        "description": "Official services and catalogs for Malabar Spices.",
+        "category": "Utilities",
+        "external_links": [
+          "https://malabarspices.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_57.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/57",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": 500,
+        "following": 100,
+        "posts_count": 250,
+        "rating_count": null,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0058",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_58_konkan_coastal",
+        "secondary_identifiers": {},
+        "display_name": "Konkan Coastal",
+        "handle": "konkancoastal.example",
+        "publisher_name": "Konkan Coastal Enterprises",
+        "developer_id": "dev_58",
+        "description": "Official services and catalogs for Konkan Coastal.",
+        "category": "Utilities",
+        "external_links": [
+          "https://konkancoastal.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_58.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/58",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0059",
+      "intended_label": "not_relevant",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "source_mode": "SIMULATED",
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "nr_59_nilgiri_tea",
+        "secondary_identifiers": {},
+        "display_name": "Nilgiri Tea",
+        "handle": "nilgiritea.example",
+        "publisher_name": "Nilgiri Tea Enterprises",
+        "developer_id": "dev_59",
+        "description": "Official services and catalogs for Nilgiri Tea.",
+        "category": "Utilities",
+        "external_links": [
+          "https://nilgiritea.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_59.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/59",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": 500,
+        "following": 100,
+        "posts_count": 250,
+        "rating_count": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T05:30:20Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    },
+    {
+      "id": "c-0060",
+      "intended_label": "not_relevant",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "source_mode": "CACHED",
+      "candidate": {
+        "source_id": "recorded_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "nr_60_sahyadri_treks",
+        "secondary_identifiers": {},
+        "display_name": "Sahyadri Treks",
+        "handle": "sahyadritreks.example",
+        "publisher_name": "Sahyadri Treks Enterprises",
+        "developer_id": "dev_60",
+        "description": "Official services and catalogs for Sahyadri Treks.",
+        "category": "Utilities",
+        "external_links": [
+          "https://sahyadritreks.example.org"
+        ],
+        "icon_url": "https://assets.example.org/icons/nr_60.png",
+        "icon_hash": "ffffffffffffffff",
+        "canonical_url": "https://apps.example.org/60",
+        "created_at_source": "2020-01-01T00:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 1500,
+        "source_mode": "CACHED",
+        "retrieved_at": "2026-10-10T12:00:00Z",
+        "matched_queries": [
+          "bank"
+        ]
+      }
+    }
+  ]
+}

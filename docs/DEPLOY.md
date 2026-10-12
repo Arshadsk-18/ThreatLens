@@ -1,8 +1,9 @@
-# ThreatLens v3 — Deployment Guide
+# ThreatLens v3 — Deployment Guide & Database Operations
 
-**Contract Version:** `3.0.0` · **API Prefix:** `/api/v1`
-**Single Source of Truth:** `docs/ARCHITECTURE_API_CONTRACT.md`, Section 21
-**Owner:** Person 2 (Backend/API & Integration Lead), in coordination with Person 5 (Database & Seed)
+**Contract Version:** `3.0.0` · **API Prefix:** `/api/v1`  
+**Single Source of Truth:** `docs/ARCHITECTURE_API_CONTRACT.md`, Section 21  
+**Deployment Lead:** Person 2 (Backend/API & Integration Lead)  
+**Database Contributor:** Person 5 (Database, Persistence, Seed & QA)
 
 ---
 
@@ -11,7 +12,7 @@
 | Component | Target Platform | Runtime / Config | Start Command / Output |
 |---|---|---|---|
 | **Backend API** | Render (Web Service) | Python 3.12, root `backend/` | `uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1` |
-| **Database** | Supabase PostgreSQL | Pooled connection (Supavisor port 6543, SSL required) | SQLAlchemy connection pool |
+| **Database** | Supabase PostgreSQL | Pooled connection (Supavisor port 6543/5432, SSL required) | SQLAlchemy connection pool |
 | **Frontend** | Vercel | Node 20+, root `frontend/` | `npm run build` -> `dist`, SPA rewrite via `vercel.json` |
 
 > [!IMPORTANT]
@@ -80,17 +81,38 @@
 
 ---
 
-## 4. Supabase PostgreSQL Setup & Coordination with Person 5
+## 4. Supabase PostgreSQL Setup & Database Operations
 
-1. **Create Supabase Project:**
-   - Create a free project in Supabase.
-   - Go to **Project Settings** -> **Database** -> **Connection String**.
-   - Select **Connection pooling** (Supavisor) and mode **Transaction** (port `6543`).
-   - Copy the URI and append `?sslmode=require`.
-2. **Schema & Migration Coordination (with Person 5):**
-   - Tables are created on first startup using SQLAlchemy `create_all()`.
-   - **Never destructively reset or drop deployed tables.**
-   - Run Person 5's seed script once after initial deployment to populate default brand data (e.g. Kaveri Bank official assets).
+### 4.1 Connection String & Driver (Person 5)
+- **Pooled Connection String:** Use the Supabase PgBouncer pooled connection string on port `6543` (Transaction mode) or `5432` (Session mode):
+  ```bash
+  DATABASE_URL="postgresql+psycopg2://<user>:<password>@<pooler-host>:6543/<dbname>?sslmode=require"
+  ```
+- **Driver:** Uses `psycopg2` via `postgresql+psycopg2://`. If provided with `postgres://`, normalization to `postgresql://` is handled automatically.
+- **SSL Requirement:** SSL is mandatory (`sslmode=require`).
+
+### 4.2 Table Initialization (`create_all` on First Start)
+- The database schema is fully managed via SQLAlchemy 2.0 portable models (`app.db.models`).
+- In FastAPI lifespan (`app/main.py`), tables are initialized on startup:
+  ```python
+  from app.db.session import init_db, create_db_engine, mark_interrupted_scans, SessionLocal
+
+  engine = create_db_engine()
+  init_db(engine)
+
+  with SessionLocal() as session:
+      interrupted_count = mark_interrupted_scans(session)
+      if interrupted_count:
+          print(f"Marked {interrupted_count} interrupted scan(s) as FAILED")
+  ```
+
+### 4.3 Seeding the Demo Story Once After Deploy
+- Once the service is running, run the idempotent seed script once:
+  ```bash
+  python -m app.db.seed.seed
+  ```
+- This populates Brand **Kaveri Bank**, its registered official assets, and 60 candidate fixtures matching Appendix B with the complete demo assessment story.
+- Detailed instructions and API verification steps are in `backend/app/db/seed/run_seed.md`.
 
 ---
 
@@ -155,9 +177,8 @@ If Render sleeps or experiences network latency during the presentation:
    ```
 2. Expose via Cloudflare Tunnel or ngrok:
    ```powershell
-   # Cloudflare Tunnel
    cloudflared tunnel --url http://127.0.0.1:8000
-   # OR ngrok
+   # OR
    ngrok http 8000
    ```
 3. Update `VITE_API_URL` or use local frontend (`npm run dev` at `http://localhost:5173`).
@@ -181,13 +202,3 @@ All deployment smoke and readiness tests pass locally against the unified contra
 tests/test_deploy_smoke.py ........                                      [100%]
 ============================== 8 passed in 0.47s ==============================
 ```
-
-### Verified Checks:
-1. `GET /api/v1/health` -> HTTP 200, `{"status": "ok", "service": "threatlens-api", "version": "3.0.0", "contract_version": "3.0.0"}`
-2. `GET /api/v1/ready` -> HTTP 200, `{"ready": true, "checks": {"database": "ok", "config": "ok"}}`, zero credentials or connection strings exposed.
-3. `GET /api/v1/meta` -> HTTP 200, 20 contract enums, 6 scoring thresholds, 3 supported platforms.
-4. `GET /api/v1/sources/status` -> HTTP 200, 9 fixed sources with Google Play, Instagram, X, and Facebook marked `NOT_CONNECTED`.
-5. `DEMO Scan` -> HTTP 202 -> 200, 0 network calls, all findings tagged `SIMULATED`.
-6. `LIVE Apple Scan` -> HTTP 202 -> 200, real timestamped records, `source_mode=LIVE`.
-7. `Funnel Invariant` -> `deduplicated == official_cleared + not_relevant + benign_lookalike + below_threshold + findings` strictly holds.
-8. `CORS & Security` -> Exact origins enforced, preflight OPTIONS handled, wildcard disallowed in production, `.env` git-ignored.
