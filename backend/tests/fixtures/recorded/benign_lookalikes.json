@@ -1,0 +1,521 @@
+{
+  "fixture_version": 1,
+  "description": "14 CACHED benign namesake lookalikes for DEMO fixtures from verified real negatives",
+  "records": [
+    {
+      "case_ref": "rn-0001",
+      "source_id": "apple_itunes",
+      "captured_at": "2026-10-12T13:01:05.317661+00:00",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "6741137784",
+        "secondary_identifiers": {
+          "bundle_id": "com.ksrsackgis.Dishaank"
+        },
+        "display_name": "Dishaank(KSRSAC)",
+        "handle": null,
+        "publisher_name": "Karnataka State Remote Sensing Application Centre",
+        "developer_id": "1378909032",
+        "description": "Dishaank enables citizens to easily identify the survey number of any location within Karnataka using mobile GPS.\nThe app also allows citizens to access detailed land information, including ownership, survey boundaries and Hissa boundaries.\n\nDeveloped by the Karnataka State Remote Sensing Applications Centre (KSRSAC), Dishaank promotes transparency and simplifies access to land records across the state.\n\nKey Features:\n* Identify survey/Hissa numbers using your current GPS location\n* View land ownership details\n* Legend view for map description\n* Search by district, taluk, hobli, village, and survey number\n* Weather widget: tap any location to view current weather and 3-day forecast\n* Measurement tools to calculate land area and distances\n* Go to latitude/longitude function for precise location navigation\n* Simple and user-friendly map interface\n\nDisclaimer:\nData provided in Dishaank is for information purposes only and not legally valid for ownership or boundary confirmation.",
+        "category": "Navigation",
+        "external_links": [],
+        "icon_url": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/8e/85/20/8e8520e2-370c-081a-a034-d55538a4a821/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
+        "icon_hash": null,
+        "canonical_url": "https://apps.apple.com/in/app/dishaank-ksrsac/id6741137784?uo=4",
+        "created_at_source": "2025-01-29T08:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 285,
+        "source_mode": "LIVE",
+        "retrieved_at": "2026-10-12T13:01:05.317661Z",
+        "matched_queries": [
+          "kaveri",
+          "kaveri mobile",
+          "kaveri app"
+        ]
+      },
+      "note": "Verified benign namesake: dishaank(ksrsac); Verified benign namesake: dishaank(ksrsac)"
+    },
+    {
+      "case_ref": "rn-0002",
+      "source_id": "apple_itunes",
+      "captured_at": "2026-10-12T13:01:05.317661+00:00",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "1494090295",
+        "secondary_identifiers": {
+          "bundle_id": "com.kaveribullionspotsurat"
+        },
+        "display_name": "Kaveri Bullion Spot",
+        "handle": null,
+        "publisher_name": "Eterna Fintech Private Limited",
+        "developer_id": "1437700984",
+        "description": "Kaveri Bullion Spot is a trusted name in the industry. Its Founder Mr.MAHENDRA J SHAH  is in this field since 15 long years.The team has been diligently trained in the art of identifying, testing and analyzing precious metals and gemstones. Kaveri Bullion Spot also offers quality gold and silver kilo bars, tola bars, coins and bullion bars.",
+        "category": "Business",
+        "external_links": [],
+        "icon_url": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f3/99/a6/f399a6a9-70b9-173f-8ffc-d0b1f6e3beeb/AppIcon-0-0-1x_U007emarketing-0-11-0-0-85-220.png/512x512bb.jpg",
+        "icon_hash": null,
+        "canonical_url": "https://apps.apple.com/in/app/kaveri-bullion-spot/id1494090295?uo=4",
+        "created_at_source": "2020-01-12T08:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 4,
+        "source_mode": "LIVE",
+        "retrieved_at": "2026-10-12T13:01:05.317661Z",
+        "matched_queries": [
+          "kaveri",
+          "kaveri mobile",
+          "kaveri app",
+          "kaveri finance"
+        ]
+      },
+      "note": "Verified benign namesake: kaveri bullion spot; Verified benign namesake: kaveri bullion spot"
+    },
+    {
+      "case_ref": "rn-0003",
+      "source_id": "apple_itunes",
+      "captured_at": "2026-10-12T13:01:05.317661+00:00",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "1640272255",
+        "secondary_identifiers": {
+          "bundle_id": "co.shopney.kaveri"
+        },
+        "display_name": "BY KAVERI",
+        "handle": null,
+        "publisher_name": "MATKIT YAZILIM TEKNOLOJILERI ANONIM SIRKETI",
+        "developer_id": "1263492858",
+        "description": "Kaveri is a designer label based out of Chennai, India. It is India's only 100% linen designer label. Browse through our range of linen tops, tunics, coords, dresses and more. Experience everyday beautiful, with linen.",
+        "category": "Shopping",
+        "external_links": [
+          "https://bykaveri.com/"
+        ],
+        "icon_url": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e1/b9/87/e1b987c8-9352-ca0e-bc93-8b88c02a5060/AppIcon-0-0-1x_U007emarketing-0-11-0-sRGB-85-220.png/512x512bb.jpg",
+        "icon_hash": null,
+        "canonical_url": "https://apps.apple.com/in/app/by-kaveri/id1640272255?uo=4",
+        "created_at_source": "2022-08-18T07:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 183,
+        "source_mode": "LIVE",
+        "retrieved_at": "2026-10-12T13:01:05.317661Z",
+        "matched_queries": [
+          "kaveri",
+          "kaveri mobile",
+          "kaveri app"
+        ]
+      },
+      "note": "Verified benign namesake: by kaveri; Verified benign namesake: by kaveri"
+    },
+    {
+      "case_ref": "rn-0004",
+      "source_id": "apple_itunes",
+      "captured_at": "2026-10-12T13:01:05.317661+00:00",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "1344704317",
+        "secondary_identifiers": {
+          "bundle_id": "com.bitla.mba.kaverytravels"
+        },
+        "display_name": "Kaveri Travels",
+        "handle": null,
+        "publisher_name": "BITLA SOFTWARE PRIVATE LIMITED",
+        "developer_id": "1497660872",
+        "description": "Kaveri Travels is a renowned brand in the bus operating industry. Our vision is to give a new face to the bus industry. Since our inception passenger comfort was our top priority. We have frequently added luxury buses to our huge fleet of buses. The only thing we focus on is that the comfort quotient of our passengers should never be compromised. We have always tried our best to push our limits in order to develop our travel experience. Read further to understand what we offer that enhances our reputation in the market.\n\nLive Bus Tracking\nWe have integrated this great technology of live bus tracking in almost all of our buses. This helps the passengers to be informed about the live position of the bus, thus helping them in planning their commute to the bus stand. It also prevents the unwanted stress of missing or waiting for the bus in case of delays.\n\nOur Customer Support\nTo render the best service we strive to provide the best customer support. We have an attentive customer support team to which the passengers can report any issues regarding the journey. This team addresses all the issues of the passengers and comes out with a solution in the shortest possible time. This creates a warm feeling in the customers thus pushing them to be our regular customers.\n\nGreat Comfort\nNow, once a passenger boards the bus he will be surprised by the inner comfort of the bus. The buses have all the latest amenities like WiFi, charging point, water bottle and central TV. The seats are really very comfortable and create a feeling of a cosy bedroom. We have almost all the luxury brand buses in our fleet. Our luxurious fleet includes Mercedes Benz Multi-axle buses, Volvo Multi-axle buses, and Scania Multi-axle comfort buses. These buses help in smoothening the journey. Our motto to change the perception of bus travel makes us enhance our luxury levels regularly.\n\nSafety\nSafety is one of the most important criteria we look for while planning a bus route. We have the best drivers who completely understand the importance of safety and follow all the safety rules.\n\nRegular Offers\nWe at K Kaveri Travels strive to maintain the most reasonable rates in the market. This also makes our passengers happy and thus we further give them discount offers on a regular basis to enhance their happiness.",
+        "category": "Travel",
+        "external_links": [],
+        "icon_url": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/48/d4/a1/48d4a12c-335e-cf5c-9c83-0062995f4416/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
+        "icon_hash": null,
+        "canonical_url": "https://apps.apple.com/in/app/kaveri-travels/id1344704317?uo=4",
+        "created_at_source": "2018-02-06T00:36:54Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 8,
+        "source_mode": "LIVE",
+        "retrieved_at": "2026-10-12T13:01:05.317661Z",
+        "matched_queries": [
+          "kaveri",
+          "kaveri mobile",
+          "kaveri app",
+          "kaveri travel"
+        ]
+      },
+      "note": "Verified benign namesake: kaveri travels; Verified benign namesake: kaveri travels"
+    },
+    {
+      "case_ref": "rn-0005",
+      "source_id": "apple_itunes",
+      "captured_at": "2026-10-12T13:01:05.317661+00:00",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "6467752615",
+        "secondary_identifiers": {
+          "bundle_id": "com.ios.kaverigold"
+        },
+        "display_name": "Kaveri Gold",
+        "handle": null,
+        "publisher_name": "CHIRAYUSOFT LIMITED",
+        "developer_id": "1600717483",
+        "description": "Kaveri Gold stands as a prominent bullion trader in Mysuru, boasting extensive knowledge in the jewellery sector.\n\nWe offer top-notch quality and genuine jewellers Products at unbeatable prices.\n\nHere's a glimpse into the highlights of our application:\n\nOur application promptly displays LIVE GOLD RATES.\n\nBank information and a reservation desk for banking and other contact details are available.\n\nA swift call function is also integrated for users.\n\nThe app automatically alerts users about fluctuations in gold prices throughout the day.\n\nThis platform doesn't support any financial transactions.\n\nOur established clientele form the user base for this business.\n\nAll app functionalities are offered at no cost, ensuring a free user experience.\n\nThe app doesn't accommodate any monetary transactions or purchases for its users. \nFeature availability is contingent on user classification, as determined by the business backend.\n\nThere's an absence of premium content or features that require payment. \nFeatures are unlocked depending on the user's classification via the backend.",
+        "category": "Shopping",
+        "external_links": [],
+        "icon_url": "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/f2/d1/81/f2d181ac-db74-7200-a6bc-61b4f4a746de/AppIcon-0-0-1x_U007emarketing-0-0-0-10-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg",
+        "icon_hash": null,
+        "canonical_url": "https://apps.apple.com/in/app/kaveri-gold/id6467752615?uo=4",
+        "created_at_source": "2023-09-27T07:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 0,
+        "source_mode": "LIVE",
+        "retrieved_at": "2026-10-12T13:01:05.317661Z",
+        "matched_queries": [
+          "kaveri",
+          "kaveri mobile",
+          "kaveri app"
+        ]
+      },
+      "note": "Verified benign namesake: kaveri gold; Verified benign namesake: kaveri gold"
+    },
+    {
+      "case_ref": "rn-0006",
+      "source_id": "apple_itunes",
+      "captured_at": "2026-10-12T13:01:05.317661+00:00",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "6765766006",
+        "secondary_identifiers": {
+          "bundle_id": "kirjoituskaveri.com.lekhnesathi"
+        },
+        "display_name": "Kirjoitus Kaveri",
+        "handle": null,
+        "publisher_name": "Deepak Chhetri",
+        "developer_id": "1886798595",
+        "description": "English\nKirjoituskaveri is a simple everyday app for speaking, writing, translating, and remembering. It helps you create messages, reminders, and shopping lists by voice or keyboard, all in one clear and easy-to-use app.\n\nWith Kirjoituskaveri, you can speak instead of typing, translate between Finnish and English, and listen to text aloud when reading is easier by audio. You can also copy, share, and save messages, so important text is always easy to find again.\n\nThe app includes a simple calendar for reminders and events, including repeating reminders for routines, appointments, and everyday tasks. You can also keep a shopping list and add items by speaking or typing.\n\nKirjoituskaveri is designed to make everyday life easier with a calm interface, clear navigation, and support in both Finnish and English.\n\nFeatures:\n\nVoice-to-text messaging\nFinnish and English translation\nText-to-speech playback\nMessage history, copy, and sharing\nCalendar and reminders\nRecurring reminders\nShopping lists by voice or typing\nOptional daily wellbeing prompts\nSimple bilingual interface\nKirjoituskaveri is a practical helper for anyone who wants an easier way to manage communication and daily routines.\n\nFinnish\nKirjoituskaveri on helppo sovellus arjen puhumiseen, kirjoittamiseen, kääntämiseen ja muistamiseen. Sen avulla voit tehdä viestejä, muistutuksia ja ostoslistoja puheella tai näppäimistöllä samassa selkeässä sovelluksessa.\n\nKirjoituskaverilla voit puhua kirjoittamisen sijaan, kääntää tekstiä suomen ja englannin välillä sekä kuunnella tekstiä ääneen. Voit myös kopioida, jakaa ja tallentaa viestejä, jotta tärkeät asiat löytyvät helposti myöhemmin.\n\nSovelluksessa on selkeä kalenteri muistutuksille ja tapahtumille. Voit luoda myös toistuvia muistutuksia rutiineihin, tapaamisiin ja muihin arjen tehtäviin. Lisäksi voit pitää ostoslistaa ja lisätä tuotteita puhumalla tai kirjoittamalla.\n\nKirjoituskaveri on suunniteltu helpottamaan arkea rauhallisella käyttöliittymällä, selkeällä navigoinnilla sekä suomen- ja englanninkielisellä tuella.\n\nOminaisuudet:\n\nPuheesta tekstiksi\nKäännökset suomen ja englannin välillä\nTekstin kuuntelu ääneen\nViestihistoria, kopiointi ja jakaminen\nKalenteri ja muistutukset\nToistuvat muistutukset\nOstoslistat puhumalla tai kirjoittamalla\nValinnaiset päivittäiset hyvinvointimuistutukset\nSelkeä kaksikielinen käyttöliittymä\nKirjoituskaveri sopii kaikille, jotka haluavat helpomman tavan hoitaa arjen viestintää ja muistettavia asioita.",
+        "category": "Productivity",
+        "external_links": [
+          "https://lekhnesathi.com/kirjoituskaver/"
+        ],
+        "icon_url": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ed/45/56/ed455621-785f-6454-044d-f71eb04e919c/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
+        "icon_hash": null,
+        "canonical_url": "https://apps.apple.com/in/app/kirjoitus-kaveri/id6765766006?uo=4",
+        "created_at_source": "2026-05-12T07:00:00Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 0,
+        "source_mode": "LIVE",
+        "retrieved_at": "2026-10-12T13:01:05.317661Z",
+        "matched_queries": [
+          "kaveri",
+          "kaveri mobile",
+          "kaveri app"
+        ]
+      },
+      "note": "Verified benign namesake: kirjoitus kaveri; Verified benign namesake: kirjoitus kaveri"
+    },
+    {
+      "case_ref": "rn-0007",
+      "source_id": "apple_itunes",
+      "captured_at": "2026-10-12T13:01:05.317661+00:00",
+      "candidate": {
+        "source_id": "apple_itunes",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "595287172",
+        "secondary_identifiers": {
+          "bundle_id": "co.hinge.mobile.ios"
+        },
+        "display_name": "Hinge Dating App: Match & Date",
+        "handle": null,
+        "publisher_name": "Hinge, Inc.",
+        "developer_id": "595287175",
+        "description": "HINGE, DESIGNED TO BE DELETED\nHinge is the dating app for people who want to get off of dating apps. With profiles that show your personality through text, photos, video, and voice, you have unique conversations that lead to great dates. \n\nHOW WE GET YOU OFF HINGE\nWhen it comes to online dating, people are so busy matching that they’re not actually connecting, in person, where it counts. Hinge is on a mission to change that. So we built an app that’s designed to be deleted. Here’s how:\n\n* We quickly learn your type. You’ll only be introduced to the best people for you.\n\n* We give you a sense of someone’s personality. You’ll get to know potential dates through their unique answers to prompts, as well as information like religion, height, politics, dating intentions, relationship type, and much more.\n\n* We make it easy to start a conversation. Every match begins by someone liking or commenting on a specific part of your profile.\n\n* We want you to feel confident about meeting people in person. Selfie Verification makes it easier for daters on Hinge to ensure that they are who they say they are.\n\n* We ask how your dates are going. After exchanging phone numbers with a Match, we’ll follow up to hear how your date went so we can make better recommendations in the future.\n\nThe app is free to use. Members looking to see everyone who likes them or send unlimited likes can upgrade to Hinge+. To access additional features, including enhanced recommendations and priority likes, we offer HingeX.\n\nPRESS\n\"It's the go-to dating app for many people looking for love.\" - The Daily Mail\n“Hinge’s CEO says a good dating app relies on vulnerability, not algorithms.” - Washington Post\n\"Hinge is the first dating app to actually measure real-world success\" - TechCrunch\n\nSUBSCRIPTION INFO\nPayment will be charged to Apple Account at confirmation of purchase\nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period\nAccount will be charged for renewal within 24-hours prior to the end of the current period\nSubscriptions may be managed and auto-renewal may be turned off by going to Account Settings after purchase\n\nSupport: hello@hinge.co\nTerms of Service: https://hinge.co/terms.html\nPrivacy Policy: https://hinge.co/privacy.html\n\nAll photos are of models and used for illustrative purposes only.",
+        "category": "Lifestyle",
+        "external_links": [
+          "http://hinge.co"
+        ],
+        "icon_url": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c8/2f/31/c82f31b7-d1d6-66b5-b280-352b627cd1b8/AppIcon-0-0-1x_U007emarketing-0-6-0-0-85-220.png/512x512bb.jpg",
+        "icon_hash": null,
+        "canonical_url": "https://apps.apple.com/in/app/hinge-dating-app-match-date/id595287172?uo=4",
+        "created_at_source": "2013-02-06T06:50:22Z",
+        "followers": null,
+        "following": null,
+        "posts_count": null,
+        "rating_count": 35569,
+        "source_mode": "LIVE",
+        "retrieved_at": "2026-10-12T13:01:05.317661Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      },
+      "note": "Verified benign namesake: hinge dating app: match & date; Verified benign namesake: hinge dating app: match & date"
+    },
+    {
+      "case_ref": "rn-0051",
+      "source_id": "bluesky_public",
+      "captured_at": "2026-10-12T13:02:07.810313+00:00",
+      "candidate": {
+        "source_id": "bluesky_public",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:4ykvau5mkcllpch3ltz3pbq7",
+        "secondary_identifiers": {
+          "handle": "meghakaveri.bsky.social"
+        },
+        "display_name": "Megha Kaveri (she/her)",
+        "handle": "meghakaveri.bsky.social",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Ex-journalist, now in comms; \nBorn in 356.54 ppm CO2;  \nInto \"Science for society\". \n\nViews strictly mine; RTs != endorsements.\n\n☕ I drink coffee, and I know things.",
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://cdn.bsky.app/img/avatar/plain/did:plc:4ykvau5mkcllpch3ltz3pbq7/bafkreifiwc2n2xpe34ovmazxweskuys5apbpusyc6rdf53vi7c7vpi3aue",
+        "icon_hash": null,
+        "canonical_url": "https://bsky.app/profile/meghakaveri.bsky.social",
+        "created_at_source": "2024-01-19T09:49:20.669000Z",
+        "followers": 102,
+        "following": 550,
+        "posts_count": 90,
+        "rating_count": null,
+        "source_mode": "LIVE",
+        "retrieved_at": "2026-10-12T13:02:07.810313Z",
+        "matched_queries": [
+          "kaveri",
+          "kaveri silks"
+        ]
+      },
+      "note": "Verified benign namesake: megha kaveri (she/her); Verified benign namesake: megha kaveri (she/her)"
+    },
+    {
+      "case_ref": "rn-0052",
+      "source_id": "bluesky_public",
+      "captured_at": "2026-10-12T13:02:07.810313+00:00",
+      "candidate": {
+        "source_id": "bluesky_public",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:tvpuphuizhybjoax3aqilyet",
+        "secondary_identifiers": {
+          "handle": "kaveri.bsky.social"
+        },
+        "display_name": "Kaveri Miguel",
+        "handle": "kaveri.bsky.social",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Encontrando un nuevo hogar para poder seguir contando mis chorradas, mi vida en Bruselas y las #cosasbelgas. ¿Estamos todos ya aquí?\nLGTBIQ+ \n@straffeketten.bsky.social",
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://cdn.bsky.app/img/avatar/plain/did:plc:tvpuphuizhybjoax3aqilyet/bafkreigq2kxatkqgzhop2zrgm4vjbzgw7ulbzfim5d3i6rqbmvh5atckr4",
+        "icon_hash": null,
+        "canonical_url": "https://bsky.app/profile/kaveri.bsky.social",
+        "created_at_source": "2023-10-31T17:32:38.141000Z",
+        "followers": 149,
+        "following": 162,
+        "posts_count": 165,
+        "rating_count": null,
+        "source_mode": "LIVE",
+        "retrieved_at": "2026-10-12T13:02:07.810313Z",
+        "matched_queries": [
+          "kaveri",
+          "kaveri silks"
+        ]
+      },
+      "note": "Verified benign namesake: kaveri miguel; Verified benign namesake: kaveri miguel"
+    },
+    {
+      "case_ref": "rn-0053",
+      "source_id": "bluesky_public",
+      "captured_at": "2026-10-12T13:02:07.810313+00:00",
+      "candidate": {
+        "source_id": "bluesky_public",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:wnf7o6l6pgoabvhged77fird",
+        "secondary_identifiers": {
+          "handle": "theredrovers.bsky.social"
+        },
+        "display_name": "Kaveri",
+        "handle": "theredrovers.bsky.social",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": null,
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://cdn.bsky.app/img/avatar/plain/did:plc:wnf7o6l6pgoabvhged77fird/bafkreifjkmlzvs5ldlhb4brpxxgybvqqedcsocrxuxusyhykuob7mrrpbq",
+        "icon_hash": null,
+        "canonical_url": "https://bsky.app/profile/theredrovers.bsky.social",
+        "created_at_source": "2024-10-08T13:43:53.607000Z",
+        "followers": 1101,
+        "following": 3210,
+        "posts_count": 0,
+        "rating_count": null,
+        "source_mode": "LIVE",
+        "retrieved_at": "2026-10-12T13:02:07.810313Z",
+        "matched_queries": [
+          "kaveri",
+          "kaveri silks"
+        ]
+      },
+      "note": "Verified benign namesake: kaveri; Verified benign namesake: kaveri"
+    },
+    {
+      "case_ref": "rn-0054",
+      "source_id": "bluesky_public",
+      "captured_at": "2026-10-12T13:02:07.810313+00:00",
+      "candidate": {
+        "source_id": "bluesky_public",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:ht6odlpd4lskaoaxi6uh5dko",
+        "secondary_identifiers": {
+          "handle": "kaveriexpress.bsky.social"
+        },
+        "display_name": "kaveriexpress.bsky.social",
+        "handle": "kaveriexpress.bsky.social",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": null,
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://cdn.bsky.app/img/avatar/plain/did:plc:ht6odlpd4lskaoaxi6uh5dko/bafkreidbnzedrofmxvgzdsa7uucccehpjfh7u3vpcwur6rnv3l2ij7ebee",
+        "icon_hash": null,
+        "canonical_url": "https://bsky.app/profile/kaveriexpress.bsky.social",
+        "created_at_source": "2024-10-17T04:07:03.106000Z",
+        "followers": 47,
+        "following": 51,
+        "posts_count": 3,
+        "rating_count": null,
+        "source_mode": "LIVE",
+        "retrieved_at": "2026-10-12T13:02:07.810313Z",
+        "matched_queries": [
+          "kaveri",
+          "kaveri express"
+        ]
+      },
+      "note": "Verified benign namesake: kaveriexpress.bsky.social; Verified benign namesake: kaveriexpress.bsky.social"
+    },
+    {
+      "case_ref": "rn-0055",
+      "source_id": "bluesky_public",
+      "captured_at": "2026-10-12T13:02:07.810313+00:00",
+      "candidate": {
+        "source_id": "bluesky_public",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:tc3selbh234jkjqhmwrh5iy7",
+        "secondary_identifiers": {
+          "handle": "julhasuja.bsky.social"
+        },
+        "display_name": "mundinho mc kaverinha",
+        "handle": "julhasuja.bsky.social",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "vcs n sabe como eh difícil viver na minha cabeça",
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://cdn.bsky.app/img/avatar/plain/did:plc:tc3selbh234jkjqhmwrh5iy7/bafkreificpymnokgcvrwp767m75zqxqbvs2i2rdtwverxbgkfgey6xpyuq",
+        "icon_hash": null,
+        "canonical_url": "https://bsky.app/profile/julhasuja.bsky.social",
+        "created_at_source": "2024-09-23T11:52:49.710000Z",
+        "followers": 18,
+        "following": 17,
+        "posts_count": 23,
+        "rating_count": null,
+        "source_mode": "LIVE",
+        "retrieved_at": "2026-10-12T13:02:07.810313Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      },
+      "note": "Verified benign namesake: mundinho mc kaverinha; Verified benign namesake: mundinho mc kaverinha"
+    },
+    {
+      "case_ref": "rn-0056",
+      "source_id": "bluesky_public",
+      "captured_at": "2026-10-12T13:02:07.810313+00:00",
+      "candidate": {
+        "source_id": "bluesky_public",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:3axpnzt52co345hx6pd523ww",
+        "secondary_identifiers": {
+          "handle": "woywoypom.bsky.social"
+        },
+        "display_name": "Turku kaveri",
+        "handle": "woywoypom.bsky.social",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": null,
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://cdn.bsky.app/img/avatar/plain/did:plc:3axpnzt52co345hx6pd523ww/bafkreifnttz3mbcixisr5hndyizzq7aricjjmb3v5uuunufpbfncgchu6q",
+        "icon_hash": null,
+        "canonical_url": "https://bsky.app/profile/woywoypom.bsky.social",
+        "created_at_source": "2024-08-23T13:06:08.919000Z",
+        "followers": 24,
+        "following": 44,
+        "posts_count": 64,
+        "rating_count": null,
+        "source_mode": "LIVE",
+        "retrieved_at": "2026-10-12T13:02:07.810313Z",
+        "matched_queries": [
+          "kaveri",
+          "kaveri silks"
+        ]
+      },
+      "note": "Verified benign namesake: turku kaveri; Verified benign namesake: turku kaveri"
+    },
+    {
+      "case_ref": "rn-0057",
+      "source_id": "bluesky_public",
+      "captured_at": "2026-10-12T13:02:07.810313+00:00",
+      "candidate": {
+        "source_id": "bluesky_public",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:qlyywa7qmitndbaniaieewgx",
+        "secondary_identifiers": {
+          "handle": "kaveri.dev"
+        },
+        "display_name": "karisssa",
+        "handle": "kaveri.dev",
+        "publisher_name": null,
+        "developer_id": null,
+        "description": "Any/All - 25\n\nI'm pretty much your big sister who's the autistic, trans, Computer Science Grad\n\nDiscord: @krsssa\n\nPaladins Solo Queue GM",
+        "category": null,
+        "external_links": [],
+        "icon_url": "https://cdn.bsky.app/img/avatar/plain/did:plc:qlyywa7qmitndbaniaieewgx/bafkreiaya7jgzky4gu2f3k4vxhramelbzi2wcx2xxgox7eyobm7cvwipha",
+        "icon_hash": null,
+        "canonical_url": "https://bsky.app/profile/kaveri.dev",
+        "created_at_source": "2023-10-13T02:33:10.447000Z",
+        "followers": 92,
+        "following": 180,
+        "posts_count": 128,
+        "rating_count": null,
+        "source_mode": "LIVE",
+        "retrieved_at": "2026-10-12T13:02:07.810313Z",
+        "matched_queries": [
+          "kaveri"
+        ]
+      },
+      "note": "Verified benign namesake: karisssa; Verified benign namesake: karisssa"
+    }
+  ]
+}
