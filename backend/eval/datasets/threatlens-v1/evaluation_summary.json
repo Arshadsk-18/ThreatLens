@@ -1,0 +1,138 @@
+{
+  "id": "2585600d-c077-4783-bae3-bded5d6bb004",
+  "dataset_id": "threatlens-v1",
+  "split": "HELDOUT",
+  "scoring_version": "3.0.0",
+  "threshold": {
+    "review": 25
+  },
+  "sample_count": 77,
+  "confusion": {
+    "tp": 16,
+    "fp": 2,
+    "tn": 59,
+    "fn": 0
+  },
+  "precision": 0.89,
+  "recall": 1.0,
+  "f1": 0.94,
+  "false_positive_rate": 0.03,
+  "confidence_intervals": {
+    "precision": [
+      0.67,
+      0.97
+    ],
+    "recall": [
+      0.81,
+      1.0
+    ],
+    "false_positive_rate": [
+      0.01,
+      0.11
+    ],
+    "method": "wilson_95"
+  },
+  "official_flagged_count": 0,
+  "hard_negatives": {
+    "tested": 53,
+    "correctly_cleared": 51,
+    "false_positives": 2
+  },
+  "technique_recall": [
+    {
+      "technique": "ADDED_WORD",
+      "tested": 3,
+      "detected": 3
+    },
+    {
+      "technique": "CHARACTER_SWAP",
+      "tested": 2,
+      "detected": 2
+    },
+    {
+      "technique": "HOMOGLYPH",
+      "tested": 1,
+      "detected": 1
+    },
+    {
+      "technique": "KEYBOARD_ADJACENT",
+      "tested": 2,
+      "detected": 2
+    },
+    {
+      "technique": "OMISSION",
+      "tested": 2,
+      "detected": 2
+    },
+    {
+      "technique": "REPETITION",
+      "tested": 2,
+      "detected": 2
+    },
+    {
+      "technique": "SEPARATOR",
+      "tested": 2,
+      "detected": 2
+    },
+    {
+      "technique": "SPACING",
+      "tested": 2,
+      "detected": 2
+    }
+  ],
+  "failure_cases": [
+    {
+      "case_id": "case-0070",
+      "expected": "BENIGN_NAMESAKE",
+      "got": "CANDIDATE_FOR_REVIEW",
+      "why": "Candidate for review: similar name, matching icon/avatar, suspicious link or thin footprint. Signals observed; not proof of malicious intent."
+    },
+    {
+      "case_id": "case-0071",
+      "expected": "BENIGN_NAMESAKE",
+      "got": "CANDIDATE_FOR_REVIEW",
+      "why": "Candidate for review: similar name, matching icon/avatar, suspicious link or thin footprint. Signals observed; not proof of malicious intent."
+    }
+  ],
+  "definitions": "Positive class = IMPERSONATION. Predicted positive = decision CANDIDATE_FOR_REVIEW. OFFICIAL cases count as negatives and any flagged official asset is also reported separately.",
+  "limitations": [
+    "Positives are synthetic.",
+    "Negatives are real captured namesakes labelled by the team."
+  ],
+  "baseline": {
+    "name": "name_only_rapidfuzz",
+    "tuned_on": "DEV",
+    "threshold": 0.75,
+    "precision": 0.89,
+    "recall": 1.0,
+    "false_positive_rate": 0.03
+  },
+  "ablation": [
+    {
+      "configuration": "FULL",
+      "precision": 0.89,
+      "recall": 1.0
+    },
+    {
+      "configuration": "NO_IDENTITYGUARD",
+      "precision": 0.89,
+      "recall": 1.0,
+      "official_flagged_count": 2
+    },
+    {
+      "configuration": "NO_GATES",
+      "precision": 0.84,
+      "recall": 1.0
+    },
+    {
+      "configuration": "NO_ICON",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "configuration": "NO_DESCRIPTION",
+      "precision": 0.84,
+      "recall": 1.0
+    }
+  ]
+}

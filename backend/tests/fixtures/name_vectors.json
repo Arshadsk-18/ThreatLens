@@ -1,0 +1,506 @@
+[
+  {
+    "id": "vec-01",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "EXACT_NAME_REUSE",
+    "expected_similarity": 1.0,
+    "description": "Exact name match identical casing and spacing"
+  },
+  {
+    "id": "vec-02",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "kaveri bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "EXACT_NAME_REUSE",
+    "expected_similarity": 1.0,
+    "description": "Exact name match case-folded"
+  },
+  {
+    "id": "vec-03",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "KAVERI BANK",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "EXACT_NAME_REUSE",
+    "expected_similarity": 1.0,
+    "description": "Exact name match uppercase"
+  },
+  {
+    "id": "vec-04",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "  Kaveri Bank  ",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "EXACT_NAME_REUSE",
+    "expected_similarity": 1.0,
+    "description": "Exact name match with leading and trailing whitespace"
+  },
+  {
+    "id": "vec-05",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaverі Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "HOMOGLYPH",
+    "expected_similarity": 1.0,
+    "description": "Cyrillic small letter i (U+0456) homoglyph in Kaveri"
+  },
+  {
+    "id": "vec-06",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kаveri Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "HOMOGLYPH",
+    "expected_similarity": 1.0,
+    "description": "Cyrillic small letter a (U+0430) homoglyph in Kaveri"
+  },
+  {
+    "id": "vec-07",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri Bаnk",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "HOMOGLYPH",
+    "expected_similarity": 1.0,
+    "description": "Cyrillic small letter a (U+0430) homoglyph in Bank"
+  },
+  {
+    "id": "vec-08",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kavеri Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "HOMOGLYPH",
+    "expected_similarity": 1.0,
+    "description": "Cyrillic small letter e (U+0435) homoglyph in Kaveri"
+  },
+  {
+    "id": "vec-09",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "KaveriBnak",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "CHARACTER_SWAP",
+    "expected_similarity": 0.9,
+    "description": "Character swap transposition an -> na in Bank (Section 8.6)"
+  },
+  {
+    "id": "vec-10",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kavrei Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "CHARACTER_SWAP",
+    "expected_similarity": 0.91,
+    "description": "Character swap transposition er -> re in Kaveri"
+  },
+  {
+    "id": "vec-11",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Akveri Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "CHARACTER_SWAP",
+    "expected_similarity": 0.91,
+    "description": "Character swap transposition ka -> ak at start"
+  },
+  {
+    "id": "vec-12",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri Bakn",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "CHARACTER_SWAP",
+    "expected_similarity": 0.91,
+    "description": "Character swap transposition nk -> kn at end"
+  },
+  {
+    "id": "vec-13",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaver Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "OMISSION",
+    "expected_similarity": 0.95,
+    "description": "Omission of character i from Kaveri"
+  },
+  {
+    "id": "vec-14",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kavri Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "OMISSION",
+    "expected_similarity": 0.95,
+    "description": "Omission of character e from Kaveri"
+  },
+  {
+    "id": "vec-15",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri Bak",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "OMISSION",
+    "expected_similarity": 0.98,
+    "description": "Omission of character n from Bank"
+  },
+  {
+    "id": "vec-16",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kveri Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "OMISSION",
+    "expected_similarity": 0.95,
+    "description": "Omission of character a from Kaveri"
+  },
+  {
+    "id": "vec-17",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaverii Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "REPETITION",
+    "expected_similarity": 0.96,
+    "description": "Repetition of character i in Kaveri"
+  },
+  {
+    "id": "vec-18",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaaveri Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "REPETITION",
+    "expected_similarity": 0.96,
+    "description": "Repetition of character a in Kaveri"
+  },
+  {
+    "id": "vec-19",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri Bannk",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "REPETITION",
+    "expected_similarity": 0.98,
+    "description": "Repetition of character n in Bank"
+  },
+  {
+    "id": "vec-20",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri Bankk",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "REPETITION",
+    "expected_similarity": 0.98,
+    "description": "Repetition of character k at end of Bank"
+  },
+  {
+    "id": "vec-21",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kavero Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "KEYBOARD_ADJACENT",
+    "expected_similarity": 0.91,
+    "description": "Keyboard adjacent typo i -> o in Kaveri"
+  },
+  {
+    "id": "vec-22",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveru Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "KEYBOARD_ADJACENT",
+    "expected_similarity": 0.91,
+    "description": "Keyboard adjacent typo i -> u in Kaveri"
+  },
+  {
+    "id": "vec-23",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri Vank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "KEYBOARD_ADJACENT",
+    "expected_similarity": 0.91,
+    "description": "Keyboard adjacent typo b -> v in Bank"
+  },
+  {
+    "id": "vec-24",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Ksveri Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "KEYBOARD_ADJACENT",
+    "expected_similarity": 0.91,
+    "description": "Keyboard adjacent typo a -> s in Kaveri"
+  },
+  {
+    "id": "vec-25",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri Bank Rewards",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "ADDED_WORD",
+    "expected_similarity": 0.86,
+    "description": "Added word Rewards (Section 8.1 & 8.6 & 8.7)"
+  },
+  {
+    "id": "vec-26",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri Bank Support",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "ADDED_WORD",
+    "expected_similarity": 0.86,
+    "description": "Added word Support"
+  },
+  {
+    "id": "vec-27",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri Bank Official App",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "ADDED_WORD",
+    "expected_similarity": 0.75,
+    "description": "Added words Official App"
+  },
+  {
+    "id": "vec-28",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Official Kaveri Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "ADDED_WORD",
+    "expected_similarity": 0.86,
+    "description": "Prepended word Official"
+  },
+  {
+    "id": "vec-29",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri Bank Fans",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "ADDED_WORD",
+    "expected_similarity": 0.86,
+    "description": "Added word Fans (Section 8.7 Scenario B & C)"
+  },
+  {
+    "id": "vec-30",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri Bank Care",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "ADDED_WORD",
+    "expected_similarity": 0.86,
+    "description": "Added word Care (Section 8.7 Scenario E)"
+  },
+  {
+    "id": "vec-31",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kav eri Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "SPACING",
+    "expected_similarity": 1.0,
+    "description": "Spacing inserted within word Kav eri (Section 8.6)"
+  },
+  {
+    "id": "vec-32",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri  Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "SPACING",
+    "expected_similarity": 1.0,
+    "description": "Double space between Kaveri and Bank (Section 8.6)"
+  },
+  {
+    "id": "vec-33",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "KaveriBank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "SPACING",
+    "expected_similarity": 1.0,
+    "description": "Space removed between Kaveri and Bank (Section 8.1 spacing variants)"
+  },
+  {
+    "id": "vec-34",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri   Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "SPACING",
+    "expected_similarity": 1.0,
+    "description": "Multiple spaces between words"
+  },
+  {
+    "id": "vec-35",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri-Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "SEPARATOR",
+    "expected_similarity": 1.0,
+    "description": "Hyphen separator between words (Section 5.4 / 8.1)"
+  },
+  {
+    "id": "vec-36",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri.Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "SEPARATOR",
+    "expected_similarity": 1.0,
+    "description": "Dot separator between words (Section 5.4 / 8.1)"
+  },
+  {
+    "id": "vec-37",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri_Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "SEPARATOR",
+    "expected_similarity": 1.0,
+    "description": "Underscore separator between words (Section 8.1)"
+  },
+  {
+    "id": "vec-38",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri/Bank",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "SEPARATOR",
+    "expected_similarity": 1.0,
+    "description": "Slash separator between words"
+  },
+  {
+    "id": "vec-39",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Kaveri Coffee Roasters",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "NONE",
+    "expected_similarity": 0.62,
+    "description": "Benign namesake Kaveri Coffee Roasters (Section 8.1 & 8.6, passes G1)"
+  },
+  {
+    "id": "vec-40",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Coffee Roasters",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "NONE",
+    "expected_similarity": 0.25,
+    "description": "Completely unrelated name Coffee Roasters (fails G1 < 0.60)"
+  },
+  {
+    "id": "vec-41",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Metro Retail Store",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "NONE",
+    "expected_similarity": 0.28,
+    "description": "Completely unrelated store name"
+  },
+  {
+    "id": "vec-42",
+    "brand_name": "Kaveri Bank",
+    "candidate_name": "Apex Finance Group",
+    "distinctive_tokens": [
+      "kaveri"
+    ],
+    "generic_tokens_extra": [],
+    "expected_technique": "NONE",
+    "expected_similarity": 0.38,
+    "description": "Generic finance namesake without distinctive token"
+  }
+]

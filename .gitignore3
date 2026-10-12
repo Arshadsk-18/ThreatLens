@@ -1,0 +1,16 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Testing & Linting caches
+.pytest_cache/
+.ruff_cache/
+
+# Environment files
+.env

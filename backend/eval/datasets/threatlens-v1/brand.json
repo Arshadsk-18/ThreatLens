@@ -1,0 +1,79 @@
+{
+  "brand": {
+    "id": "e4b6b6a0-54e7-49f9-b883-82084c83e180",
+    "name": "Kaveri Bank",
+    "description": "Kaveri Bank official digital banking platform, loans, savings, and mobile services.",
+    "official_domains": ["kaveribank.example"],
+    "keywords": ["Kaveri Bank", "KaveriBank", "Kaveri Mobile"],
+    "distinctive_tokens": ["kaveri"],
+    "generic_tokens_extra": ["bank"],
+    "industry_category": "Finance",
+    "demo_brand": true
+  },
+  "official_assets": [
+    {
+      "id": "11111111-1111-1111-1111-111111111111",
+      "brand_id": "e4b6b6a0-54e7-49f9-b883-82084c83e180",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "stable_identifier": "1234567890",
+      "secondary_identifiers": {
+        "bundle_id": "com.kaveribank.mobile"
+      },
+      "developer_id": "9000000001",
+      "publisher_name": "Kaveri Bank Ltd",
+      "display_name": "Kaveri Bank",
+      "description": "Official Kaveri Bank iOS app for secure mobile banking.",
+      "canonical_url": "https://apps.apple.com/in/app/kaveri-bank/id1234567890",
+      "icon_url": "https://cdn.example.com/icons/kaveri.png",
+      "icon_hash": "a1b2c3d4e5f60718",
+      "relationship": "OFFICIAL",
+      "verification_method": "STORE_LOOKUP",
+      "is_verified": true,
+      "trust_publisher": true,
+      "is_active": true
+    },
+    {
+      "id": "22222222-2222-2222-2222-222222222222",
+      "brand_id": "e4b6b6a0-54e7-49f9-b883-82084c83e180",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "platform": "bluesky",
+      "stable_identifier": "did:plc:kaveribankofficial",
+      "secondary_identifiers": {
+        "handle": "kaveribank.bsky.social"
+      },
+      "handle": "kaveribank.bsky.social",
+      "display_name": "Kaveri Bank Official",
+      "description": "Official Bluesky customer support and updates for Kaveri Bank.",
+      "canonical_url": "https://bsky.app/profile/kaveribank.bsky.social",
+      "icon_url": "https://cdn.example.com/avatars/kaveri.png",
+      "icon_hash": "1122334455667788",
+      "relationship": "OFFICIAL",
+      "verification_method": "DOMAIN_VERIFIED_HANDLE",
+      "is_verified": true,
+      "trust_publisher": false,
+      "is_active": true
+    },
+    {
+      "id": "33333333-3333-3333-3333-333333333333",
+      "brand_id": "e4b6b6a0-54e7-49f9-b883-82084c83e180",
+      "asset_type": "IOS_APP",
+      "platform": "apple_app_store",
+      "stable_identifier": "5555555555",
+      "secondary_identifiers": {
+        "bundle_id": "com.partner.kaveripay"
+      },
+      "developer_id": "9000000088",
+      "publisher_name": "Authorized FinTech Partner Ltd",
+      "display_name": "Kaveri Pay by Partner",
+      "description": "Official merchant payment gateway partnered with Kaveri Bank.",
+      "canonical_url": "https://apps.apple.com/in/app/kaveri-pay/id5555555555",
+      "icon_hash": "ffff0000ffff0000",
+      "relationship": "AUTHORIZED_PARTNER",
+      "verification_method": "STORE_LOOKUP",
+      "is_verified": true,
+      "trust_publisher": false,
+      "is_active": true
+    }
+  ]
+}

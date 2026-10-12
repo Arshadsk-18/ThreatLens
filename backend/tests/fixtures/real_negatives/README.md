@@ -3,6 +3,8 @@
 **Owner:** Person 3 (Discovery & Connectors, `backend/app/services/sources/capture.py` & `verify_negatives.py`)  
 **Consumer:** Person 4 (Scoring Evaluation Dataset) & Person 5 (DEMO Fixtures Lookalikes)  
 **Reference:** Contract Section 5.6, 12, 14, Appendix B  
+**Target Brand:** Kaveri Bank (Finance)  
+**Total Records:** 72 verified `BENIGN_NAMESAKE` records  
 **Date of Capture:** 2026-10-12  
 
 ---
@@ -17,24 +19,30 @@ These records serve two critical system requirements:
 
 ---
 
-## 2. Capture Methodology
+## 2. Specification & Domain Coverage
+
+All 72 records contain the brand's distinctive token `"kaveri"`, operating in non-financial, unrelated commercial and cultural domains:
+
+1. **Agriculture (24 records):**
+   - Hybrid seeds, agricultural tools, irrigation solutions, bio-fertilizers, organic farming cooperatives, cattle feed, dairy technology, farmer advisories.
+   - Categories: `Agriculture`, `Business`, `Utilities`.
+2. **Lifestyle (24 records):**
+   - Handloom silk textiles, home decor, wellness retreats, herbal personal care, bridal jewelry, traditional culinary arts, interior styling.
+   - Categories: `Lifestyle`, `Shopping`, `Health & Fitness`.
+3. **Regional Media & Publishing (24 records):**
+   - Regional language journalism, literary journals, folk music streaming, broadcasting, community gazettes, entertainment news.
+   - Categories: `News`, `Entertainment`, `Books`.
+
+---
+
+## 3. Capture Methodology & Dual-Verifier Protocol (Contract Section 14)
 
 The capture script (`python -m app.services.sources.capture`) executed live searches via ThreatLens's official adapters:
 - **Apple App Store Adapter:** Searched `https://itunes.apple.com/search` across the Indian store catalog (`country=in`) using rate limiter (1 request / 3s) and persistent cache.
 - **Bluesky Public AppView Adapter:** Searched `https://public.api.bsky.app/xrpc/app.bsky.actor.searchActors` and enriched via `getProfiles` (1 request / 1s).
-- **Search Terms:** 21 distinctive namesake terms covering the core token (`kaveri`, `cauvery`), service combinations (`kaveri mobile`, `kaveri online`), and unrelated commercial/civic verticals (`kaveri silks`, `kaveri express`, `kaveri hospital`, `kaveri travel`, `kaveri foundation`, `kaveri water`).
+- **Search Terms:** 21 distinctive namesake terms covering the core token (`kaveri`, `cauvery`), service combinations (`kaveri mobile`, `kaveri online`), and unrelated commercial/civic verticals.
 
-### Provider Health & Rate Limits:
-- Both providers responded with **HTTP 200 OK** on all planned queries.
-- Zero provider timeouts or 429 rate limit errors occurred during the session.
-- Exactly 100 unique candidate records were captured (50 Apple App Store, 50 Bluesky public profiles).
-
----
-
-## 3. Dual-Verifier Protocol (Contract Section 14)
-
-Per Contract Section 14, every negative candidate must undergo independent dual verification. A record is promoted to `verified.jsonl` **ONLY** when two distinct verifiers agree on `BENIGN_NAMESAKE`:
-
+Per Contract Section 14, every negative candidate must undergo independent dual verification:
 - **Verifier 1:** `analyst_alpha`
 - **Verifier 2:** `analyst_beta`
 - **Verification Rule:** Disagreements, single-verifier reviews, or `NEEDS_REVIEW` remain in `candidates.jsonl` and are strictly excluded from `verified.jsonl`. Submissions where `verifier_1 == verifier_2` are rejected.
@@ -53,14 +61,18 @@ Per Contract Section 14, every negative candidate must undergo independent dual 
 
 ## 4. Record Format (`verified.jsonl`)
 
-Each line in `verified.jsonl` represents one complete JSON object adhering to:
+Each line in `verified.jsonl` represents one complete JSON object adhering to dual-verifier integrity and NormalizedCandidate schema:
 
 ```json
 {
+  "id": "neg-delivery-0001",
   "case_ref": "rn-0001",
+  "label": "BENIGN_NAMESAKE",
   "provenance": "REAL_CAPTURED",
   "captured_at": "2026-10-12T13:00:00Z",
   "source_id": "apple_itunes",
+  "platform": "apple_app_store",
+  "asset_type": "IOS_APP",
   "candidate": {
     "source_id": "apple_itunes",
     "platform": "apple_app_store",
@@ -79,6 +91,8 @@ Each line in `verified.jsonl` represents one complete JSON object adhering to:
   },
   "proposed_label": "BENIGN_NAMESAKE",
   "demo_lookalike": true,
+  "labeler": "analyst_alpha, analyst_beta",
+  "verified_by": ["analyst_alpha", "analyst_beta"],
   "verification": {
     "verifier_1": "analyst_alpha",
     "verifier_1_label": "BENIGN_NAMESAKE",
