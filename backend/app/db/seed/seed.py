@@ -6,6 +6,9 @@ import json
 from pathlib import Path
 from typing import Any
 
+from sqlalchemy import delete, select
+from sqlalchemy.orm import Session, sessionmaker
+
 from app.db.base import generate_uuid
 from app.db.models import (
     Assessment,
@@ -19,12 +22,11 @@ from app.repositories.sqlalchemy_repo import (
     SqlAlchemyAssessmentRepo,
     SqlAlchemyCandidateRepo,
 )
-from sqlalchemy import delete, select
-from sqlalchemy.orm import Session, sessionmaker
 
 MANIFEST_PATH = Path(__file__).parent / "fixtures_manifest.json"
 DEMO_SCAN_ID = "00000000-0000-4000-8000-000000000001"
 DEMO_BRAND_NAME = "Kaveri Bank"
+DEMO_BRAND_ID = "acc79881-46b6-4938-8e2d-d10e5acbcb17"
 
 
 def load_fixtures_manifest() -> list[dict[str, Any]]:
@@ -59,11 +61,13 @@ def seed_demo_story(
     with session_factory() as session:
         # 1. Brand (Kaveri Bank)
         brand = session.execute(
-            select(Brand).where(Brand.name == DEMO_BRAND_NAME)
+            select(Brand).where(
+                (Brand.name == DEMO_BRAND_NAME) | (Brand.id == DEMO_BRAND_ID)
+            )
         ).scalar_one_or_none()
 
         if brand is None:
-            brand_id = generate_uuid()
+            brand_id = DEMO_BRAND_ID
             brand = Brand(
                 id=brand_id,
                 name=DEMO_BRAND_NAME,

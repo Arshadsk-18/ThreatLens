@@ -30,18 +30,28 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "sqlite:///./threatlens.db"
 
     # CORS
-    CORS_ORIGINS: list[str] = ["http://localhost:5173"]
+    CORS_ORIGINS: list[str] = [
+        "http://localhost:5173",
+        "https://threatlens-ui.onrender.com",
+    ]
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
     def assemble_cors_origins(cls, v: Any) -> list[str]:
         if isinstance(v, str):
             if v.startswith("[") and v.endswith("]"):
-                return json.loads(v)
-            return [i.strip() for i in v.split(",") if i.strip()]
+                origins = json.loads(v)
+            else:
+                origins = [i.strip() for i in v.split(",") if i.strip()]
         elif isinstance(v, list):
-            return v
-        return ["http://localhost:5173"]
+            origins = list(v)
+        else:
+            origins = ["http://localhost:5173"]
+
+        render_origin = "https://threatlens-ui.onrender.com"
+        if render_origin not in origins:
+            origins.append(render_origin)
+        return origins
 
     # Providers
     APPLE_COUNTRY: str = "in"
