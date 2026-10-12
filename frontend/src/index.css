@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --ink: 236 21% 10%;           /* #14151F */
+    --ink-muted: 224 16% 45%;     /* Quiet secondary text */
+    --canvas: 230 25% 96%;        /* #F2F3F8 (cool, not cream) */
+    --surface: 0 0% 100%;         /* #FFFFFF */
+    --surface-2: 231 33% 98%;      /* #F7F8FC */
+    --hairline: 232 20% 91%;      /* #E3E5EE */
+    --lens: 243 75% 59%;          /* #4F46E5 */
+    --lens-muted: 243 75% 96%;
+
+    /* Severity (warm ramp, used ONLY for severity) */
+    --severity-low: 218 11% 45%;
+    --severity-medium: 36 72% 42%;    /* #B7791F */
+    --severity-high: 17 89% 45%;      /* #D9480F */
+    --severity-critical: 341 78% 36%; /* #A4123F */
+
+    /* Source / Status (cool ramp, NEVER reuses severity hues) */
+    --source-live: 186 83% 33%;        /* #0E8F9C */
+    --source-cached: 221 20% 41%;      /* #55627F */
+    --source-simulated: 263 70% 50%;   /* #6D28D9 */
+    --source-notconnected: 220 13% 54%;/* #7A8499 */
+
+    /* Floating shadow */
+    --shadow-floating: 0 12px 32px -4px rgba(20, 21, 31, 0.08), 0 4px 12px -2px rgba(20, 21, 31, 0.04);
+  }
+
+  [data-theme='dark'] {
+    --ink: 230 25% 96%;           /* Lifted for dark theme */
+    --ink-muted: 220 14% 65%;
+    --canvas: 235 22% 7%;         /* #0E0F16 */
+    --surface: 236 24% 12%;       /* #171826 */
+    --surface-2: 236 24% 16%;      /* #1F2033 */
+    --hairline: 232 22% 20%;      /* #272A3D */
+    --lens: 243 75% 65%;          /* #6366F1 */
+    --lens-muted: 243 50% 18%;
+
+    /* Severity lifted slightly for dark canvas contrast */
+    --severity-low: 218 15% 65%;
+    --severity-medium: 38 85% 55%;
+    --severity-high: 17 92% 58%;
+    --severity-critical: 341 85% 55%;
+
+    /* Source / Status lifted slightly for dark canvas */
+    --source-live: 186 80% 45%;
+    --source-cached: 221 25% 62%;
+    --source-simulated: 263 75% 68%;
+    --source-notconnected: 220 15% 65%;
+
+    --shadow-floating: 0 16px 40px -8px rgba(0, 0, 0, 0.5), 0 4px 16px -2px rgba(0, 0, 0, 0.3);
+  }
+
+  * {
+    border-color: hsl(var(--hairline));
+  }
+
+  body {
+    background-color: hsl(var(--canvas));
+    color: hsl(var(--ink));
+    font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Accessible visible focus ring */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--lens));
+    outline-offset: 2px;
+  }
+}
+
+/* Restrict text line lengths to under 80 characters for optimal reading ergonomics */
+.prose-lens {
+  max-width: 75ch;
+}
+
+/* Orchestrated entrance motion for Overview / Landing */
+@keyframes forensicFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-forensic-enter {
+  animation: forensicFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.stagger-1 { animation-delay: 0.04s; }
+.stagger-2 { animation-delay: 0.08s; }
+.stagger-3 { animation-delay: 0.12s; }
+.stagger-4 { animation-delay: 0.16s; }
+
+/* Reduced motion accessibility (removes non-essential animations) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
