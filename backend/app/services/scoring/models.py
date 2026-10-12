@@ -97,6 +97,9 @@ class AssessmentResult(BaseModel):
     scoring_version: str = "3.0.0"
     relevant: bool = True  # False when G1 failed
 
+    def get(self, key: str, default: Any = None) -> Any:
+        return getattr(self, key, default)
+
 
 class ScoringConfig(BaseModel):
     scoring_version: str = "3.0.0"

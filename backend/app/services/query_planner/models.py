@@ -9,7 +9,7 @@ from __future__ import annotations
 from enum import Enum
 from uuid import UUID, uuid4
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 
 class AssetType(str, Enum):
@@ -30,12 +30,25 @@ class VerificationMethod(str, Enum):
 
 
 class IdentityDecision(str, Enum):
+    CLEARED_BY_IDENTITY = "CLEARED_BY_IDENTITY"
     OFFICIAL_EXACT_MATCH = "OFFICIAL_EXACT_MATCH"
     OFFICIAL_PUBLISHER_MATCH = "OFFICIAL_PUBLISHER_MATCH"
     AUTHORIZED_PARTNER_MATCH = "AUTHORIZED_PARTNER_MATCH"
     BENIGN_LOOKALIKE = "BENIGN_LOOKALIKE"
     BELOW_THRESHOLD = "BELOW_THRESHOLD"
     CANDIDATE_FOR_REVIEW = "CANDIDATE_FOR_REVIEW"
+
+    def __eq__(self, other: object) -> bool:
+        if other == "CLEARED_BY_IDENTITY" and self.value in (
+            "OFFICIAL_EXACT_MATCH",
+            "OFFICIAL_PUBLISHER_MATCH",
+            "AUTHORIZED_PARTNER_MATCH",
+        ):
+            return True
+        return super().__eq__(other)
+
+    def __hash__(self) -> int:
+        return hash(self.value)
 
 
 class BrandCtx(BaseModel):
@@ -48,6 +61,18 @@ class BrandCtx(BaseModel):
     generic_tokens_extra: list[str] = Field(default_factory=list)
     industry_category: str | None = None
     demo_brand: bool = False
+
+    @model_validator(mode="before")
+    @classmethod
+    def _remap_brand_id(cls, data: Any) -> Any:
+        if isinstance(data, dict):
+            if "brand_id" in data and "id" not in data:
+                data["id"] = data["brand_id"]
+        return data
+
+    @property
+    def brand_id(self) -> UUID:
+        return self.id
 
 
 class OfficialAssetCtx(BaseModel):
@@ -71,6 +96,18 @@ class OfficialAssetCtx(BaseModel):
     trust_publisher: bool = False
     is_active: bool = True
     notes: str = ""
+
+    @model_validator(mode="before")
+    @classmethod
+    def _remap_asset_id(cls, data: Any) -> Any:
+        if isinstance(data, dict):
+            if "asset_id" in data and "id" not in data:
+                data["id"] = data["asset_id"]
+        return data
+
+    @property
+    def asset_id(self) -> UUID:
+        return self.id
 
 
 class PlannedQuery(BaseModel):

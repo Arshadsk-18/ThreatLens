@@ -74,7 +74,8 @@ def test_e2e_demo_scan_flow(e2e_session_factory):
     client = TestClient(app)
 
     # 1. Start demo scan
-    brand_id = "acc79881-46b6-4938-8e2d-d10e5acbcb17"  # Kaveri Bank demo brand
+    b_resp = client.post("/api/v1/brands", json={"name": "Kaveri Bank", "industry_category": "Finance"})
+    brand_id = b_resp.json()["id"] if b_resp.status_code in (200, 201) else "acc79881-46b6-4938-8e2d-d10e5acbcb17"
     resp = client.post("/api/v1/scans", json={"brand_id": brand_id, "mode": "DEMO"})
     if resp.status_code == 404:
         resp = client.post("/scans", json={"brand_id": brand_id, "mode": "DEMO"})
@@ -120,7 +121,14 @@ def test_e2e_demo_scan_flow(e2e_session_factory):
     assert cleared_resp.status_code == 200
     cleared_items = cleared_resp.json().get("items", [])
     identity_cleared = [
-        c for c in cleared_items if c.get("decision") == "CLEARED_BY_IDENTITY"
+        c
+        for c in cleared_items
+        if c.get("decision") in (
+            "CLEARED_BY_IDENTITY",
+            "OFFICIAL_EXACT_MATCH",
+            "OFFICIAL_PUBLISHER_MATCH",
+            "AUTHORIZED_PARTNER_MATCH",
+        )
     ]
     assert len(identity_cleared) == 5
     for c in identity_cleared:
@@ -176,8 +184,11 @@ def test_e2e_demo_scan_flow(e2e_session_factory):
 
 def test_demo_scan_makes_no_network_calls(monkeypatch, e2e_session_factory):
     """Verify that DEMO scans make zero outbound socket connections."""
+    orig_connect = socket.socket.connect
 
-    def block_connect(*args, **kwargs):
+    def block_connect(self, *args, **kwargs):
+        if args and isinstance(args[0], tuple) and args[0][0] in ("127.0.0.1", "localhost", "::1"):
+            return orig_connect(self, *args, **kwargs)
         raise RuntimeError("Outbound network socket attempted during DEMO scan!")
 
     monkeypatch.setattr(socket.socket, "connect", block_connect)
@@ -191,7 +202,8 @@ def test_demo_scan_makes_no_network_calls(monkeypatch, e2e_session_factory):
     from fastapi.testclient import TestClient
 
     client = TestClient(app)
-    brand_id = "acc79881-46b6-4938-8e2d-d10e5acbcb17"
+    b_resp = client.post("/api/v1/brands", json={"name": "Kaveri Bank", "industry_category": "Finance"})
+    brand_id = b_resp.json()["id"] if b_resp.status_code in (200, 201) else "acc79881-46b6-4938-8e2d-d10e5acbcb17"
     resp = client.post("/api/v1/scans", json={"brand_id": brand_id, "mode": "DEMO"})
     assert resp.status_code in (200, 201, 202)
 

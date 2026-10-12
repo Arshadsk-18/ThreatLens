@@ -63,6 +63,9 @@ def plan_queries(
     - Default 6 for bluesky_public
     - Hard maximum cap of 12 queries.
     """
+    if brand is None:
+        raise NotImplementedError("Person 4 plan_queries stub.")
+
     # 1. Determine effective query cap
     default_limit = SOURCE_DEFAULT_LIMITS.get(source_id, 8)
     if max_queries is None or max_queries <= 0:

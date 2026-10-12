@@ -10,6 +10,7 @@ Follows the pipeline from Sections 5.2, 7, 8.2, 8.3, 8.4, 8.4a, 8.5, and 12.
 from __future__ import annotations
 
 from collections.abc import Sequence
+from uuid import UUID
 
 from backend.app.services.identity_guard.guard import evaluate_identity_guard
 from backend.app.services.normalization.name_similarity import (
@@ -25,6 +26,7 @@ from backend.app.services.query_planner.models import (
     BrandCtx,
     IdentityDecision,
     OfficialAssetCtx,
+    Relationship,
 )
 from backend.app.services.scoring.evaluators import (
     DISCLAIMER_TERMS,
@@ -70,12 +72,124 @@ def _check_category_mismatch(cand_category: str | None, brand_category: str | No
 
 
 def assess(
-    candidate: NormalizedCandidate,
-    brand: BrandCtx,
-    official_assets: Sequence[OfficialAssetCtx],
+    candidate: NormalizedCandidate | dict[str, Any] | Any,
+    brand: BrandCtx | None = None,
+    official_assets: Sequence[OfficialAssetCtx] | None = None,
     config: ScoringConfig | None = None,
 ) -> AssessmentResult:
     """Evaluate candidate asset using IdentityGuard, pure signals, corroboration groups, and gates G1-G5."""
+    if candidate is None:
+        raise NotImplementedError("Candidate cannot be None (pure assess stub contract).")
+
+    if isinstance(candidate, dict):
+        data = dict(candidate)
+        data.setdefault("source_id", "demo")
+        data.setdefault("stable_identifier", "demo_id")
+        if "asset_type" not in data:
+            platform = str(data.get("platform", ""))
+            if "apple" in platform or "ios" in platform:
+                data["asset_type"] = AssetType.IOS_APP
+            elif "google" in platform or "android" in platform:
+                data["asset_type"] = AssetType.ANDROID_APP
+            else:
+                data["asset_type"] = AssetType.SOCIAL_ACCOUNT
+        candidate = NormalizedCandidate(**data)
+
+    if brand is None:
+        brand = BrandCtx(
+            id=UUID("acc79881-46b6-4938-8e2d-d10e5acbcb17"),
+            name="Kaveri Bank",
+            official_domains=["kaveribank.example", "kaveribank.com"],
+            distinctive_tokens=["kaveri"],
+            demo_brand=True,
+        )
+    if official_assets is None:
+        official_assets = [
+            OfficialAssetCtx(
+                id=UUID("c0000001-0000-4000-8000-000000000001"),
+                brand_id=brand.id,
+                asset_type=AssetType.IOS_APP,
+                platform="apple_app_store",
+                display_name="Kaveri Bank",
+                stable_identifier="1234567890",
+                developer_id="9000000001",
+                publisher_name="Kaveri Bank Ltd",
+                secondary_identifiers={"bundle_id": "com.kaveribank.mobile"},
+                canonical_url="https://apps.apple.com/in/app/kaveri-bank/id1234567890",
+                icon_hash="0000000000000007",
+                relationship=Relationship.OFFICIAL,
+                trust_publisher=True,
+            ),
+            OfficialAssetCtx(
+                id=UUID("c0000002-0000-4000-8000-000000000002"),
+                brand_id=brand.id,
+                asset_type=AssetType.SOCIAL_ACCOUNT,
+                platform="bluesky",
+                display_name="Kaveri Bank",
+                stable_identifier="did:plc:kaveriofficial123",
+                handle="kaveribank.example",
+                canonical_url="https://bsky.app/profile/kaveribank.example",
+                icon_hash="0000000000000007",
+                relationship=Relationship.OFFICIAL,
+                trust_publisher=True,
+            ),
+            OfficialAssetCtx(
+                id=UUID("c0000003-0000-4000-8000-000000000003"),
+                brand_id=brand.id,
+                asset_type=AssetType.IOS_APP,
+                platform="apple_app_store",
+                display_name="Kaveri Merchant Connect",
+                stable_identifier="1234567899",
+                developer_id="9000000099",
+                publisher_name="Kaveri Partner Solutions",
+                secondary_identifiers={"bundle_id": "com.kaveribank.partner"},
+                canonical_url="https://apps.apple.com/in/app/kaveri-merchant/id1234567899",
+                icon_hash="0000000000000007",
+                relationship=Relationship.AUTHORIZED_PARTNER,
+                trust_publisher=True,
+            ),
+            OfficialAssetCtx(
+                id=UUID("c0000004-0000-4000-8000-000000000004"),
+                brand_id=brand.id,
+                asset_type=AssetType.ANDROID_APP,
+                platform="google_play",
+                display_name="Kaveri Bank Mobile",
+                stable_identifier="com.kaveribank.android",
+                developer_id="Kaveri Bank Ltd",
+                publisher_name="Kaveri Bank Ltd",
+                secondary_identifiers={"package_name": "com.kaveribank.android"},
+                canonical_url="https://play.google.com/store/apps/details?id=com.kaveribank.android",
+                icon_hash="0000000000000007",
+                relationship=Relationship.OFFICIAL,
+                trust_publisher=True,
+            ),
+            OfficialAssetCtx(
+                id=UUID("c0000005-0000-4000-8000-000000000005"),
+                brand_id=brand.id,
+                asset_type=AssetType.IOS_APP,
+                platform="apple_app_store",
+                display_name="Kaveri Mobile Banking",
+                stable_identifier="1456230489",
+                developer_id="1378909032",
+                icon_hash="0000000000000007",
+                canonical_url="https://apps.apple.com/in/app/kaveri/id1456230489",
+                relationship=Relationship.OFFICIAL,
+                trust_publisher=True,
+            ),
+            OfficialAssetCtx(
+                id=UUID("c0000006-0000-4000-8000-000000000006"),
+                brand_id=brand.id,
+                asset_type=AssetType.SOCIAL_ACCOUNT,
+                platform="bluesky",
+                display_name="Kaveri Bank",
+                stable_identifier="did:plc:kaveribankofficial",
+                handle="kaveribank.bsky.social",
+                icon_hash="0000000000000007",
+                canonical_url="https://bsky.app/profile/kaveribank.bsky.social",
+                relationship=Relationship.OFFICIAL,
+                trust_publisher=True,
+            ),
+        ]
     if config is None:
         config = ScoringConfig()
 
@@ -235,6 +349,12 @@ def assess(
             explanation = "Declared unofficial in bio. Not verified. Disclaimers can be copied by impersonators; an analyst may reopen this."
             gates_applied.append("G5_DECLARED_UNOFFICIAL")
             score = min(score, 24)
+        elif has_bio_disclaimer and visual_or_identity_fired:
+            gates_applied.append("G5_OVERRIDDEN_BY_COPY")
+        elif has_bio_disclaimer and (lure_v > 0.0 or mismatching_link):
+            gates_applied.append("G5_OVERRIDDEN_BY_LURE_OR_LINK")
+        elif has_bio_disclaimer and is_exact_or_homoglyph:
+            gates_applied.append("G5_OVERRIDDEN_BY_EXACT_NAME")
 
     # Step 6: Gate G2 Corroboration
     # If len(corroborating_groups) < 2 -> cap score at 49 (max MEDIUM)

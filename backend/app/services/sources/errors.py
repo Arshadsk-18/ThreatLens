@@ -9,7 +9,7 @@ from __future__ import annotations
 from app.schemas import ProviderErrorCode
 
 
-class ProviderError(Exception):
+class ProviderError(ValueError):
     """Exception raised when an external provider request fails.
 
     This exception carries a standardized ProviderErrorCode and a sanitized

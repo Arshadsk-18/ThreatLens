@@ -15,10 +15,12 @@ env_path = project_root / ".env"
 if env_path.exists():
     load_dotenv(env_path)
 
-# Ensure backend directory is in sys.path when running pytest from repository root
+# Ensure backend and repo root are in sys.path when running pytest
 backend_path = Path(__file__).resolve().parent.parent
 if str(backend_path) not in sys.path:
     sys.path.insert(0, str(backend_path))
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
 
 from app.main import create_app
 

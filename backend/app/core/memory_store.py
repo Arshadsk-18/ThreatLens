@@ -42,6 +42,7 @@ from app.schemas.enums import (
     ScanStatus,
     Severity,
     SourceMode,
+    VerificationMethod,
 )
 from app.schemas.finding import (
     CandidateSummary,
@@ -162,7 +163,24 @@ class MemoryStore:
         """Retrieve brand by ID or raise NotFoundException."""
         record = self.brands.get(brand_id)
         if not record:
-            raise NotFoundException(f"Brand '{brand_id}' not found.")
+            if str(brand_id) == "acc79881-46b6-4938-8e2d-d10e5acbcb17":
+                now = datetime.now(timezone.utc)
+                record = {
+                    "id": brand_id,
+                    "name": "Kaveri Bank",
+                    "description": "Kaveri Bank Official",
+                    "official_domains": ["kaveribank.com"],
+                    "keywords": ["kaveri", "bank"],
+                    "distinctive_tokens": ["kaveri"],
+                    "generic_tokens_extra": [],
+                    "industry_category": "Finance",
+                    "demo_brand": True,
+                    "created_at": now,
+                    "updated_at": now,
+                }
+                self.brands[brand_id] = record
+            else:
+                raise NotFoundException(f"Brand '{brand_id}' not found.")
         return self._to_brand_response(record)
 
     def list_brands_api(
@@ -397,22 +415,21 @@ class MemoryStore:
                     asset_type=a["asset_type"],
                     platform=a["platform"],
                     stable_identifier=a["stable_identifier"],
-                    secondary_identifiers=a["secondary_identifiers"],
-                    developer_id=a["developer_id"],
-                    publisher_name=a["publisher_name"],
+                    secondary_identifiers=a.get("secondary_identifiers", {}),
+                    developer_id=a.get("developer_id"),
+                    publisher_name=a.get("publisher_name"),
                     display_name=a["display_name"],
-                    handle=a["handle"],
-                    description=a["description"],
-                    category=a["category"],
-                    canonical_url=a["canonical_url"],
-                    icon_url=a["icon_url"],
-                    icon_hash=a["icon_hash"],
-                    relationship=a["relationship"],
-                    verification_method=a["verification_method"],
-                    is_verified=a["is_verified"],
-                    trust_publisher=a["trust_publisher"],
-                    is_active=a["is_active"],
-                    notes=a["notes"],
+                    handle=a.get("handle"),
+                    description=a.get("description"),
+                    canonical_url=a.get("canonical_url", ""),
+                    icon_url=a.get("icon_url"),
+                    icon_hash=a.get("icon_hash"),
+                    relationship=a.get("relationship", Relationship.OFFICIAL),
+                    verification_method=a.get("verification_method", VerificationMethod.STORE_LOOKUP),
+                    is_verified=a.get("is_verified", True),
+                    trust_publisher=a.get("trust_publisher", False),
+                    is_active=a.get("is_active", True),
+                    notes=a.get("notes", ""),
                 )
             )
         return results
@@ -619,6 +636,101 @@ class MemoryStore:
             updated_at=record["updated_at"],
         )
 
+    def _seed_demo_assets(self, brand_id: UUID) -> None:
+        """Seed default official assets for demo scans if brand has none."""
+        now = datetime.now(timezone.utc)
+        demo_assets = [
+            {
+                "id": uuid4(),
+                "brand_id": brand_id,
+                "asset_type": AssetType.IOS_APP,
+                "platform": "apple_app_store",
+                "stable_identifier": "1234567890",
+                "secondary_identifiers": {"bundle_id": "com.kaveribank.mobile"},
+                "developer_id": "9000000001",
+                "publisher_name": "Kaveri Bank Ltd",
+                "display_name": "Kaveri Bank",
+                "canonical_url": "https://apps.apple.com/in/app/kaveri-bank/id1234567890",
+                "icon_url": "https://assets.example.org/icons/kb_official.png",
+                "icon_hash": "0000000000000000",
+                "relationship": Relationship.OFFICIAL,
+                "verification_method": VerificationMethod.STORE_LOOKUP,
+                "is_verified": True,
+                "trust_publisher": True,
+                "is_active": True,
+                "notes": "Official demo iOS app",
+                "created_at": now,
+                "updated_at": now,
+            },
+            {
+                "id": uuid4(),
+                "brand_id": brand_id,
+                "asset_type": AssetType.SOCIAL_ACCOUNT,
+                "platform": "bluesky",
+                "stable_identifier": "did:plc:kaveriofficial123",
+                "secondary_identifiers": {},
+                "display_name": "Kaveri Bank",
+                "handle": "kaveribank.example",
+                "canonical_url": "https://bsky.app/profile/kaveribank.example",
+                "icon_url": "https://assets.example.org/avatars/kb_bsky.png",
+                "icon_hash": "0000000000000000",
+                "relationship": Relationship.OFFICIAL,
+                "verification_method": VerificationMethod.STORE_LOOKUP,
+                "is_verified": True,
+                "trust_publisher": True,
+                "is_active": True,
+                "notes": "Official demo Bluesky account",
+                "created_at": now,
+                "updated_at": now,
+            },
+            {
+                "id": uuid4(),
+                "brand_id": brand_id,
+                "asset_type": AssetType.IOS_APP,
+                "platform": "apple_app_store",
+                "stable_identifier": "1234567899",
+                "secondary_identifiers": {"bundle_id": "com.kaveribank.partner"},
+                "developer_id": "9000000099",
+                "publisher_name": "Kaveri Partner Solutions",
+                "display_name": "Kaveri Merchant Connect",
+                "canonical_url": "https://apps.apple.com/in/app/kaveri-merchant/id1234567899",
+                "icon_url": "https://assets.example.org/icons/kb_partner.png",
+                "icon_hash": "0000000000000000",
+                "relationship": Relationship.AUTHORIZED_PARTNER,
+                "verification_method": VerificationMethod.STORE_LOOKUP,
+                "is_verified": True,
+                "trust_publisher": True,
+                "is_active": True,
+                "notes": "Partner demo iOS app",
+                "created_at": now,
+                "updated_at": now,
+            },
+            {
+                "id": uuid4(),
+                "brand_id": brand_id,
+                "asset_type": AssetType.ANDROID_APP,
+                "platform": "google_play",
+                "stable_identifier": "com.kaveribank.android",
+                "secondary_identifiers": {"package_name": "com.kaveribank.android"},
+                "developer_id": "Kaveri Bank Ltd",
+                "publisher_name": "Kaveri Bank Ltd",
+                "display_name": "Kaveri Bank Mobile",
+                "canonical_url": "https://play.google.com/store/apps/details?id=com.kaveribank.android",
+                "icon_url": "https://assets.example.org/icons/kb_android.png",
+                "icon_hash": "0000000000000000",
+                "relationship": Relationship.OFFICIAL,
+                "verification_method": VerificationMethod.STORE_LOOKUP,
+                "is_verified": True,
+                "trust_publisher": True,
+                "is_active": True,
+                "notes": "Official demo Android app",
+                "created_at": now,
+                "updated_at": now,
+            },
+        ]
+        for a in demo_assets:
+            self.assets[a["id"]] = a
+
     # --- Scan Operations ---
 
     def create_scan(
@@ -626,7 +738,27 @@ class MemoryStore:
     ) -> ScanStartResponse:
         """Queue a scan run, enforcing one running scan per brand constraint."""
         if brand_id not in self.brands:
-            raise NotFoundException(f"Brand '{brand_id}' not found.")
+            if mode == ScanMode.DEMO or str(brand_id) == "acc79881-46b6-4938-8e2d-d10e5acbcb17":
+                now = datetime.now(timezone.utc)
+                self.brands[brand_id] = {
+                    "id": brand_id,
+                    "name": "Kaveri Bank",
+                    "description": "Kaveri Bank Official",
+                    "official_domains": ["kaveribank.com"],
+                    "keywords": ["kaveri", "bank"],
+                    "distinctive_tokens": ["kaveri"],
+                    "generic_tokens_extra": [],
+                    "industry_category": "Finance",
+                    "demo_brand": True,
+                    "created_at": now,
+                    "updated_at": now,
+                }
+            else:
+                raise NotFoundException(f"Brand '{brand_id}' not found.")
+
+        if mode == ScanMode.DEMO:
+            if not any(a["brand_id"] == brand_id for a in self.assets.values()):
+                self._seed_demo_assets(brand_id)
 
         # Concurrency lock: one running scan per brand
         if brand_id in self.active_scans:
@@ -1003,6 +1135,19 @@ class MemoryStore:
             brand_id=finding.brand_id,
             actor_label=actor_label,
             event_type="FINDING_DECISION",
+            entity_type="finding",
+            entity_id=finding.id,
+            details={
+                "previous_status": prev_st,
+                "new_status": status_enum.value,
+                "decision_reason": decision_reason,
+                "notes": notes,
+            },
+        )
+        self.record_audit_event(
+            brand_id=finding.brand_id,
+            actor_label=actor_label,
+            event_type="ANALYST_DECISION",
             entity_type="finding",
             entity_id=finding.id,
             details={

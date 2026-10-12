@@ -141,6 +141,14 @@ class FindingDecisionRequest(BaseModel):
     decision_reason: str | None = None
     notes: str | None = None
 
+    @model_validator(mode="before")
+    @classmethod
+    def _remap_new_status(cls, data: Any) -> Any:
+        if isinstance(data, dict):
+            if "new_status" in data and "status" not in data:
+                data["status"] = data["new_status"]
+        return data
+
     @model_validator(mode="after")
     def validate_reason(self) -> "FindingDecisionRequest":
         if self.status in {

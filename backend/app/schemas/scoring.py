@@ -56,7 +56,9 @@ class AssessmentResult(BaseModel):
     gates_applied: list[str] = Field(default_factory=list)
     breakdown: list[SignalResult] = Field(default_factory=list)
     technique: LookalikeTechnique = LookalikeTechnique.NONE
-    nearest_official_asset_id: UUID | None = None
     explanation: str = ""
     scoring_version: str = "3.0.0"
-    relevant: bool = True  # False when G1 relevance gate fails (not persisted)
+    relevant: bool = True
+
+    def get(self, key: str, default: Any = None) -> Any:
+        return getattr(self, key, default)  # False when G1 relevance gate fails (not persisted)

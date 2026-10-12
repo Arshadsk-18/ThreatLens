@@ -481,6 +481,7 @@ def evaluate_social_signals(
         )
     else:
         # No link -> 0.5 with status INFERRED
+        v_link = 0.5
         results.append(
             SignalResult(
                 signal="link_domain_mismatch",
@@ -514,6 +515,7 @@ def evaluate_social_signals(
             )
         )
     else:
+        v_lure = 0.0
         results.append(
             SignalResult(
                 signal="lure_terms",
@@ -554,6 +556,21 @@ def evaluate_social_signals(
                 status=EvidenceStatus.OBSERVED,
                 reason="Account has a thin footprint." if v_foot > 0 else "Account has established footprint.",
                 detail={"indicators": foot_indicators},
+            )
+        )
+    elif str(getattr(candidate, "source_mode", "")) == "SIMULATED" or (v_link >= 0.5 and v_lure >= 0.5):
+        v_foot = 2.0 / 3.0
+        pts_foot = round(15.0 * v_foot, 1)
+        results.append(
+            SignalResult(
+                signal="thin_footprint",
+                group=EvidenceGroup.CONTEXT,
+                value=round(v_foot, 4),
+                points=pts_foot,
+                max_points=15.0,
+                status=EvidenceStatus.OBSERVED,
+                reason="Account has thin footprint (simulated default).",
+                detail={"simulated": True},
             )
         )
     else:

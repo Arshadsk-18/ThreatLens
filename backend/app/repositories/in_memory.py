@@ -515,7 +515,7 @@ class InMemoryCacheRepo(CacheRepo):
 
         # If max_age_s is specified, enforce it along with TTL
         if max_age_s is not None:
-            if age_s > max_age_s or age_s > item.ttl_seconds:
+            if max_age_s <= 0 or age_s > max_age_s or age_s > item.ttl_seconds:
                 return None
             return copy.deepcopy(item)
 

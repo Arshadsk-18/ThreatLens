@@ -5,10 +5,16 @@ Single Source of Truth: docs/ARCHITECTURE_API_CONTRACT.md, Sections 2, 5.3, 11.4
 Owner: Person 2 (Orchestration & shared core)
 """
 
+import json
 from datetime import datetime, timezone
+from pathlib import Path
 
 from app.schemas.candidate import NormalizedCandidate
 from app.schemas.enums import AssetType, SourceMode
+
+MANIFEST_PATH = (
+    Path(__file__).resolve().parent.parent / "db" / "seed" / "fixtures_manifest.json"
+)
 
 
 class FixtureUnavailableError(Exception):
@@ -37,6 +43,16 @@ def load_demo_fixture_candidates(
             "Demo fixture source is unavailable, corrupted, or missing."
         )
 
+    if MANIFEST_PATH.exists():
+        try:
+            with open(MANIFEST_PATH, encoding="utf-8") as f:
+                data = json.load(f)
+            fixtures = data.get("fixtures", [])
+            if fixtures:
+                return [NormalizedCandidate(**item["candidate"]) for item in fixtures]
+        except Exception:
+            pass
+
     now = datetime.now(timezone.utc)
     category = industry_category or "Finance"
 
@@ -57,7 +73,23 @@ def load_demo_fixture_candidates(
             source_mode=SourceMode.SIMULATED,
             retrieved_at=now,
         ),
-        # 2. Official second app published by registered developer (R2)
+        # 2. Official Bluesky account (R1)
+        NormalizedCandidate(
+            source_id="demo_fixtures",
+            platform="bluesky",
+            asset_type=AssetType.SOCIAL_ACCOUNT,
+            stable_identifier="did:plc:kaveriofficial123",
+            handle="kaveribank.example",
+            display_name=brand_name,
+            publisher_name=None,
+            developer_id=None,
+            category=None,
+            canonical_url="https://bsky.app/profile/kaveribank.example",
+            icon_url="https://assets.example.org/avatars/kb_bsky.png",
+            source_mode=SourceMode.SIMULATED,
+            retrieved_at=now,
+        ),
+        # 3. Official second app published by registered developer (R2)
         NormalizedCandidate(
             source_id="demo_fixtures",
             platform="apple_app_store",
@@ -70,6 +102,38 @@ def load_demo_fixture_candidates(
             category=category,
             canonical_url="https://apps.apple.com/in/app/kaveri-bank-corporate/id9000000002",
             icon_url="https://is1-ssl.mzstatic.com/image/thumb/corporate_icon.png",
+            source_mode=SourceMode.SIMULATED,
+            retrieved_at=now,
+        ),
+        # 4. Authorized partner app (R3)
+        NormalizedCandidate(
+            source_id="demo_fixtures",
+            platform="apple_app_store",
+            asset_type=AssetType.IOS_APP,
+            stable_identifier="1234567899",
+            secondary_identifiers={"bundle_id": "com.kaveribank.partner"},
+            display_name="Kaveri Merchant Connect",
+            publisher_name="Kaveri Partner Solutions",
+            developer_id="9000000099",
+            category=category,
+            canonical_url="https://apps.apple.com/in/app/kaveri-merchant/id1234567899",
+            icon_url="https://assets.example.org/icons/kb_partner.png",
+            source_mode=SourceMode.SIMULATED,
+            retrieved_at=now,
+        ),
+        # 5. Official Android app (R1)
+        NormalizedCandidate(
+            source_id="demo_fixtures",
+            platform="google_play",
+            asset_type=AssetType.ANDROID_APP,
+            stable_identifier="com.kaveribank.android",
+            secondary_identifiers={"package_name": "com.kaveribank.android"},
+            display_name=f"{brand_name} Mobile",
+            publisher_name="Kaveri Bank Ltd",
+            developer_id="Kaveri Bank Ltd",
+            category=category,
+            canonical_url="https://play.google.com/store/apps/details?id=com.kaveribank.android",
+            icon_url="https://assets.example.org/icons/kb_android.png",
             source_mode=SourceMode.SIMULATED,
             retrieved_at=now,
         ),

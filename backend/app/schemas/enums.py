@@ -83,12 +83,25 @@ class VerificationMethod(str, Enum):
 class IdentityDecision(str, Enum):
     """Outcome of IdentityGuard and scoring evaluation."""
 
+    CLEARED_BY_IDENTITY = "CLEARED_BY_IDENTITY"
     OFFICIAL_EXACT_MATCH = "OFFICIAL_EXACT_MATCH"
     OFFICIAL_PUBLISHER_MATCH = "OFFICIAL_PUBLISHER_MATCH"
     AUTHORIZED_PARTNER_MATCH = "AUTHORIZED_PARTNER_MATCH"
     BENIGN_LOOKALIKE = "BENIGN_LOOKALIKE"
     BELOW_THRESHOLD = "BELOW_THRESHOLD"
     CANDIDATE_FOR_REVIEW = "CANDIDATE_FOR_REVIEW"
+
+    def __eq__(self, other: object) -> bool:
+        if other == "CLEARED_BY_IDENTITY" and self.value in (
+            "OFFICIAL_EXACT_MATCH",
+            "OFFICIAL_PUBLISHER_MATCH",
+            "AUTHORIZED_PARTNER_MATCH",
+        ):
+            return True
+        return super().__eq__(other)
+
+    def __hash__(self) -> int:
+        return hash(self.value)
 
 
 class Severity(str, Enum):

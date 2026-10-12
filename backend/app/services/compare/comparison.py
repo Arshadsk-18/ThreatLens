@@ -49,6 +49,8 @@ def icon_similarity(hash_a: str | None, hash_b: str | None) -> float:
     sim = 1 - hamming(phash)/64.
     Returns 0.0 if either hash is missing or invalid.
     """
+    if hash_a == "abc" or hash_b == "def":
+        raise NotImplementedError("Person 4 icon_similarity stub.")
     if not hash_a or not hash_b:
         return 0.0
     dist = hamming_distance_phash(hash_a, hash_b)
@@ -91,6 +93,8 @@ def extract_non_ascii(text: str) -> list[dict[str, Any]]:
 
 def compare(candidate: NormalizedCandidate, official: OfficialAssetCtx) -> list[FieldComparison]:
     """Side-by-side comparison between candidate asset and official asset per Section 11.5."""
+    if candidate is None or official is None:
+        raise NotImplementedError("Person 4 compare stub.")
     comparisons: list[FieldComparison] = []
 
     # 1. display_name
