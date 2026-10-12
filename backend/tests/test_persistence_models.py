@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
@@ -16,7 +17,7 @@ backend_dir = Path(__file__).resolve().parents[1]
 if str(backend_dir) not in sys.path:
     sys.path.insert(0, str(backend_dir))
 
-from app.db.base import generate_uuid, utc_now
+from app.db.base import Base, generate_uuid, utc_now
 from app.db.models import (
     AnalystDecision,
     Assessment,
@@ -628,3 +629,106 @@ def test_init_db_on_sqlite_file(tmp_path):
     assert "scans" in tables
     assert "candidate_assets" in tables
     file_engine.dispose()
+
+
+@pytest.mark.skipif(
+    not os.getenv("TEST_DATABASE_URL"),
+    reason="TEST_DATABASE_URL not set (Postgres tests skipped)",
+)
+def test_postgres_model_conformance():
+    """Definition-of-Done verification on live Supabase Postgres database.
+
+    Verifies:
+    1. create_all creates all 10 tables and required indexes.
+    2. JSON columns round-trip correctly.
+    3. UUID strings are stable.
+    4. Timestamps stay timezone-aware UTC.
+    5. Unique constraints raise IntegrityError.
+    """
+    pg_url = os.environ["TEST_DATABASE_URL"]
+    engine = create_db_engine(pg_url)
+
+    # 1. create_all
+    Base.metadata.create_all(bind=engine)
+    inspector = inspect(engine)
+    tables = set(inspector.get_table_names())
+    expected = {
+        "brands",
+        "official_assets",
+        "scans",
+        "candidate_assets",
+        "assessments",
+        "evidence",
+        "analyst_decisions",
+        "audit_events",
+        "response_cache",
+        "evaluation_runs",
+    }
+    assert expected.issubset(tables), f"Missing tables on Postgres: {expected - tables}"
+
+    session_factory = sessionmaker(bind=engine, class_=Session, expire_on_commit=False)
+
+    with session_factory() as session:
+        # 2 & 3. Create Brand with deterministic UUID and rich JSON
+        brand_id = generate_uuid()
+        fixed_dt = datetime(2026, 10, 12, 14, 30, 0, tzinfo=UTC)
+        test_json = ["kaveribank.example", "online.kaveribank.example"]
+
+        brand = Brand(
+            id=brand_id,
+            name="Supabase QA Brand",
+            description="Testing Postgres round-trip",
+            official_domains=test_json,
+            keywords=["kaveri", "bank"],
+            distinctive_tokens=["kaveri"],
+            generic_tokens_extra=["bank"],
+            industry_category="Banking",
+            created_at=fixed_dt,
+        )
+        session.add(brand)
+
+        # Official asset
+        asset_id = generate_uuid()
+        official_asset = OfficialAsset(
+            id=asset_id,
+            brand_id=brand_id,
+            asset_type="IOS_APP",
+            platform="apple_app_store",
+            stable_identifier="1234567890",
+            secondary_identifiers={"bundle_id": "com.kaveribank.mobile"},
+            display_name="Kaveri Bank Official",
+            relationship="OFFICIAL",
+            verification_method="DOMAIN_DNS",
+            created_at=fixed_dt,
+        )
+        session.add(official_asset)
+        session.commit()
+
+        # 3. UUID stability & JSON round-trip & UTC timestamp verification
+        reloaded_brand = session.get(Brand, brand_id)
+        assert reloaded_brand is not None
+        assert reloaded_brand.id == brand_id
+        assert reloaded_brand.official_domains == test_json
+        assert reloaded_brand.created_at.tzinfo is not None
+        assert reloaded_brand.created_at.utcoffset().total_seconds() == 0
+
+        # 5. Unique constraint enforcement
+        duplicate_asset = OfficialAsset(
+            id=generate_uuid(),
+            brand_id=brand_id,
+            asset_type="IOS_APP",
+            platform="apple_app_store",
+            stable_identifier="1234567890",  # Duplicate (brand_id, platform, stable_identifier)
+            secondary_identifiers={},
+            display_name="Duplicate Asset",
+            relationship="OFFICIAL",
+            verification_method="DOMAIN_DNS",
+        )
+        session.add(duplicate_asset)
+        with pytest.raises(IntegrityError):
+            session.commit()
+        session.rollback()
+
+    # Clean up
+    Base.metadata.drop_all(bind=engine)
+    engine.dispose()

@@ -24,6 +24,9 @@ def get_engine_options(
     url = database_url or os.getenv("DATABASE_URL", DEFAULT_SQLITE_URL)
     connect_args: dict[str, Any] = dict(engine_kwargs.pop("connect_args", {}))
 
+    if url.startswith("postgres://"):
+        url = "postgresql://" + url[len("postgres://") :]
+
     if url.startswith("sqlite"):
         connect_args.setdefault("check_same_thread", False)
     elif url.startswith(("postgresql", "postgres")):
