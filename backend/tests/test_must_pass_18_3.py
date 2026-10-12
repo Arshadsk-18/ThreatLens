@@ -53,6 +53,10 @@ def repo_session_factory():
     return session_factory
 
 
+# Alias fixture for imported E2E tests
+e2e_session_factory = repo_session_factory
+
+
 # ------------------------------------------------------------------------------
 # 1. OpenAPI & Route Mappings (Owner: Person 2)
 # ------------------------------------------------------------------------------
@@ -333,3 +337,179 @@ def test_eval_metrics_computed_not_hardcoded():
 
     metrics = evaluate_dataset("dev")
     assert isinstance(metrics.get("f1"), float)
+
+
+# ------------------------------------------------------------------------------
+# 4. DEMO Safety & Provider Reliability (Owner: Person 5)
+# ------------------------------------------------------------------------------
+from tests.test_e2e_demo import (
+    test_demo_scan_makes_no_network_calls as _test_demo_scan_makes_no_network_calls,
+)
+from tests.test_e2e_demo import (
+    test_live_scan_has_no_simulated_records as _test_live_scan_has_no_simulated_records,
+)
+from tests.test_e2e_demo import (
+    test_not_connected_is_not_an_error as _test_not_connected_is_not_an_error,
+)
+from tests.test_e2e_demo import (
+    test_provider_failure_is_not_clean_result as _test_provider_failure_is_not_clean_result,
+)
+
+
+def test_demo_scan_makes_no_network_calls(monkeypatch, e2e_session_factory):
+    """Verify DEMO scans make no outbound network socket connections (Owner: Person 5)."""
+    _test_demo_scan_makes_no_network_calls(monkeypatch, e2e_session_factory)
+
+
+def test_live_scan_has_no_simulated_records(e2e_session_factory):
+    """Verify LIVE scans never tag candidates with SIMULATED mode (Owner: Person 5)."""
+    _test_live_scan_has_no_simulated_records(e2e_session_factory)
+
+
+def test_not_connected_is_not_an_error(e2e_session_factory):
+    """Verify disconnected sources record NOT_CONNECTED without failing scan (Owner: Person 5)."""
+    _test_not_connected_is_not_an_error(e2e_session_factory)
+
+
+def test_provider_failure_is_not_clean_result(e2e_session_factory):
+    """Verify provider failure records FAILED rather than claiming clean 0-findings (Owner: Person 5)."""
+    _test_provider_failure_is_not_clean_result(e2e_session_factory)
+
+
+# ------------------------------------------------------------------------------
+# 5. Decision Memory & Persistence (Owner: Person 5)
+# ------------------------------------------------------------------------------
+def test_decision_memory_persists(repo_session_factory):
+    """Test full decision memory lifecycle: dismiss, suppress on identical rescan, resurface on content change."""
+    from app.repositories.sqlalchemy_repo import (
+        SqlAlchemyAuditRepo,
+        SqlAlchemyBrandRepo,
+        SqlAlchemyCandidateRepo,
+        SqlAlchemyDecisionRepo,
+        SqlAlchemyScanRepo,
+    )
+
+    brand_repo = SqlAlchemyBrandRepo(repo_session_factory)
+    scan_repo = SqlAlchemyScanRepo(repo_session_factory)
+    cand_repo = SqlAlchemyCandidateRepo(repo_session_factory)
+    assess_repo = SqlAlchemyAssessmentRepo(repo_session_factory)
+    dec_repo = SqlAlchemyDecisionRepo(repo_session_factory)
+    audit_repo = SqlAlchemyAuditRepo(repo_session_factory)
+
+    brand = brand_repo.create({"name": "Kaveri Bank Memory Test"})
+    brand_id = brand["id"]
+
+    scan1 = scan_repo.create({"brand_id": brand_id, "mode": "LIVE"})
+    candidate_data = {
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "9876543210",
+        "display_name": "Kaveri Bank Rewards",
+        "publisher_name": "KB Rewards Studio",
+        "description": "Legitimate partner loyalty app.",
+        "icon_hash": "iconhash123",
+        "source_mode": "LIVE",
+    }
+    cand = cand_repo.upsert(candidate_data, brand_id=brand_id, scan_id=scan1["id"])
+
+    assessment1_id = assess_repo.save(
+        scan_id=scan1["id"],
+        candidate_id=cand["id"],
+        result={
+            "identity_decision": "CANDIDATE_FOR_REVIEW",
+            "rule": "NO_EXACT_MATCH",
+            "risk_score": 72,
+            "severity": "HIGH",
+            "evidence_coverage": 1.0,
+            "technique": "ADDED_WORD",
+            "score_breakdown": [
+                {"signal": "name_lookalike", "points": 19.5, "max_points": 25}
+            ],
+        },
+        evidence=[
+            {
+                "source_id": "apple_itunes",
+                "evidence_type": "APP_STORE_METADATA",
+                "status": "OBSERVED",
+                "field_name": "publisher_name",
+                "observed_value": "KB Rewards Studio",
+            }
+        ],
+        brand_id=brand_id,
+    )
+
+    # 1. Finding appears in findings queue
+    findings1 = assess_repo.list_findings(brand_id=brand_id, latest_only=True)
+    assert any(
+        f.candidate.get("stable_identifier") == "9876543210" for f in findings1.items
+    )
+
+    # 2. Analyst dismisses candidate as false positive
+    dec_repo.record(
+        candidate_id=cand["id"],
+        assessment_id=assessment1_id,
+        new_status="DISMISSED_FALSE_POSITIVE",
+        decision_reason="Confirmed partner app.",
+        notes="Whitelisted partner for rewards",
+        actor_label="analyst_alice",
+    )
+
+    # 3. Suppressed in active queue
+    findings_after_dismiss = assess_repo.list_findings(
+        brand_id=brand_id, latest_only=True
+    )
+    assert not any(
+        f.candidate.get("stable_identifier") == "9876543210"
+        for f in findings_after_dismiss.items
+    )
+
+    # 4. Rescan with identical content keeps status DISMISSED_FALSE_POSITIVE and hidden
+    scan2 = scan_repo.create({"brand_id": brand_id, "mode": "LIVE"})
+    cand2 = cand_repo.upsert(candidate_data, brand_id=brand_id, scan_id=scan2["id"])
+    assert cand2["analyst_status"] == "DISMISSED_FALSE_POSITIVE"
+    assert cand2["content_hash"] == cand["content_hash"]
+
+    assess_repo.save(
+        scan_id=scan2["id"],
+        candidate_id=cand["id"],
+        result={
+            "identity_decision": "CANDIDATE_FOR_REVIEW",
+            "risk_score": 72,
+            "severity": "HIGH",
+        },
+        evidence=[],
+        brand_id=brand_id,
+    )
+    findings2 = assess_repo.list_findings(
+        brand_id=brand_id, scan_id=scan2["id"], include_dismissed=False
+    )
+    assert findings2.total == 0
+
+    # 5. Content changes -> content_hash changes -> candidate RESURFACES with changed_since_decision=True
+    scan3 = scan_repo.create({"brand_id": brand_id, "mode": "LIVE"})
+    changed_data = dict(candidate_data)
+    changed_data["description"] = "Updated malicious phish link http://evil.com"
+    cand3 = cand_repo.upsert(changed_data, brand_id=brand_id, scan_id=scan3["id"])
+    assert cand3["content_hash"] != cand["content_hash"]
+
+    assessment3_id = assess_repo.save(
+        scan_id=scan3["id"],
+        candidate_id=cand["id"],
+        result={
+            "identity_decision": "CANDIDATE_FOR_REVIEW",
+            "risk_score": 88,
+            "severity": "CRITICAL",
+        },
+        evidence=[],
+        brand_id=brand_id,
+    )
+    findings3 = assess_repo.list_findings(
+        brand_id=brand_id, scan_id=scan3["id"], include_dismissed=False
+    )
+    assert findings3.total == 1
+    assert findings3.items[0].id == assessment3_id
+    assert findings3.items[0].changed_since_decision is True
+
+    # 6. Audit trail
+    audits = audit_repo.list(brand_id=brand_id)
+    assert any(a.event_type == "ANALYST_DECISION" for a in audits.items)
