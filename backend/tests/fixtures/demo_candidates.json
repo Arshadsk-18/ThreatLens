@@ -1,0 +1,93 @@
+{
+  "brand_id": "c0000000-0000-0000-0000-000000000001",
+  "candidates": [
+    {
+      "source_id": "demo_fixtures",
+      "platform": "apple_app_store",
+      "asset_type": "IOS_APP",
+      "stable_identifier": "1234567890",
+      "secondary_identifiers": {
+        "bundle_id": "com.kaveribank.mobile"
+      },
+      "display_name": "Kaveri Bank",
+      "handle": null,
+      "publisher_name": "Kaveri Bank Ltd",
+      "developer_id": "9000000001",
+      "description": "Official mobile banking app of Kaveri Bank.",
+      "category": "Finance",
+      "external_links": ["https://kaveribank.example"],
+      "icon_url": "https://is1-ssl.mzstatic.com/image/thumb/AppIcon/100x100bb.jpg",
+      "canonical_url": "https://apps.apple.com/in/app/kaveri-bank/id1234567890",
+      "source_mode": "SIMULATED",
+      "rating_count": 125000,
+      "matched_queries": ["kaveri bank"]
+    },
+    {
+      "source_id": "demo_fixtures",
+      "platform": "apple_app_store",
+      "asset_type": "IOS_APP",
+      "stable_identifier": "9876543210",
+      "secondary_identifiers": {
+        "bundle_id": "com.kbrewards.app"
+      },
+      "display_name": "Kaveri Bank Rewards",
+      "handle": null,
+      "publisher_name": "KB Rewards Studio",
+      "developer_id": "9000000042",
+      "description": "Get rewards, instant loan and cashback on your Kaveri Bank account.",
+      "category": "Finance",
+      "external_links": ["https://kb-rewards.example"],
+      "icon_url": "https://is1-ssl.mzstatic.com/image/thumb/RewardsIcon/100x100bb.jpg",
+      "canonical_url": "https://apps.apple.com/app/id9876543210",
+      "source_mode": "SIMULATED",
+      "rating_count": 12,
+      "matched_queries": ["kaveri bank", "kaveri bank rewards"]
+    },
+    {
+      "source_id": "demo_fixtures",
+      "platform": "bluesky",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "stable_identifier": "did:plc:kaveriofficial12345",
+      "secondary_identifiers": {
+        "handle": "kaveribank.bsky.social"
+      },
+      "display_name": "Kaveri Bank Official",
+      "handle": "kaveribank.bsky.social",
+      "publisher_name": null,
+      "developer_id": null,
+      "description": "Official updates from Kaveri Bank. Visit https://kaveribank.example",
+      "category": null,
+      "external_links": ["https://kaveribank.example"],
+      "icon_url": "https://cdn.bsky.app/img/avatar/plain/did:plc:kaveriofficial12345/avatar.jpg",
+      "canonical_url": "https://bsky.app/profile/kaveribank.bsky.social",
+      "source_mode": "SIMULATED",
+      "followers": 45000,
+      "following": 120,
+      "posts_count": 1200,
+      "matched_queries": ["kaveri bank"]
+    },
+    {
+      "source_id": "demo_fixtures",
+      "platform": "bluesky",
+      "asset_type": "SOCIAL_ACCOUNT",
+      "stable_identifier": "did:plc:kaverifake98765",
+      "secondary_identifiers": {
+        "handle": "kaveri-support.bsky.social"
+      },
+      "display_name": "Kaveri Bank Support & Care",
+      "handle": "kaveri-support.bsky.social",
+      "publisher_name": null,
+      "developer_id": null,
+      "description": "Official 24x7 customer care for Kaveri Bank. Instant KYC and loan support.",
+      "category": null,
+      "external_links": ["https://kaveri-helpdesk.example"],
+      "icon_url": "https://cdn.bsky.app/img/avatar/plain/did:plc:kaverifake98765/avatar.jpg",
+      "canonical_url": "https://bsky.app/profile/kaveri-support.bsky.social",
+      "source_mode": "SIMULATED",
+      "followers": 15,
+      "following": 2,
+      "posts_count": 3,
+      "matched_queries": ["kaveri", "kaveri support"]
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "fixture_version": 1,
+  "records": [
+    {
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "demo-ios-001",
+        "secondary_identifiers": {"bundle_id": "com.kaveri.mobilebanking"},
+        "display_name": "Kaveri Mobile Plus",
+        "handle": null,
+        "publisher_name": "Kaveri Bank Official",
+        "url": "https://apps.apple.com/in/app/kaveri-mobile-plus/id9991001",
+        "icon_url": null,
+        "icon_phash": "817a7a7a7e027e81",
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T12:00:00Z",
+        "matched_queries": ["kaveri bank", "kaveri mobile"]
+      },
+      "note": "CLEARED: Official legitimate iOS mobile banking app"
+    },
+    {
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "google_play",
+        "asset_type": "ANDROID_APP",
+        "stable_identifier": "demo-android-001",
+        "secondary_identifiers": {"package_name": "com.kaveribank.online"},
+        "display_name": "Kaveri NetBanking Official",
+        "handle": null,
+        "publisher_name": "Kaveri Bank Ltd",
+        "url": "https://play.google.com/store/apps/details?id=com.kaveribank.online",
+        "icon_url": null,
+        "icon_phash": "817a7a7a7e027e81",
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T12:00:00Z",
+        "matched_queries": ["kaveri bank", "kaveri online"]
+      },
+      "note": "CLEARED: Official legitimate Android banking application"
+    },
+    {
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:kaveriofficialbank00001",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Bank",
+        "handle": "kaveribank.bsky.social",
+        "publisher_name": null,
+        "url": "https://bsky.app/profile/kaveribank.bsky.social",
+        "icon_url": null,
+        "icon_phash": "817a7a7a7e027e81",
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T12:00:00Z",
+        "matched_queries": ["kaveri bank"]
+      },
+      "note": "CLEARED: Official verified social account"
+    },
+    {
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:fakekaverisupport223344",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Bank Customer Care",
+        "handle": "kaveri-care24x7.bsky.social",
+        "publisher_name": null,
+        "url": "https://bsky.app/profile/kaveri-care24x7.bsky.social",
+        "icon_url": null,
+        "icon_phash": "817a7a7a7a037e81",
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T12:00:00Z",
+        "matched_queries": ["kaveri bank support", "kaveri care"]
+      },
+      "note": "IMPERSONATION: Fake support channel soliciting account OTPs"
+    },
+    {
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "demo-ios-fake-002",
+        "secondary_identifiers": {"bundle_id": "org.kaverii.loans"},
+        "display_name": "Kaverii Fast Loan - Instant Cash",
+        "handle": null,
+        "publisher_name": "QuickCash Tech Private Ltd",
+        "url": "https://apps.apple.com/in/app/kaverii-fast-loan/id9992002",
+        "icon_url": null,
+        "icon_phash": "817a7a7a7a037e81",
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T12:00:00Z",
+        "matched_queries": ["kaveri loan"]
+      },
+      "note": "IMPERSONATION: Typo-squatting predatory lending app using brand name"
+    },
+    {
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "google_play",
+        "asset_type": "ANDROID_APP",
+        "stable_identifier": "demo-android-fake-002",
+        "secondary_identifiers": {"package_name": "com.kaveri.rewardspoints.app"},
+        "display_name": "Kaveri Bank Rewards & KYC Update",
+        "handle": null,
+        "publisher_name": "Developer Unknown",
+        "url": "https://play.google.com/store/apps/details?id=com.kaveri.rewardspoints.app",
+        "icon_url": null,
+        "icon_phash": "817a7a7a7e027e81",
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T12:00:00Z",
+        "matched_queries": ["kaveri reward points", "kaveri kyc"]
+      },
+      "note": "IMPERSONATION: Phishing app harvesting mobile banking credentials"
+    },
+    {
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "x",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "demo-x-fake-001",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Bank Helpline Urgent",
+        "handle": "KaveriBankHelp",
+        "publisher_name": null,
+        "url": "https://x.com/KaveriBankHelp",
+        "icon_url": null,
+        "icon_phash": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T12:00:00Z",
+        "matched_queries": ["kaveri bank helpline"]
+      },
+      "note": "IMPERSONATION: Fake grievance redressal handle asking for phone callback"
+    },
+    {
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "instagram",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "demo-ig-fake-001",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Bank Lottery Winners",
+        "handle": "kaveri_bank_lottery",
+        "publisher_name": null,
+        "url": "https://instagram.com/kaveri_bank_lottery",
+        "icon_url": null,
+        "icon_phash": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T12:00:00Z",
+        "matched_queries": ["kaveri bank lottery"]
+      },
+      "note": "IMPERSONATION: Social scam claiming prize money in exchange for fee"
+    },
+    {
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "bluesky",
+        "asset_type": "SOCIAL_ACCOUNT",
+        "stable_identifier": "did:plc:kaveririvertrust889911",
+        "secondary_identifiers": {},
+        "display_name": "Kaveri Basin Heritage Society",
+        "handle": "kaveribasin.bsky.social",
+        "publisher_name": null,
+        "url": "https://bsky.app/profile/kaveribasin.bsky.social",
+        "icon_url": null,
+        "icon_phash": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T12:00:00Z",
+        "matched_queries": ["kaveri"]
+      },
+      "note": "NOT-RELEVANT: Historical and cultural river conservation society"
+    },
+    {
+      "candidate": {
+        "source_id": "demo_fixtures",
+        "platform": "apple_app_store",
+        "asset_type": "IOS_APP",
+        "stable_identifier": "demo-ios-benign-003",
+        "secondary_identifiers": {"bundle_id": "com.kaverisilks.shopping"},
+        "display_name": "Kaveri Silks Online Sarees",
+        "handle": null,
+        "publisher_name": "Kaveri Silks Retail Store",
+        "url": "https://apps.apple.com/in/app/kaveri-silks/id9993003",
+        "icon_url": null,
+        "icon_phash": null,
+        "source_mode": "SIMULATED",
+        "retrieved_at": "2026-10-12T12:00:00Z",
+        "matched_queries": ["kaveri online"]
+      },
+      "note": "NOT-RELEVANT: Apparel retail ecommerce app sharing namesake"
+    }
+  ]
+}

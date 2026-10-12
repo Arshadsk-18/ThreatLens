@@ -1,24 +1,24 @@
-"""Source adapter interface specification.
+"""SourceAdapter Protocol definition.
 
-Contract Version: 3.0.0
-Single Source of Truth: docs/ARCHITECTURE_API_CONTRACT.md, Section 12
-Owner: Person 3 (Discovery and Connectors)
-Branch: feat/discovery
-
-NOTE: This file defines the Protocol interface agreed between Person 2 and Person 3.
-Person 3 owns the concrete implementation of live source adapters (Apple, Bluesky).
-Do not replace this Protocol with a concrete implementation here.
+Owner: Person 3 (backend/app/services/sources/base.py)
+Reference: Contract Section 12 (Internal Python interfaces)
 """
+
+from __future__ import annotations
 
 from typing import Protocol, runtime_checkable
 
-from app.schemas.candidate import NormalizedCandidate, QueryPlan, SourceResult
-from app.schemas.source import SourceHealth
+from app.schemas import (
+    NormalizedCandidate,
+    QueryPlan,
+    SourceHealth,
+    SourceResult,
+)
 
 
 @runtime_checkable
 class SourceAdapter(Protocol):
-    """Protocol for external platform connectors."""
+    """Internal contract protocol for all external and fixture-backed source adapters."""
 
     source_id: str
 
