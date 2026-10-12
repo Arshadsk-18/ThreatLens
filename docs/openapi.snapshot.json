@@ -1,0 +1,4815 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ThreatLens API",
+    "description": "ThreatLens v3 — Digital Risk Protection: Social & App Monitoring",
+    "version": "3.0.0"
+  },
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "tags": [
+          "Health & Meta"
+        ],
+        "summary": "Get Health",
+        "description": "Service liveness probe.",
+        "operationId": "get_health_api_v1_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ready": {
+      "get": {
+        "tags": [
+          "Health & Meta"
+        ],
+        "summary": "Get Ready",
+        "description": "Service readiness probe verifying essential subsystems (no secrets exposed).",
+        "operationId": "get_ready_api_v1_ready_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/meta": {
+      "get": {
+        "tags": [
+          "Health & Meta"
+        ],
+        "summary": "Get Meta",
+        "description": "System metadata, enum catalog, scoring thresholds, and supported platforms.",
+        "operationId": "get_meta_api_v1_meta_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetaResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/brands": {
+      "post": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Create Brand",
+        "description": "Register a new brand profile.",
+        "operationId": "create_brand_api_v1_brands_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BrandCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrandResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "List Brands",
+        "description": "List registered brands with pagination.",
+        "operationId": "list_brands_api_v1_brands_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse_BrandResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/brands/{brand_id}": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Get Brand",
+        "description": "Get brand profile details and asset count.",
+        "operationId": "get_brand_api_v1_brands__brand_id__get",
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Brand Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrandResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Update Brand",
+        "description": "Update permitted fields of a brand profile.",
+        "operationId": "update_brand_api_v1_brands__brand_id__patch",
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Brand Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BrandUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrandResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/brands/{brand_id}/summary": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Get Brand Summary",
+        "description": "Get brand monitoring overview aggregates, funnel metrics, and coverage.",
+        "operationId": "get_brand_summary_api_v1_brands__brand_id__summary_get",
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Brand Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrandSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/brands/{brand_id}/cleared": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "List Brand Cleared",
+        "description": "List cleared items for a brand with optional filtering and pagination.",
+        "operationId": "list_brand_cleared_api_v1_brands__brand_id__cleared_get",
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Brand Id"
+            }
+          },
+          {
+            "name": "decision",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/IdentityDecision"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Decision"
+            }
+          },
+          {
+            "name": "scan_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Scan Id"
+            }
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Q"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse_ClearedListItem_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/brands/{brand_id}/audit": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "List Brand Audit",
+        "description": "List audit events for a brand ordered newest first.",
+        "operationId": "list_brand_audit_api_v1_brands__brand_id__audit_get",
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Brand Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse_AuditEventResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/brands/{brand_id}/assets/prefill": {
+      "post": {
+        "tags": [
+          "Official Assets"
+        ],
+        "summary": "Prefill Asset",
+        "description": "Generate draft asset metadata from store link or platform identifier.\n\nDoes NOT persist any asset. Never fetches arbitrary user URLs.\nUnallowlisted URLs return 422 VALIDATION_ERROR with BLOCKED_URL details.",
+        "operationId": "prefill_asset_api_v1_brands__brand_id__assets_prefill_post",
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Brand Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetPrefillRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetPrefillResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/brands/{brand_id}/assets": {
+      "post": {
+        "tags": [
+          "Official Assets"
+        ],
+        "summary": "Register Asset",
+        "description": "Register an official or authorized partner asset.",
+        "operationId": "register_asset_api_v1_brands__brand_id__assets_post",
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Brand Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OfficialAssetCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfficialAssetResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Official Assets"
+        ],
+        "summary": "List Assets",
+        "description": "List official assets for a brand with filtering and pagination.",
+        "operationId": "list_assets_api_v1_brands__brand_id__assets_get",
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Brand Id"
+            }
+          },
+          {
+            "name": "asset_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/AssetType"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Asset Type"
+            }
+          },
+          {
+            "name": "relationship",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Relationship"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Relationship"
+            }
+          },
+          {
+            "name": "is_verified",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Is Verified"
+            }
+          },
+          {
+            "name": "is_active",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Is Active"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse_OfficialAssetResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/brands/{brand_id}/assets/{asset_id}": {
+      "get": {
+        "tags": [
+          "Official Assets"
+        ],
+        "summary": "Get Asset",
+        "description": "Get registered asset details by asset ID.",
+        "operationId": "get_asset_api_v1_brands__brand_id__assets__asset_id__get",
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Brand Id"
+            }
+          },
+          {
+            "name": "asset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Asset Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfficialAssetResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Official Assets"
+        ],
+        "summary": "Update Asset",
+        "description": "Update or deactivate an asset. Writes an audit event.",
+        "operationId": "update_asset_api_v1_brands__brand_id__assets__asset_id__patch",
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Brand Id"
+            }
+          },
+          {
+            "name": "asset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Asset Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OfficialAssetUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfficialAssetResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/scans": {
+      "post": {
+        "tags": [
+          "Scans"
+        ],
+        "summary": "Start Scan",
+        "description": "Start an asynchronous scan job.\n\nEnforces:\n- 409 SCAN_ALREADY_RUNNING if a scan is already running for the brand.\n- 422 MODE_NOT_ALLOWED if mode is LIVE and simulated sources are requested.\n- DEMO mode ignores source_ids for live providers and runs fixtures only.",
+        "operationId": "start_scan_api_v1_scans_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScanStartRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScanStartResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Scans"
+        ],
+        "summary": "List Scans",
+        "description": "List historical scans ordered newest first.",
+        "operationId": "list_scans_api_v1_scans_get",
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Brand Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse_ScanDetailResponse_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/scans/{scan_id}": {
+      "get": {
+        "tags": [
+          "Scans"
+        ],
+        "summary": "Get Scan",
+        "description": "Get scan progress, per-source outcomes, funnel counts, and event log.",
+        "operationId": "get_scan_api_v1_scans__scan_id__get",
+        "parameters": [
+          {
+            "name": "scan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Scan Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScanDetailResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/scans/{scan_id}/findings": {
+      "get": {
+        "tags": [
+          "Scans"
+        ],
+        "summary": "Get Scan Findings",
+        "description": "Get candidate findings surfaced in this specific scan.",
+        "operationId": "get_scan_findings_api_v1_scans__scan_id__findings_get",
+        "parameters": [
+          {
+            "name": "scan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Scan Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse_FindingListItem_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/scans/{scan_id}/cleared": {
+      "get": {
+        "tags": [
+          "Scans"
+        ],
+        "summary": "Get Scan Cleared",
+        "description": "Get candidates cleared by identity rules or benign gates in this scan.",
+        "operationId": "get_scan_cleared_api_v1_scans__scan_id__cleared_get",
+        "parameters": [
+          {
+            "name": "scan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Scan Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse_ClearedListItem_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sources/status": {
+      "get": {
+        "tags": [
+          "Sources"
+        ],
+        "summary": "Get Sources Status",
+        "description": "Retrieve external source coverage and connectivity status.\n\nReturns fixed list of 9 source IDs per Section 11.1.\nGoogle Play, Instagram, X and Facebook are explicitly NOT_CONNECTED.\nWhen refresh=True, performs a live health check for connected adapters.",
+        "operationId": "get_sources_status_api_v1_sources_status_get",
+        "parameters": [
+          {
+            "name": "refresh",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Refresh"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SourceHealth"
+                  },
+                  "title": "Response Get Sources Status Api V1 Sources Status Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/findings": {
+      "get": {
+        "tags": [
+          "Findings"
+        ],
+        "summary": "List Findings",
+        "description": "Get review findings with filters, ordering, pagination, and defaults.",
+        "operationId": "list_findings_api_v1_findings_get",
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Brand Id"
+            }
+          },
+          {
+            "name": "scan_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Scan Id"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/FindingStatus"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "name": "asset_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/AssetType"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Asset Type"
+            }
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform"
+            }
+          },
+          {
+            "name": "severity",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Severity"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Severity"
+            }
+          },
+          {
+            "name": "min_score",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Min Score"
+            }
+          },
+          {
+            "name": "source_mode",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/SourceMode"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Source Mode"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Q"
+            }
+          },
+          {
+            "name": "latest_only",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Latest Only"
+            }
+          },
+          {
+            "name": "include_dismissed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Dismissed"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "score_desc",
+              "title": "Sort"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse_FindingListItem_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/findings/{finding_id}": {
+      "get": {
+        "tags": [
+          "Findings"
+        ],
+        "summary": "Get Finding",
+        "description": "Get finding detail with breakdown, evidence, limitations, and decision history.",
+        "operationId": "get_finding_api_v1_findings__finding_id__get",
+        "parameters": [
+          {
+            "name": "finding_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Finding Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FindingDetailResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Findings"
+        ],
+        "summary": "Patch Finding Decision",
+        "description": "Record analyst review decision with reason validation and audit event.",
+        "operationId": "patch_finding_decision_api_v1_findings__finding_id__patch",
+        "parameters": [
+          {
+            "name": "finding_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Finding Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FindingDecisionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FindingDetailResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/findings/{finding_id}/comparison": {
+      "get": {
+        "tags": [
+          "Findings"
+        ],
+        "summary": "Get Finding Comparison",
+        "description": "Resolve nearest official asset and compare side-by-side via Person 4's compare() interface.",
+        "operationId": "get_finding_comparison_api_v1_findings__finding_id__comparison_get",
+        "parameters": [
+          {
+            "name": "finding_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Finding Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComparisonResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AssetPrefillDraft": {
+        "properties": {
+          "asset_type": {
+            "$ref": "#/components/schemas/AssetType"
+          },
+          "platform": {
+            "type": "string",
+            "title": "Platform"
+          },
+          "stable_identifier": {
+            "type": "string",
+            "title": "Stable Identifier"
+          },
+          "secondary_identifiers": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Secondary Identifiers"
+          },
+          "developer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Developer Id"
+          },
+          "publisher_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher Name"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name"
+          },
+          "handle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Handle"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "canonical_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canonical Url"
+          },
+          "icon_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon Url"
+          },
+          "verification_method": {
+            "$ref": "#/components/schemas/VerificationMethod",
+            "default": "STORE_LOOKUP"
+          },
+          "relationship": {
+            "$ref": "#/components/schemas/Relationship",
+            "default": "OFFICIAL"
+          },
+          "trust_publisher": {
+            "type": "boolean",
+            "title": "Trust Publisher",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "asset_type",
+          "platform",
+          "stable_identifier",
+          "display_name"
+        ],
+        "title": "AssetPrefillDraft",
+        "description": "Draft asset returned by prefill for analyst review/editing before persistence."
+      },
+      "AssetPrefillRequest": {
+        "properties": {
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "platform": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Platform"
+          },
+          "identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Identifier"
+          }
+        },
+        "type": "object",
+        "title": "AssetPrefillRequest",
+        "description": "Prefill request by store URL or platform identifier."
+      },
+      "AssetPrefillResponse": {
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "source_mode": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SourceMode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "retrieved_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retrieved At"
+          },
+          "draft": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AssetPrefillDraft"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SourceStatus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProviderErrorCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_id"
+        ],
+        "title": "AssetPrefillResponse",
+        "description": "Response returned by POST /brands/{brand_id}/assets/prefill."
+      },
+      "AssetType": {
+        "type": "string",
+        "enum": [
+          "IOS_APP",
+          "ANDROID_APP",
+          "SOCIAL_ACCOUNT"
+        ],
+        "title": "AssetType",
+        "description": "Asset class."
+      },
+      "AuditEventResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "brand_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Brand Id"
+          },
+          "actor_label": {
+            "type": "string",
+            "title": "Actor Label",
+            "default": "analyst"
+          },
+          "event_type": {
+            "type": "string",
+            "title": "Event Type"
+          },
+          "entity_type": {
+            "type": "string",
+            "title": "Entity Type"
+          },
+          "entity_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Entity Id"
+          },
+          "details": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Details"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "brand_id",
+          "event_type",
+          "entity_type",
+          "entity_id",
+          "created_at"
+        ],
+        "title": "AuditEventResponse",
+        "description": "Audit log entry for brand changes, asset updates, and analyst decisions."
+      },
+      "BrandCreate": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 2,
+            "title": "Name",
+            "description": "Brand name (2-60 chars)"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "official_domains": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Official Domains"
+          },
+          "keywords": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 12,
+            "title": "Keywords"
+          },
+          "distinctive_tokens": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Distinctive Tokens"
+          },
+          "generic_tokens_extra": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Generic Tokens Extra"
+          },
+          "industry_category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Industry Category"
+          },
+          "demo_brand": {
+            "type": "boolean",
+            "title": "Demo Brand",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "BrandCreate",
+        "description": "Payload for creating a brand."
+      },
+      "BrandResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "official_domains": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Official Domains"
+          },
+          "keywords": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Keywords"
+          },
+          "distinctive_tokens": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Distinctive Tokens"
+          },
+          "generic_tokens_extra": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Generic Tokens Extra"
+          },
+          "industry_category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Industry Category"
+          },
+          "demo_brand": {
+            "type": "boolean",
+            "title": "Demo Brand",
+            "default": false
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "official_asset_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Official Asset Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "BrandResponse",
+        "description": "Brand detail response."
+      },
+      "BrandSummaryResponse": {
+        "properties": {
+          "brand_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Brand Id"
+          },
+          "official_asset_count": {
+            "type": "integer",
+            "title": "Official Asset Count",
+            "default": 0
+          },
+          "last_scan": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Scan"
+          },
+          "funnel": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Funnel"
+          },
+          "findings_by_severity": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Findings By Severity"
+          },
+          "findings_by_status": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Findings By Status"
+          },
+          "findings_by_platform": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Findings By Platform"
+          },
+          "cleared_by_decision": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Cleared By Decision"
+          },
+          "review_progress": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Review Progress"
+          },
+          "source_coverage": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Source Coverage"
+          },
+          "latest_evaluation": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Evaluation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "brand_id"
+        ],
+        "title": "BrandSummaryResponse",
+        "description": "Overview aggregates for brand monitoring overview screen."
+      },
+      "BrandUpdate": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 60,
+                "minLength": 2
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "official_domains": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Official Domains"
+          },
+          "keywords": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "maxItems": 12
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Keywords"
+          },
+          "distinctive_tokens": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Distinctive Tokens"
+          },
+          "generic_tokens_extra": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Generic Tokens Extra"
+          },
+          "industry_category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Industry Category"
+          },
+          "demo_brand": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Demo Brand"
+          }
+        },
+        "type": "object",
+        "title": "BrandUpdate",
+        "description": "Payload for updating permitted brand fields."
+      },
+      "CandidateSummary": {
+        "properties": {
+          "platform": {
+            "type": "string",
+            "title": "Platform"
+          },
+          "asset_type": {
+            "$ref": "#/components/schemas/AssetType"
+          },
+          "stable_identifier": {
+            "type": "string",
+            "title": "Stable Identifier"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name"
+          },
+          "handle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Handle"
+          },
+          "publisher_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher Name"
+          },
+          "icon_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon Url"
+          },
+          "canonical_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canonical Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "platform",
+          "asset_type",
+          "stable_identifier",
+          "display_name"
+        ],
+        "title": "CandidateSummary",
+        "description": "External observed candidate summary for list views."
+      },
+      "ClearedCandidateSummary": {
+        "properties": {
+          "platform": {
+            "type": "string",
+            "title": "Platform"
+          },
+          "asset_type": {
+            "$ref": "#/components/schemas/AssetType"
+          },
+          "stable_identifier": {
+            "type": "string",
+            "title": "Stable Identifier"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name"
+          },
+          "publisher_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher Name"
+          },
+          "icon_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "platform",
+          "asset_type",
+          "stable_identifier",
+          "display_name"
+        ],
+        "title": "ClearedCandidateSummary",
+        "description": "External asset summary for cleared views."
+      },
+      "ClearedListItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "scan_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Scan Id"
+          },
+          "candidate": {
+            "$ref": "#/components/schemas/ClearedCandidateSummary"
+          },
+          "decision": {
+            "$ref": "#/components/schemas/IdentityDecision"
+          },
+          "rule": {
+            "type": "string",
+            "title": "Rule"
+          },
+          "matched_official_asset_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Matched Official Asset Id"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          },
+          "risk_score": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Risk Score"
+          },
+          "source_mode": {
+            "$ref": "#/components/schemas/SourceMode"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observed At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "scan_id",
+          "candidate",
+          "decision",
+          "rule",
+          "explanation",
+          "source_mode",
+          "observed_at"
+        ],
+        "title": "ClearedListItem",
+        "description": "Candidate cleared by exact ID, publisher ID, partner, or benign gate."
+      },
+      "ComparisonAssetSummary": {
+        "properties": {
+          "asset_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Asset Id"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name"
+          },
+          "stable_identifier": {
+            "type": "string",
+            "title": "Stable Identifier"
+          },
+          "publisher_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher Name"
+          },
+          "developer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Developer Id"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "icon_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon Url"
+          },
+          "canonical_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canonical Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "display_name",
+          "stable_identifier"
+        ],
+        "title": "ComparisonAssetSummary",
+        "description": "Summary of asset fields shown in Evidence Compare view."
+      },
+      "ComparisonResponse": {
+        "properties": {
+          "finding_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Finding Id"
+          },
+          "nearest_official_asset_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nearest Official Asset Id"
+          },
+          "official_asset": {
+            "$ref": "#/components/schemas/ComparisonAssetSummary"
+          },
+          "candidate_asset": {
+            "$ref": "#/components/schemas/ComparisonAssetSummary"
+          },
+          "comparisons": {
+            "items": {
+              "$ref": "#/components/schemas/FieldComparison"
+            },
+            "type": "array",
+            "title": "Comparisons"
+          },
+          "disclaimer": {
+            "type": "string",
+            "title": "Disclaimer",
+            "default": "Similarity indicates a candidate for review, not proof of malicious intent."
+          }
+        },
+        "type": "object",
+        "required": [
+          "finding_id",
+          "official_asset",
+          "candidate_asset"
+        ],
+        "title": "ComparisonResponse",
+        "description": "Response payload for GET /findings/{id}/comparison."
+      },
+      "DecisionHistoryItem": {
+        "properties": {
+          "previous_status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FindingStatus"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Previous Status"
+          },
+          "new_status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FindingStatus"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "New Status"
+          },
+          "decision_reason": {
+            "type": "string",
+            "title": "Decision Reason"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "actor_label": {
+            "type": "string",
+            "title": "Actor Label",
+            "default": "analyst"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "previous_status",
+          "new_status",
+          "decision_reason",
+          "created_at"
+        ],
+        "title": "DecisionHistoryItem",
+        "description": "Historical record of an analyst decision on a finding."
+      },
+      "EvidenceGroup": {
+        "type": "string",
+        "enum": [
+          "NAME",
+          "IDENTITY",
+          "VISUAL",
+          "CONTENT",
+          "CONTEXT"
+        ],
+        "title": "EvidenceGroup",
+        "description": "Independent evidence group for corroboration."
+      },
+      "EvidenceItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "evidence_type": {
+            "type": "string",
+            "title": "Evidence Type"
+          },
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "status": {
+            "$ref": "#/components/schemas/EvidenceStatus"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observed At"
+          },
+          "field_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field Name"
+          },
+          "observed_value": {
+            "title": "Observed Value"
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Url"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "evidence_type",
+          "source_id",
+          "status",
+          "observed_at"
+        ],
+        "title": "EvidenceItem",
+        "description": "Individual item of observable evidence."
+      },
+      "EvidenceStatus": {
+        "type": "string",
+        "enum": [
+          "OBSERVED",
+          "INFERRED",
+          "UNAVAILABLE",
+          "SIMULATED"
+        ],
+        "title": "EvidenceStatus",
+        "description": "Observation reliability status for an individual signal."
+      },
+      "FieldComparison": {
+        "properties": {
+          "field": {
+            "type": "string",
+            "title": "Field"
+          },
+          "official_value": {
+            "title": "Official Value"
+          },
+          "candidate_value": {
+            "title": "Candidate Value"
+          },
+          "similarity": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Similarity"
+          },
+          "name_diff": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/NameDiffSegment"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name Diff"
+          },
+          "non_ascii_chars": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/NonAsciiChar"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Non Ascii Chars"
+          },
+          "detail": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "field"
+        ],
+        "title": "FieldComparison",
+        "description": "Side-by-side comparison of an attribute between official and candidate."
+      },
+      "FindingDecisionRequest": {
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/FindingStatus"
+          },
+          "decision_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decision Reason"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "FindingDecisionRequest",
+        "description": "Payload for PATCH /findings/{id} analyst decision."
+      },
+      "FindingDetailCandidate": {
+        "properties": {
+          "platform": {
+            "type": "string",
+            "title": "Platform"
+          },
+          "asset_type": {
+            "$ref": "#/components/schemas/AssetType"
+          },
+          "stable_identifier": {
+            "type": "string",
+            "title": "Stable Identifier"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name"
+          },
+          "handle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Handle"
+          },
+          "publisher_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher Name"
+          },
+          "icon_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon Url"
+          },
+          "canonical_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canonical Url"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "external_links": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "External Links"
+          },
+          "created_at_source": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At Source"
+          },
+          "followers": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Followers"
+          },
+          "rating_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rating Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "platform",
+          "asset_type",
+          "stable_identifier",
+          "display_name"
+        ],
+        "title": "FindingDetailCandidate",
+        "description": "Candidate details for finding view."
+      },
+      "FindingDetailResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "brand_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Brand Id"
+          },
+          "scan_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Scan Id"
+          },
+          "candidate": {
+            "$ref": "#/components/schemas/FindingDetailCandidate"
+          },
+          "identity_guard": {
+            "$ref": "#/components/schemas/IdentityGuardResult"
+          },
+          "risk_score": {
+            "type": "integer",
+            "title": "Risk Score"
+          },
+          "severity": {
+            "$ref": "#/components/schemas/Severity"
+          },
+          "evidence_coverage": {
+            "type": "number",
+            "title": "Evidence Coverage"
+          },
+          "technique": {
+            "$ref": "#/components/schemas/LookalikeTechnique",
+            "default": "NONE"
+          },
+          "top_signals": {
+            "items": {
+              "$ref": "#/components/schemas/TopSignal"
+            },
+            "type": "array",
+            "title": "Top Signals"
+          },
+          "corroborating_groups": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceGroup"
+            },
+            "type": "array",
+            "title": "Corroborating Groups"
+          },
+          "gates_applied": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Gates Applied"
+          },
+          "score_breakdown": {
+            "items": {
+              "$ref": "#/components/schemas/SignalResult"
+            },
+            "type": "array",
+            "title": "Score Breakdown"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceItem"
+            },
+            "type": "array",
+            "title": "Evidence"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation",
+            "default": ""
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          },
+          "scoring_version": {
+            "type": "string",
+            "title": "Scoring Version",
+            "default": "3.0.0"
+          },
+          "source_mode": {
+            "$ref": "#/components/schemas/SourceMode"
+          },
+          "status": {
+            "$ref": "#/components/schemas/FindingStatus",
+            "default": "NEW"
+          },
+          "decision_history": {
+            "items": {
+              "$ref": "#/components/schemas/DecisionHistoryItem"
+            },
+            "type": "array",
+            "title": "Decision History"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "observed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observed At"
+          },
+          "changed_since_decision": {
+            "type": "boolean",
+            "title": "Changed Since Decision",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "brand_id",
+          "scan_id",
+          "candidate",
+          "identity_guard",
+          "risk_score",
+          "severity",
+          "evidence_coverage",
+          "source_mode",
+          "created_at"
+        ],
+        "title": "FindingDetailResponse",
+        "description": "Comprehensive finding detail payload for GET /findings/{id} and PATCH /findings/{id}."
+      },
+      "FindingListItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "brand_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Brand Id"
+          },
+          "scan_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Scan Id"
+          },
+          "candidate": {
+            "$ref": "#/components/schemas/CandidateSummary"
+          },
+          "risk_score": {
+            "type": "integer",
+            "title": "Risk Score"
+          },
+          "severity": {
+            "$ref": "#/components/schemas/Severity"
+          },
+          "evidence_coverage": {
+            "type": "number",
+            "title": "Evidence Coverage"
+          },
+          "technique": {
+            "$ref": "#/components/schemas/LookalikeTechnique"
+          },
+          "top_signals": {
+            "items": {
+              "$ref": "#/components/schemas/TopSignal"
+            },
+            "type": "array",
+            "title": "Top Signals"
+          },
+          "status": {
+            "$ref": "#/components/schemas/FindingStatus",
+            "default": "NEW"
+          },
+          "source_mode": {
+            "$ref": "#/components/schemas/SourceMode"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Observed At"
+          },
+          "changed_since_decision": {
+            "type": "boolean",
+            "title": "Changed Since Decision",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "brand_id",
+          "scan_id",
+          "candidate",
+          "risk_score",
+          "severity",
+          "evidence_coverage",
+          "technique",
+          "source_mode",
+          "observed_at"
+        ],
+        "title": "FindingListItem",
+        "description": "Candidate for review item listed in findings queue."
+      },
+      "FindingStatus": {
+        "type": "string",
+        "enum": [
+          "NEW",
+          "IN_REVIEW",
+          "CONFIRMED_SUSPICIOUS",
+          "DISMISSED_FALSE_POSITIVE",
+          "INCONCLUSIVE"
+        ],
+        "title": "FindingStatus",
+        "description": "Analyst workflow review state."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "ok"
+          },
+          "service": {
+            "type": "string",
+            "title": "Service",
+            "default": "threatlens-api"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version",
+            "default": "3.0.0"
+          },
+          "contract_version": {
+            "type": "string",
+            "title": "Contract Version",
+            "default": "3.0.0"
+          }
+        },
+        "type": "object",
+        "title": "HealthResponse",
+        "description": "Payload returned by GET /api/v1/health."
+      },
+      "IdentityDecision": {
+        "type": "string",
+        "enum": [
+          "OFFICIAL_EXACT_MATCH",
+          "OFFICIAL_PUBLISHER_MATCH",
+          "AUTHORIZED_PARTNER_MATCH",
+          "BENIGN_LOOKALIKE",
+          "BELOW_THRESHOLD",
+          "CANDIDATE_FOR_REVIEW"
+        ],
+        "title": "IdentityDecision",
+        "description": "Outcome of IdentityGuard and scoring evaluation."
+      },
+      "IdentityGuardResult": {
+        "properties": {
+          "decision": {
+            "$ref": "#/components/schemas/IdentityDecision"
+          },
+          "rule": {
+            "type": "string",
+            "title": "Rule"
+          },
+          "matched_official_asset_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Matched Official Asset Id"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "decision",
+          "rule",
+          "explanation"
+        ],
+        "title": "IdentityGuardResult",
+        "description": "IdentityGuard outcome recorded with assessment."
+      },
+      "LookalikeTechnique": {
+        "type": "string",
+        "enum": [
+          "EXACT_NAME_REUSE",
+          "HOMOGLYPH",
+          "CHARACTER_SWAP",
+          "OMISSION",
+          "REPETITION",
+          "KEYBOARD_ADJACENT",
+          "ADDED_WORD",
+          "SPACING",
+          "SEPARATOR",
+          "NONE"
+        ],
+        "title": "LookalikeTechnique",
+        "description": "Classification of name lookalike variation technique."
+      },
+      "MetaResponse": {
+        "properties": {
+          "scoring_version": {
+            "type": "string",
+            "title": "Scoring Version",
+            "default": "3.0.0"
+          },
+          "contract_version": {
+            "type": "string",
+            "title": "Contract Version",
+            "default": "3.0.0"
+          },
+          "enums": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "type": "object",
+            "title": "Enums"
+          },
+          "thresholds": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Thresholds"
+          },
+          "signal_tables": {
+            "additionalProperties": {
+              "items": {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "type": "object",
+            "title": "Signal Tables"
+          },
+          "supported_platforms": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Supported Platforms"
+          },
+          "supported_asset_types": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Supported Asset Types"
+          }
+        },
+        "type": "object",
+        "title": "MetaResponse",
+        "description": "Payload returned by GET /api/v1/meta."
+      },
+      "NameDiffSegment": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "changed": {
+            "type": "boolean",
+            "title": "Changed"
+          }
+        },
+        "type": "object",
+        "required": [
+          "text",
+          "changed"
+        ],
+        "title": "NameDiffSegment",
+        "description": "Segment in a character-level name difference breakdown."
+      },
+      "NonAsciiChar": {
+        "properties": {
+          "char": {
+            "type": "string",
+            "title": "Char"
+          },
+          "codepoint": {
+            "type": "string",
+            "title": "Codepoint"
+          },
+          "index": {
+            "type": "integer",
+            "title": "Index"
+          }
+        },
+        "type": "object",
+        "required": [
+          "char",
+          "codepoint",
+          "index"
+        ],
+        "title": "NonAsciiChar",
+        "description": "Observed non-ASCII character with unicode codepoint."
+      },
+      "OfficialAssetCreate": {
+        "properties": {
+          "asset_type": {
+            "$ref": "#/components/schemas/AssetType"
+          },
+          "platform": {
+            "type": "string",
+            "title": "Platform"
+          },
+          "stable_identifier": {
+            "type": "string",
+            "title": "Stable Identifier"
+          },
+          "secondary_identifiers": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Secondary Identifiers"
+          },
+          "developer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Developer Id"
+          },
+          "publisher_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher Name"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name"
+          },
+          "handle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Handle"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "canonical_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canonical Url"
+          },
+          "icon_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon Url"
+          },
+          "relationship": {
+            "$ref": "#/components/schemas/Relationship",
+            "default": "OFFICIAL"
+          },
+          "verification_method": {
+            "$ref": "#/components/schemas/VerificationMethod",
+            "default": "STORE_LOOKUP"
+          },
+          "is_verified": {
+            "type": "boolean",
+            "title": "Is Verified",
+            "default": false
+          },
+          "trust_publisher": {
+            "type": "boolean",
+            "title": "Trust Publisher",
+            "default": false
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "asset_type",
+          "platform",
+          "stable_identifier",
+          "display_name"
+        ],
+        "title": "OfficialAssetCreate",
+        "description": "Payload for registering a new official or authorized partner asset."
+      },
+      "OfficialAssetResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "brand_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Brand Id"
+          },
+          "asset_type": {
+            "$ref": "#/components/schemas/AssetType"
+          },
+          "platform": {
+            "type": "string",
+            "title": "Platform"
+          },
+          "stable_identifier": {
+            "type": "string",
+            "title": "Stable Identifier"
+          },
+          "secondary_identifiers": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Secondary Identifiers"
+          },
+          "developer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Developer Id"
+          },
+          "publisher_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher Name"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name"
+          },
+          "handle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Handle"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "canonical_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canonical Url"
+          },
+          "icon_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon Url"
+          },
+          "icon_hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon Hash"
+          },
+          "relationship": {
+            "$ref": "#/components/schemas/Relationship"
+          },
+          "verification_method": {
+            "$ref": "#/components/schemas/VerificationMethod"
+          },
+          "is_verified": {
+            "type": "boolean",
+            "title": "Is Verified"
+          },
+          "trust_publisher": {
+            "type": "boolean",
+            "title": "Trust Publisher"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "warning": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Warning"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "brand_id",
+          "asset_type",
+          "platform",
+          "stable_identifier",
+          "display_name",
+          "relationship",
+          "verification_method",
+          "is_verified",
+          "trust_publisher",
+          "is_active",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "OfficialAssetResponse",
+        "description": "Registered official asset response."
+      },
+      "OfficialAssetUpdate": {
+        "properties": {
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name"
+          },
+          "handle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Handle"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "canonical_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canonical Url"
+          },
+          "icon_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon Url"
+          },
+          "icon_hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon Hash"
+          },
+          "developer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Developer Id"
+          },
+          "publisher_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publisher Name"
+          },
+          "relationship": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Relationship"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "verification_method": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VerificationMethod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "is_verified": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Verified"
+          },
+          "trust_publisher": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trust Publisher"
+          },
+          "is_active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Active"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          }
+        },
+        "type": "object",
+        "title": "OfficialAssetUpdate",
+        "description": "Payload for updating an official asset."
+      },
+      "PaginatedResponse_AuditEventResponse_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AuditEventResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "default": 0
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "default": 20
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "PaginatedResponse[AuditEventResponse]"
+      },
+      "PaginatedResponse_BrandResponse_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/BrandResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "default": 0
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "default": 20
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "PaginatedResponse[BrandResponse]"
+      },
+      "PaginatedResponse_ClearedListItem_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ClearedListItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "default": 0
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "default": 20
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "PaginatedResponse[ClearedListItem]"
+      },
+      "PaginatedResponse_FindingListItem_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/FindingListItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "default": 0
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "default": 20
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "PaginatedResponse[FindingListItem]"
+      },
+      "PaginatedResponse_OfficialAssetResponse_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/OfficialAssetResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "default": 0
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "default": 20
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "PaginatedResponse[OfficialAssetResponse]"
+      },
+      "PaginatedResponse_ScanDetailResponse_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ScanDetailResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "default": 0
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "default": 20
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "PaginatedResponse[ScanDetailResponse]"
+      },
+      "ProviderErrorCode": {
+        "type": "string",
+        "enum": [
+          "TIMEOUT",
+          "RATE_LIMITED",
+          "AUTH_REQUIRED",
+          "PROVIDER_UNAVAILABLE",
+          "NOT_CONFIGURED",
+          "INVALID_RESPONSE",
+          "BLOCKED_URL"
+        ],
+        "title": "ProviderErrorCode",
+        "description": "Upstream provider error classification."
+      },
+      "ReadyResponse": {
+        "properties": {
+          "ready": {
+            "type": "boolean",
+            "title": "Ready",
+            "default": true
+          },
+          "checks": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Checks"
+          }
+        },
+        "type": "object",
+        "title": "ReadyResponse",
+        "description": "Payload returned by GET /api/v1/ready."
+      },
+      "Relationship": {
+        "type": "string",
+        "enum": [
+          "OFFICIAL",
+          "AUTHORIZED_PARTNER"
+        ],
+        "title": "Relationship",
+        "description": "Relationship of an asset to the brand."
+      },
+      "ScanDetailResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "brand_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Brand Id"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/ScanMode"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ScanStatus"
+          },
+          "stage": {
+            "$ref": "#/components/schemas/ScanStage"
+          },
+          "progress_percent": {
+            "type": "integer",
+            "title": "Progress Percent"
+          },
+          "options": {
+            "$ref": "#/components/schemas/ScanOptions"
+          },
+          "source_outcomes": {
+            "items": {
+              "$ref": "#/components/schemas/SourceOutcome"
+            },
+            "type": "array",
+            "title": "Source Outcomes"
+          },
+          "funnel": {
+            "$ref": "#/components/schemas/ScanFunnel"
+          },
+          "findings_by_severity": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Findings By Severity"
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/ScanEvent"
+            },
+            "type": "array",
+            "title": "Events"
+          },
+          "error_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Message"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completed At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "brand_id",
+          "mode",
+          "status",
+          "stage",
+          "progress_percent",
+          "options",
+          "created_at"
+        ],
+        "title": "ScanDetailResponse",
+        "description": "Detailed scan status and outcomes polled by frontend."
+      },
+      "ScanEvent": {
+        "properties": {
+          "at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "At"
+          },
+          "stage": {
+            "type": "string",
+            "title": "Stage"
+          },
+          "level": {
+            "type": "string",
+            "title": "Level",
+            "default": "INFO"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "source_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "at",
+          "stage",
+          "message"
+        ],
+        "title": "ScanEvent",
+        "description": "Log event emitted during scan pipeline progression."
+      },
+      "ScanFunnel": {
+        "properties": {
+          "retrieved": {
+            "type": "integer",
+            "title": "Retrieved",
+            "default": 0
+          },
+          "deduplicated": {
+            "type": "integer",
+            "title": "Deduplicated",
+            "default": 0
+          },
+          "official_cleared": {
+            "type": "integer",
+            "title": "Official Cleared",
+            "default": 0
+          },
+          "not_relevant": {
+            "type": "integer",
+            "title": "Not Relevant",
+            "default": 0
+          },
+          "benign_lookalike": {
+            "type": "integer",
+            "title": "Benign Lookalike",
+            "default": 0
+          },
+          "below_threshold": {
+            "type": "integer",
+            "title": "Below Threshold",
+            "default": 0
+          },
+          "findings": {
+            "type": "integer",
+            "title": "Findings",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "ScanFunnel",
+        "description": "Funnel counters enforcing deduplicated invariant."
+      },
+      "ScanMode": {
+        "type": "string",
+        "enum": [
+          "LIVE",
+          "DEMO"
+        ],
+        "title": "ScanMode",
+        "description": "Scan execution mode."
+      },
+      "ScanOptions": {
+        "properties": {
+          "asset_types": {
+            "items": {
+              "$ref": "#/components/schemas/AssetType"
+            },
+            "type": "array",
+            "title": "Asset Types"
+          },
+          "source_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Source Ids"
+          },
+          "query_limit_per_source": {
+            "type": "integer",
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "title": "Query Limit Per Source",
+            "default": 25
+          },
+          "include_icon_similarity": {
+            "type": "boolean",
+            "title": "Include Icon Similarity",
+            "default": true
+          },
+          "force_refresh": {
+            "type": "boolean",
+            "title": "Force Refresh",
+            "default": false
+          },
+          "allow_stale_cache": {
+            "type": "boolean",
+            "title": "Allow Stale Cache",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "ScanOptions",
+        "description": "Execution options configuration for a scan."
+      },
+      "ScanStage": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "resolving_brand",
+          "planning_queries",
+          "fetching",
+          "normalizing",
+          "hashing_images",
+          "assessing",
+          "persisting",
+          "completed",
+          "failed"
+        ],
+        "title": "ScanStage",
+        "description": "Detailed pipeline progress stage."
+      },
+      "ScanStartRequest": {
+        "properties": {
+          "brand_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Brand Id"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/ScanMode",
+            "default": "LIVE"
+          },
+          "asset_types": {
+            "items": {
+              "$ref": "#/components/schemas/AssetType"
+            },
+            "type": "array",
+            "title": "Asset Types"
+          },
+          "source_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Source Ids"
+          },
+          "query_limit_per_source": {
+            "type": "integer",
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "title": "Query Limit Per Source",
+            "default": 25
+          },
+          "include_icon_similarity": {
+            "type": "boolean",
+            "title": "Include Icon Similarity",
+            "default": true
+          },
+          "force_refresh": {
+            "type": "boolean",
+            "title": "Force Refresh",
+            "default": false
+          },
+          "allow_stale_cache": {
+            "type": "boolean",
+            "title": "Allow Stale Cache",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "brand_id"
+        ],
+        "title": "ScanStartRequest",
+        "description": "Payload to trigger a new scan."
+      },
+      "ScanStartResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "brand_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Brand Id"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/ScanMode"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ScanStatus",
+            "default": "QUEUED"
+          },
+          "stage": {
+            "$ref": "#/components/schemas/ScanStage",
+            "default": "queued"
+          },
+          "progress_percent": {
+            "type": "integer",
+            "title": "Progress Percent",
+            "default": 0
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "brand_id",
+          "mode",
+          "created_at"
+        ],
+        "title": "ScanStartResponse",
+        "description": "Response returned immediately upon queuing a scan (HTTP 202 Accepted)."
+      },
+      "ScanStatus": {
+        "type": "string",
+        "enum": [
+          "QUEUED",
+          "RUNNING",
+          "COMPLETED",
+          "COMPLETED_WITH_ERRORS",
+          "FAILED"
+        ],
+        "title": "ScanStatus",
+        "description": "Lifecycle status of a scan job."
+      },
+      "Severity": {
+        "type": "string",
+        "enum": [
+          "LOW",
+          "MEDIUM",
+          "HIGH",
+          "CRITICAL"
+        ],
+        "title": "Severity",
+        "description": "Severity band for findings."
+      },
+      "SignalResult": {
+        "properties": {
+          "signal": {
+            "type": "string",
+            "title": "Signal"
+          },
+          "group": {
+            "$ref": "#/components/schemas/EvidenceGroup"
+          },
+          "value": {
+            "type": "number",
+            "title": "Value"
+          },
+          "points": {
+            "type": "number",
+            "title": "Points"
+          },
+          "max_points": {
+            "type": "number",
+            "title": "Max Points"
+          },
+          "status": {
+            "$ref": "#/components/schemas/EvidenceStatus"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "detail": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "signal",
+          "group",
+          "value",
+          "points",
+          "max_points",
+          "status",
+          "reason"
+        ],
+        "title": "SignalResult",
+        "description": "Evaluation result for an individual risk signal."
+      },
+      "SourceHealth": {
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name"
+          },
+          "platform": {
+            "type": "string",
+            "title": "Platform"
+          },
+          "asset_types": {
+            "items": {
+              "$ref": "#/components/schemas/AssetType"
+            },
+            "type": "array",
+            "title": "Asset Types"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SourceStatus"
+          },
+          "supported_modes": {
+            "items": {
+              "$ref": "#/components/schemas/SourceMode"
+            },
+            "type": "array",
+            "title": "Supported Modes"
+          },
+          "default_mode": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SourceMode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "last_checked_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Checked At"
+          },
+          "rate_limit_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rate Limit Note"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_id",
+          "display_name",
+          "platform",
+          "status"
+        ],
+        "title": "SourceHealth",
+        "description": "Health check output and coverage status of an external provider source."
+      },
+      "SourceMode": {
+        "type": "string",
+        "enum": [
+          "LIVE",
+          "CACHED",
+          "SIMULATED"
+        ],
+        "title": "SourceMode",
+        "description": "Origin mode for a candidate record or source outcome."
+      },
+      "SourceOutcome": {
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SourceStatus"
+          },
+          "source_mode": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SourceMode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "queries_planned": {
+            "type": "integer",
+            "title": "Queries Planned",
+            "default": 0
+          },
+          "queries_executed": {
+            "type": "integer",
+            "title": "Queries Executed",
+            "default": 0
+          },
+          "candidate_count": {
+            "type": "integer",
+            "title": "Candidate Count",
+            "default": 0
+          },
+          "cache_hit_count": {
+            "type": "integer",
+            "title": "Cache Hit Count",
+            "default": 0
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProviderErrorCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": ""
+          },
+          "retrieved_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retrieved At"
+          },
+          "duration_ms": {
+            "type": "integer",
+            "title": "Duration Ms",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_id",
+          "status"
+        ],
+        "title": "SourceOutcome",
+        "description": "Outcome and query metrics for an individual source provider."
+      },
+      "SourceStatus": {
+        "type": "string",
+        "enum": [
+          "CONNECTED",
+          "PARTIAL",
+          "NOT_CONNECTED",
+          "RATE_LIMITED",
+          "ERROR"
+        ],
+        "title": "SourceStatus",
+        "description": "Health/query status of an external provider source."
+      },
+      "TopSignal": {
+        "properties": {
+          "signal": {
+            "type": "string",
+            "title": "Signal"
+          },
+          "points": {
+            "type": "number",
+            "title": "Points"
+          },
+          "max_points": {
+            "type": "number",
+            "title": "Max Points"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          }
+        },
+        "type": "object",
+        "required": [
+          "signal",
+          "points",
+          "max_points",
+          "reason"
+        ],
+        "title": "TopSignal",
+        "description": "Top highlighted signal explaining why finding was surfaced."
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "VerificationMethod": {
+        "type": "string",
+        "enum": [
+          "OWNER_PROVIDED",
+          "STORE_LOOKUP",
+          "DOMAIN_VERIFIED_HANDLE"
+        ],
+        "title": "VerificationMethod",
+        "description": "Method by which an official asset was verified."
+      }
+    }
+  }
+}
