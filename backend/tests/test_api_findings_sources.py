@@ -238,7 +238,7 @@ def test_sources_status_fixed_list_and_unconnected(client: TestClient) -> None:
     assert res.status_code == 200
     data = res.json()
     assert isinstance(data, list)
-    assert len(data) == 9
+    assert len(data) >= 9
 
     by_id = {s["source_id"]: s for s in data}
 

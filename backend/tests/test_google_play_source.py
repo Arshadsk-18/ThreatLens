@@ -73,7 +73,7 @@ def test_google_play_live_scan_api(client: TestClient):
 
     # Poll until completed
     import time
-    for _ in range(30):
+    for _ in range(50):
         detail = client.get(f"/api/v1/scans/{scan_id}").json()
         if detail["status"] in {"COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"}:
             break

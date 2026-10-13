@@ -780,10 +780,11 @@ class SqlAlchemyCacheRepo(CacheRepo):
 
             # TTL & max_age_s enforcement:
             # If max_age_s is specified, item must be strictly fresher than both max_age_s and ttl_seconds
-            if max_age_s is not None and (
-                age_s > max_age_s or age_s > item.ttl_seconds
-            ):
-                return None
+            if max_age_s is not None:
+                if max_age_s <= 0:
+                    return None
+                if age_s > max_age_s or age_s > item.ttl_seconds:
+                    return None
 
             # If max_age_s is None: stale read is allowed; keep original retrieved_at
             return CachedResponse(

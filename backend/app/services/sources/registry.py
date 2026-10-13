@@ -45,6 +45,14 @@ FIXED_SOURCE_IDS = (
     "recorded_fixtures",
 )
 
+# 4 Core live data adapters for Kampus.VC challenge
+AVAILABLE_SOURCES = (
+    "apple_itunes",
+    "google_play_snapshot",
+    "bluesky_public",
+    "serper_search",
+)
+
 
 class AwaitableList(list):
     """List that can be returned synchronously or awaited asynchronously."""
@@ -266,6 +274,7 @@ async def refresh_status(source_id: str) -> SourceHealth:
 
 
 __all__ = [
+    "AVAILABLE_SOURCES",
     "DEMO_ONLY_SOURCES",
     "FIXED_SOURCE_IDS",
     "SourceRegistry",

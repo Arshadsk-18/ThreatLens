@@ -132,3 +132,15 @@ class ScanDetailResponse(BaseModel):
     created_at: datetime
     started_at: datetime | None = None
     completed_at: datetime | None = None
+
+    @property
+    def per_source_outcomes(self) -> list[SourceOutcome]:
+        return self.source_outcomes
+
+    @property
+    def funnel_metrics(self) -> ScanFunnel:
+        return self.funnel
+
+    @property
+    def event_feed_logs(self) -> list[ScanEvent]:
+        return self.events

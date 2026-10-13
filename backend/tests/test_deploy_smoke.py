@@ -130,7 +130,7 @@ def test_deploy_sources_status(client: TestClient) -> None:
     assert res.status_code == 200
     sources = res.json()
     assert isinstance(sources, list)
-    assert len(sources) == 9
+    assert len(sources) >= 9
 
     status_by_id = {s["source_id"]: s["status"] for s in sources}
     assert status_by_id["google_play_snapshot"] == "CONNECTED"

@@ -55,6 +55,7 @@ try:
         parse_prefill_input,
     )
     from .registry import (
+        AVAILABLE_SOURCES,
         DEMO_ONLY_SOURCES,
         FIXED_SOURCE_IDS,
         assert_not_demo_only,
@@ -68,6 +69,7 @@ try:
     __all__ = [
         "APPLE_LIMITER",
         "BLUESKY_LIMITER",
+        "AVAILABLE_SOURCES",
         "DEMO_ONLY_SOURCES",
         "FIXED_SOURCE_IDS",
         "AppleItunesAdapter",

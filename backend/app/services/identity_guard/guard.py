@@ -89,38 +89,59 @@ def evaluate_identity_guard(
     """
     cand_platform = _clean_id(getattr(candidate, "platform", ""))
     cand_stable_id = _clean_id(getattr(candidate, "stable_identifier", ""))
+    cand_ext_id = _clean_id(getattr(candidate, "external_id", None)) or cand_stable_id
     cand_dev_id = _clean_id(getattr(candidate, "developer_id", None))
 
     cand_sec_ids: dict[str, str] = getattr(candidate, "secondary_identifiers", {}) or {}
     cand_sec_clean = {k.lower(): _clean_id(v) for k, v in cand_sec_ids.items() if v}
+    cand_pkg = _clean_id(getattr(candidate, "package_name", None)) or cand_sec_clean.get("package_name") or cand_sec_clean.get("bundle_id")
+    cand_handle = _clean_id(getattr(candidate, "handle", None)) or cand_sec_clean.get("handle")
 
-    # 1. Evaluate Rule R1_EXACT_ID:
-    # Same platform and (stable_identifier or secondary_identifier) equals an active, verified asset with relationship=OFFICIAL
+    # 1. Evaluate Rule R1_EXACT_ID (Strict Official Asset Exclusion):
+    # Matches exact external_id == official_asset.id / stable_identifier, package_name, or handle
     for asset in official_assets:
         if not asset.is_active or not asset.is_verified:
             continue
         if asset.relationship != Relationship.OFFICIAL:
             continue
-        if _clean_id(asset.platform) != cand_platform:
-            continue
 
         asset_stable_id = _clean_id(asset.stable_identifier)
+        asset_id_str = _clean_id(str(asset.id))
         asset_sec_clean = {k.lower(): _clean_id(v) for k, v in (asset.secondary_identifiers or {}).items() if v}
+        asset_pkg = _clean_id(getattr(asset, "package_name", None)) or asset_sec_clean.get("package_name") or asset_sec_clean.get("bundle_id")
+        asset_handle = _clean_id(getattr(asset, "handle", None)) or asset_sec_clean.get("handle")
 
-        # Check stable_identifier match
-        if cand_stable_id and cand_stable_id == asset_stable_id:
+        # Exact ID match (external_id / stable_identifier)
+        if cand_ext_id and (cand_ext_id == asset_id_str or cand_ext_id == asset_stable_id):
             return IdentityGuardResult(
                 decision=IdentityDecision.OFFICIAL_EXACT_MATCH,
                 rule="R1_EXACT_ID",
                 matched_official_asset_id=asset.id,
-                explanation=f"Cleared: exact identifier match '{asset.stable_identifier}' with registered official asset '{asset.display_name}'.",
+                explanation=f"Cleared: exact identifier match '{cand_ext_id}' with registered official asset '{asset.display_name}'.",
             )
 
-        # Check secondary identifiers (e.g. bundle_id, handle)
+        # Exact package_name / bundle_id match
+        if cand_pkg and asset_pkg and cand_pkg == asset_pkg:
+            return IdentityGuardResult(
+                decision=IdentityDecision.OFFICIAL_EXACT_MATCH,
+                rule="R1_EXACT_ID",
+                matched_official_asset_id=asset.id,
+                explanation=f"Cleared: exact package/bundle match '{cand_pkg}' with registered official asset '{asset.display_name}'.",
+            )
+
+        # Exact handle match
+        if cand_handle and asset_handle and cand_handle == asset_handle:
+            return IdentityGuardResult(
+                decision=IdentityDecision.OFFICIAL_EXACT_MATCH,
+                rule="R1_EXACT_ID",
+                matched_official_asset_id=asset.id,
+                explanation=f"Cleared: exact handle match '{cand_handle}' with registered official asset '{asset.display_name}'.",
+            )
+
+        # Secondary identifiers check
         for key, val in cand_sec_clean.items():
             if not val:
                 continue
-            # Match against asset secondary_identifier with same key
             if asset_sec_clean.get(key) == val:
                 return IdentityGuardResult(
                     decision=IdentityDecision.OFFICIAL_EXACT_MATCH,
@@ -128,24 +149,6 @@ def evaluate_identity_guard(
                     matched_official_asset_id=asset.id,
                     explanation=f"Cleared: exact {key} match '{val}' with registered official asset '{asset.display_name}'.",
                 )
-            # Or handle matching handle
-            if key == "handle" and asset.handle and _clean_id(asset.handle) == val:
-                return IdentityGuardResult(
-                    decision=IdentityDecision.OFFICIAL_EXACT_MATCH,
-                    rule="R1_EXACT_ID",
-                    matched_official_asset_id=asset.id,
-                    explanation=f"Cleared: exact handle match '{val}' with registered official asset '{asset.display_name}'.",
-                )
-
-        # Also check direct handle equality if present on candidate
-        cand_handle = _clean_id(getattr(candidate, "handle", None))
-        if cand_handle and asset.handle and cand_handle == _clean_id(asset.handle):
-            return IdentityGuardResult(
-                decision=IdentityDecision.OFFICIAL_EXACT_MATCH,
-                rule="R1_EXACT_ID",
-                matched_official_asset_id=asset.id,
-                explanation=f"Cleared: exact handle match '{asset.handle}' with registered official asset '{asset.display_name}'.",
-            )
 
     # 2. Evaluate Rule R2_PUBLISHER_ID:
     # Same platform and candidate developer_id matches developer_id of an active verified OFFICIAL asset with trust_publisher=True

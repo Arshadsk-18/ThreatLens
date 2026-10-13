@@ -65,6 +65,12 @@ class AssetType(str, Enum):
     SOCIAL_ACCOUNT = "SOCIAL_ACCOUNT"
 
 
+# Interoperability aliases
+setattr(AssetType, "MOBILE_APP", AssetType.IOS_APP)
+setattr(AssetType, "SOCIAL_PROFILE", AssetType.SOCIAL_ACCOUNT)
+setattr(AssetType, "WEB_DOMAIN", AssetType.SOCIAL_ACCOUNT)
+
+
 class Relationship(str, Enum):
     """Relationship of an asset to the brand."""
 

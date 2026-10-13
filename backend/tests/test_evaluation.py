@@ -117,7 +117,9 @@ def test_person3_hard_negatives_clearance():
     brand, official_assets, _ = load_dataset("threatlens-v1")
     config = ScoringConfig()
 
-    fixture_path = Path("backend/tests/fixtures/real_negatives/verified.jsonl")
+    fixture_path = Path(__file__).parent / "fixtures" / "real_negatives" / "verified.jsonl"
+    if not fixture_path.exists():
+        fixture_path = Path("backend/tests/fixtures/real_negatives/verified.jsonl")
     assert fixture_path.exists(), f"Delivery fixture {fixture_path} not found!"
 
     with open(fixture_path, "r", encoding="utf-8") as f:
