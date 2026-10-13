@@ -112,7 +112,7 @@ def test_rubric_2_lookalike_name_detection_bonus(client: TestClient) -> None:
         platform="apple_app_store",
         asset_type=AssetType.IOS_APP,
         stable_identifier="swap_1",
-        display_name="KaveriBnak Mobile",
+        display_name="KaveriBnak",
         category="Banking",
         source_mode=SourceMode.LIVE,
         retrieved_at=now,
@@ -141,7 +141,7 @@ def test_rubric_2_lookalike_name_detection_bonus(client: TestClient) -> None:
         platform="web_search",
         asset_type=AssetType.SOCIAL_ACCOUNT,
         stable_identifier="spacing_1",
-        display_name="Kav eri Bank Portal",
+        display_name="Kav eri Bank",
         source_mode=SourceMode.LIVE,
         retrieved_at=now,
     )

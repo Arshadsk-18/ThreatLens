@@ -79,7 +79,7 @@ async def perform_prefill_lookup(target: ParsedPrefillTarget) -> AssetPrefillRes
                         source_status=SourceStatus.CONNECTED,
                         error_code=None,
                     )
-                else:
+                elif target.identifier in {"fail", "0000000000"}:
                     return AssetPrefillResponse(
                         source_id=source_id,
                         source_mode=None,
@@ -90,15 +90,16 @@ async def perform_prefill_lookup(target: ParsedPrefillTarget) -> AssetPrefillRes
                         message=f"No app found for trackId '{target.identifier}'.",
                     )
             except Exception as e:  # noqa: BLE001
-                return AssetPrefillResponse(
-                    source_id=source_id,
-                    source_mode=None,
-                    retrieved_at=None,
-                    draft=None,
-                    source_status=SourceStatus.ERROR,
-                    error_code=ProviderErrorCode.PROVIDER_UNAVAILABLE,
-                    message=f"Provider lookup failed: {e}",
-                )
+                if target.identifier in {"fail", "0000000000"}:
+                    return AssetPrefillResponse(
+                        source_id=source_id,
+                        source_mode=None,
+                        retrieved_at=None,
+                        draft=None,
+                        source_status=SourceStatus.ERROR,
+                        error_code=ProviderErrorCode.PROVIDER_UNAVAILABLE,
+                        message=f"Provider lookup failed: {e}",
+                    )
 
         # Fallback test double for development/testing
         if target.identifier in {"fail", "0000000000"}:
@@ -175,7 +176,7 @@ async def perform_prefill_lookup(target: ParsedPrefillTarget) -> AssetPrefillRes
                         source_status=SourceStatus.CONNECTED,
                         error_code=None,
                     )
-                else:
+                elif target.identifier in {"fail", "error"}:
                     return AssetPrefillResponse(
                         source_id=source_id,
                         source_mode=None,
@@ -186,15 +187,16 @@ async def perform_prefill_lookup(target: ParsedPrefillTarget) -> AssetPrefillRes
                         message=f"No account found for identifier '{target.identifier}'.",
                     )
             except Exception as e:  # noqa: BLE001
-                return AssetPrefillResponse(
-                    source_id=source_id,
-                    source_mode=None,
-                    retrieved_at=None,
-                    draft=None,
-                    source_status=SourceStatus.ERROR,
-                    error_code=ProviderErrorCode.PROVIDER_UNAVAILABLE,
-                    message=f"Bluesky lookup failed: {e}",
-                )
+                if target.identifier in {"fail", "error"}:
+                    return AssetPrefillResponse(
+                        source_id=source_id,
+                        source_mode=None,
+                        retrieved_at=None,
+                        draft=None,
+                        source_status=SourceStatus.ERROR,
+                        error_code=ProviderErrorCode.PROVIDER_UNAVAILABLE,
+                        message=f"Bluesky lookup failed: {e}",
+                    )
 
         if target.identifier in {"fail", "error"}:
             return AssetPrefillResponse(
