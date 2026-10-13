@@ -17,10 +17,19 @@ from app.schemas.enums import (
     SourceStatus,
     VerificationMethod,
 )
+from app.services.sources.apple import AppleItunesAdapter
 from app.services.sources.base import SourceAdapter
+from app.services.sources.bluesky import BlueskyPublicAdapter
+from app.services.sources.google_play import GooglePlaySnapshotAdapter
+from app.services.sources.serper import SerperSearchAdapter
 
 # Registry where live source adapters can be registered
-_adapters: dict[str, SourceAdapter] = {}
+_adapters: dict[str, SourceAdapter] = {
+    "apple_itunes": AppleItunesAdapter(),
+    "bluesky_public": BlueskyPublicAdapter(),
+    "google_play_snapshot": GooglePlaySnapshotAdapter(),
+    "serper_search": SerperSearchAdapter(),
+}
 
 
 def register_source_adapter(source_id: str, adapter: SourceAdapter) -> None:
@@ -229,7 +238,43 @@ async def perform_prefill_lookup(target: ParsedPrefillTarget) -> AssetPrefillRes
             error_code=None,
         )
 
-    # 3. Other platforms (not connected in live mode)
+    # 3. Google Play lookup
+    elif target.platform == "google_play":
+        source_id = "google_play_snapshot"
+        adapter = _adapters.get(source_id)
+        if adapter:
+            try:
+                candidate = await adapter.lookup(target.identifier)
+                if candidate:
+                    draft = AssetPrefillDraft(
+                        asset_type=candidate.asset_type,
+                        platform=candidate.platform,
+                        stable_identifier=candidate.stable_identifier,
+                        secondary_identifiers=candidate.secondary_identifiers,
+                        developer_id=candidate.developer_id,
+                        publisher_name=candidate.publisher_name,
+                        display_name=candidate.display_name,
+                        handle=candidate.handle,
+                        description=candidate.description,
+                        category=candidate.category,
+                        canonical_url=candidate.canonical_url,
+                        icon_url=candidate.icon_url,
+                        verification_method=VerificationMethod.STORE_LOOKUP,
+                        relationship=Relationship.OFFICIAL,
+                        trust_publisher=True,
+                    )
+                    return AssetPrefillResponse(
+                        source_id=source_id,
+                        source_mode=SourceMode.LIVE,
+                        retrieved_at=now,
+                        draft=draft,
+                        source_status=SourceStatus.CONNECTED,
+                        error_code=None,
+                    )
+            except Exception:
+                pass
+
+    # 4. Other platforms (not connected in live mode)
     return AssetPrefillResponse(
         source_id="not_connected",
         source_mode=None,

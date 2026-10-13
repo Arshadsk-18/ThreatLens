@@ -94,19 +94,30 @@ async def get_sources_status(
         message="P1 authenticated search; not connected.",
     )
 
-    # 4. google_play_snapshot (Explicitly NOT_CONNECTED)
+    # 4. google_play_snapshot (Live Snapshot Adapter)
     google_play = SourceHealth(
         source_id="google_play_snapshot",
         display_name="Google Play Store Snapshot",
         platform="google_play",
         asset_types=[AssetType.ANDROID_APP],
-        status=SourceStatus.NOT_CONNECTED,
-        supported_modes=[SourceMode.SIMULATED, SourceMode.CACHED],
-        default_mode=None,
-        last_checked_at=None,
-        rate_limit_note=None,
-        message="No official API; not queried",
+        status=SourceStatus.CONNECTED,
+        supported_modes=[SourceMode.LIVE, SourceMode.CACHED],
+        default_mode=SourceMode.LIVE,
+        last_checked_at=now,
+        rate_limit_note="Snapshot quota: ~60 requests per minute",
+        message="Live snapshot catalog queries available.",
     )
+    if refresh and "google_play_snapshot" in _adapters:
+        try:
+            adapter_h = await _adapters["google_play_snapshot"].health_check()
+            google_play.status = adapter_h.status
+            google_play.last_checked_at = adapter_h.last_checked_at or now
+            if adapter_h.message:
+                google_play.message = adapter_h.message
+        except Exception as e:  # noqa: BLE001
+            logger.warning("google_play_snapshot health check failed: %s", e)
+            google_play.status = SourceStatus.ERROR
+            google_play.message = f"Health check failed: {e}"
 
     # 5. instagram (Explicitly NOT_CONNECTED)
     instagram = SourceHealth(

@@ -141,7 +141,6 @@ async def test_not_connected_row_for_every_non_live_source_with_exact_messages()
     plan = make_dummy_plan()
 
     expected_checks = [
-        ("google_play_snapshot", "No official API; not queried"),
         ("instagram", "Requires platform API access. Not queried."),
         ("x", "Requires platform API access. Not queried."),
         ("facebook", "Requires platform API access. Not queried."),
@@ -193,10 +192,10 @@ def test_catalog_contains_exactly_nine_ids_with_expected_default_states() -> Non
     assert lookup_map["apple_itunes"].status == SourceStatus.CONNECTED
     assert lookup_map["apple_itunes"].default_mode == SourceMode.LIVE
     assert lookup_map["bluesky_public"].status == SourceStatus.CONNECTED
+    assert lookup_map["google_play_snapshot"].status == SourceStatus.CONNECTED
 
     # Not connected sources
     assert lookup_map["bluesky_posts"].status == SourceStatus.NOT_CONNECTED
-    assert lookup_map["google_play_snapshot"].status == SourceStatus.NOT_CONNECTED
     assert lookup_map["instagram"].status == SourceStatus.NOT_CONNECTED
     assert lookup_map["x"].status == SourceStatus.NOT_CONNECTED
     assert lookup_map["facebook"].status == SourceStatus.NOT_CONNECTED

@@ -24,6 +24,8 @@ from app.schemas import AssetType, SourceHealth, SourceMode
 from .apple import AppleItunesAdapter
 from .base import SourceAdapter
 from .bluesky import BlueskyPublicAdapter
+from .google_play import GooglePlaySnapshotAdapter
+from .serper import SerperSearchAdapter
 from .fixtures_demo import DemoFixtureAdapter
 from .fixtures_recorded import RecordedFixtureAdapter
 from .not_connected import NotConnectedAdapter
@@ -65,6 +67,8 @@ class SourceRegistry:
         # 1. Live connectors
         self._adapters["apple_itunes"] = AppleItunesAdapter()
         self._adapters["bluesky_public"] = BlueskyPublicAdapter()
+        self._adapters["google_play_snapshot"] = GooglePlaySnapshotAdapter()
+        self._adapters["serper_search"] = SerperSearchAdapter()
 
         # 2. Not connected connectors
         self._adapters["bluesky_posts"] = NotConnectedAdapter(
@@ -73,13 +77,6 @@ class SourceRegistry:
             message="Post search not enabled in P0; not queried.",
             platform="bluesky",
             asset_types=[AssetType.SOCIAL_ACCOUNT],
-        )
-        self._adapters["google_play_snapshot"] = NotConnectedAdapter(
-            source_id="google_play_snapshot",
-            display_name="Google Play snapshot",
-            message="No official API; not queried",
-            platform="google_play",
-            asset_types=[AssetType.ANDROID_APP],
         )
         self._adapters["instagram"] = NotConnectedAdapter(
             source_id="instagram",
@@ -132,21 +129,40 @@ class SourceRegistry:
                 continue
             # Extract health without network (reflecting last real outcome)
             if hasattr(adapter, "_last_health_status"):
-                # Live adapter: Apple or Bluesky
+                # Live adapter: Apple, Bluesky, or Google Play
+                platform = (
+                    "apple_app_store"
+                    if "apple" in sid
+                    else ("google_play" if "google" in sid else "bluesky")
+                )
+                asset_types = (
+                    [AssetType.IOS_APP]
+                    if "apple" in sid
+                    else (
+                        [AssetType.ANDROID_APP]
+                        if "google" in sid
+                        else [AssetType.SOCIAL_ACCOUNT]
+                    )
+                )
+                rate_limit_note = (
+                    "Snapshot query quota: ~60 req/min"
+                    if "google" in sid
+                    else (
+                        "Rate limited"
+                        if "apple" in sid
+                        else "Conservative rate limit"
+                    )
+                )
                 health = SourceHealth(
                     source_id=adapter.source_id,
                     display_name=getattr(adapter, "display_name", adapter.source_id),
-                    platform="apple_app_store" if "apple" in sid else "bluesky",
-                    asset_types=[AssetType.IOS_APP]
-                    if "apple" in sid
-                    else [AssetType.SOCIAL_ACCOUNT],
+                    platform=platform,
+                    asset_types=asset_types,
                     status=adapter._last_health_status,
                     supported_modes=[SourceMode.LIVE, SourceMode.CACHED],
                     default_mode=SourceMode.LIVE,
                     last_checked_at=adapter._last_checked_at,
-                    rate_limit_note="Rate limited"
-                    if "apple" in sid
-                    else "Conservative rate limit",
+                    rate_limit_note=rate_limit_note,
                     message=adapter._last_health_message,
                 )
             elif isinstance(adapter, NotConnectedAdapter):

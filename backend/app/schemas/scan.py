@@ -24,10 +24,15 @@ class ScanOptions(BaseModel):
     """Execution options configuration for a scan."""
 
     asset_types: list[AssetType] = Field(
-        default_factory=lambda: [AssetType.IOS_APP, AssetType.SOCIAL_ACCOUNT]
+        default_factory=lambda: [AssetType.IOS_APP, AssetType.ANDROID_APP, AssetType.SOCIAL_ACCOUNT]
     )
     source_ids: list[str] = Field(
-        default_factory=lambda: ["apple_itunes", "bluesky_public"]
+        default_factory=lambda: [
+            "apple_itunes",
+            "google_play_snapshot",
+            "bluesky_public",
+            "serper_search",
+        ]
     )
     query_limit_per_source: int = Field(default=25, ge=1, le=50)
     include_icon_similarity: bool = True
@@ -41,10 +46,15 @@ class ScanStartRequest(BaseModel):
     brand_id: UUID
     mode: ScanMode = ScanMode.LIVE
     asset_types: list[AssetType] = Field(
-        default_factory=lambda: [AssetType.IOS_APP, AssetType.SOCIAL_ACCOUNT]
+        default_factory=lambda: [AssetType.IOS_APP, AssetType.ANDROID_APP, AssetType.SOCIAL_ACCOUNT]
     )
     source_ids: list[str] = Field(
-        default_factory=lambda: ["apple_itunes", "bluesky_public"]
+        default_factory=lambda: [
+            "apple_itunes",
+            "google_play_snapshot",
+            "bluesky_public",
+            "serper_search",
+        ]
     )
     query_limit_per_source: int = Field(default=25, ge=1, le=50)
     include_icon_similarity: bool = True

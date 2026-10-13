@@ -258,11 +258,12 @@ def test_sources_status_fixed_list_and_unconnected(client: TestClient) -> None:
         assert sid in by_id, f"Source ID '{sid}' missing from status response!"
 
     # Explicitly NOT_CONNECTED per Section 11.1
-    for unconnected in ["google_play_snapshot", "instagram", "x", "facebook"]:
+    for unconnected in ["instagram", "x", "facebook"]:
         entry = by_id[unconnected]
         assert entry["status"] == "NOT_CONNECTED", (
             f"Expected {unconnected} to be explicitly NOT_CONNECTED, got {entry['status']}"
         )
+    assert by_id["google_play_snapshot"]["status"] == "CONNECTED"
 
     # Check apple_itunes fields
     apple = by_id["apple_itunes"]

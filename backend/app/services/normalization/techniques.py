@@ -184,6 +184,14 @@ def classify_technique(observed: str, official: str) -> tuple[LookalikeTechnique
         metadata["matched_rule"] = "CHARACTER_SWAP"
         return LookalikeTechnique.CHARACTER_SWAP, metadata
 
+    tokens_off = [t for t in norm_off.split() if t]
+    tokens_obs = [t for t in norm_obs.split() if t]
+    for toff in tokens_off:
+        for tobs in tokens_obs:
+            if toff != tobs and len(toff) == len(tobs) and _check_character_swap(toff, tobs):
+                metadata["matched_rule"] = "CHARACTER_SWAP"
+                return LookalikeTechnique.CHARACTER_SWAP, metadata
+
     # 4. OMISSION: missing characters from official name
     if (
         clean_obs_nospace

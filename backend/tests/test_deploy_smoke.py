@@ -133,7 +133,7 @@ def test_deploy_sources_status(client: TestClient) -> None:
     assert len(sources) == 9
 
     status_by_id = {s["source_id"]: s["status"] for s in sources}
-    assert status_by_id["google_play_snapshot"] == "NOT_CONNECTED"
+    assert status_by_id["google_play_snapshot"] == "CONNECTED"
     assert status_by_id["instagram"] == "NOT_CONNECTED"
     assert status_by_id["x"] == "NOT_CONNECTED"
     assert status_by_id["facebook"] == "NOT_CONNECTED"

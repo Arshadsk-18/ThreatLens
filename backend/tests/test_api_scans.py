@@ -381,13 +381,13 @@ def test_not_connected_source_does_not_cause_scan_error(client: TestClient) -> N
     brand = client.post("/api/v1/brands", json={"name": "Kaveri Bank"}).json()
     b_id = brand["id"]
 
-    # Apple succeeds, google_play is not connected
+    # Apple succeeds, instagram is not connected
     adapter = FakeAppleAdapter(candidates=[], status=SourceStatus.CONNECTED)
     register_source_adapter("apple_itunes", adapter)
 
     res = client.post(
         "/api/v1/scans",
-        json={"brand_id": b_id, "mode": "LIVE", "source_ids": ["apple_itunes", "google_play_snapshot"]},
+        json={"brand_id": b_id, "mode": "LIVE", "source_ids": ["apple_itunes", "instagram"]},
     )
     scan_id = res.json()["id"]
 
@@ -395,7 +395,7 @@ def test_not_connected_source_does_not_cause_scan_error(client: TestClient) -> N
     assert detail["status"] == "COMPLETED"
     statuses = {o["source_id"]: o["status"] for o in detail["source_outcomes"]}
     assert statuses["apple_itunes"] == "CONNECTED"
-    assert statuses["google_play_snapshot"] == "NOT_CONNECTED"
+    assert statuses["instagram"] == "NOT_CONNECTED"
 
 
 def test_server_restart_scan_recovery(client: TestClient) -> None:

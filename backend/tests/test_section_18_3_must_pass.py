@@ -491,7 +491,7 @@ def test_not_connected_is_not_an_error(client: TestClient) -> None:
     brand = client.post("/api/v1/brands", json={"name": "NotConnTest", "industry_category": "Banking"}).json()
     b_id = brand["id"]
 
-    start = client.post("/api/v1/scans", json={"brand_id": b_id, "mode": "LIVE", "source_ids": ["google_play_snapshot"]})
+    start = client.post("/api/v1/scans", json={"brand_id": b_id, "mode": "LIVE", "source_ids": ["instagram"]})
     scan = _wait_for_scan(client, start.json()["id"])
     assert scan["status"] == "COMPLETED"
     outcome = scan["source_outcomes"][0]

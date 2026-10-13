@@ -583,3 +583,83 @@ def test_bluesky_helpers_and_adapter_alias() -> None:
         2024, 11, 12, 6, 12, 47, 702000, tzinfo=UTC
     )
     assert parse_iso_date("invalid") is None
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_bluesky_429_retry_with_backoff_success(plan: QueryPlan) -> None:
+    """When a 429 is encountered, retry with backoff and succeed on subsequent attempt."""
+    search_data = json.loads(BSKY_SEARCH_FIXTURE_PATH.read_text(encoding="utf-8"))
+    profiles_data = json.loads(BSKY_PROFILES_FIXTURE_PATH.read_text(encoding="utf-8"))
+
+    # First attempt: 429, Second attempt: 200
+    route = respx.get("https://public.api.bsky.app/xrpc/app.bsky.actor.searchActors")
+    route.side_effect = [
+        httpx.Response(429, text="Rate Limited"),
+        httpx.Response(200, json=search_data),
+    ]
+
+    respx.get("https://public.api.bsky.app/xrpc/app.bsky.actor.getProfiles").mock(
+        return_value=httpx.Response(200, json=profiles_data)
+    )
+
+    adapter = BlueskyPublicAdapter(min_interval_s=0.0, rate_limit_retries=1, query_delay_s=0.0)
+    result = await adapter.search(plan)
+
+    assert route.call_count == 2
+    assert result.status == SourceStatus.CONNECTED
+    assert len(result.candidates) > 0
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_bluesky_inter_query_delay() -> None:
+    """Ensure small asynchronous delay is introduced between multiple query dispatches."""
+    import time
+    search_data = json.loads(BSKY_SEARCH_FIXTURE_PATH.read_text(encoding="utf-8"))
+    profiles_data = json.loads(BSKY_PROFILES_FIXTURE_PATH.read_text(encoding="utf-8"))
+
+    respx.get("https://public.api.bsky.app/xrpc/app.bsky.actor.searchActors").mock(
+        return_value=httpx.Response(200, json=search_data)
+    )
+    respx.get("https://public.api.bsky.app/xrpc/app.bsky.actor.getProfiles").mock(
+        return_value=httpx.Response(200, json=profiles_data)
+    )
+
+    two_query_plan = QueryPlan(
+        brand_id=uuid4(),
+        queries=[
+            PlannedQuery(term="bank", kind="BASE", priority=1),
+            PlannedQuery(term="kaveri", kind="BASE", priority=2),
+        ],
+    )
+
+    adapter = BlueskyPublicAdapter(min_interval_s=0.0, query_delay_s=0.05, rate_limit_retries=0)
+    t0 = time.monotonic()
+    result = await adapter.search(two_query_plan)
+    elapsed = time.monotonic() - t0
+
+    assert elapsed >= 0.04
+    assert result.status == SourceStatus.CONNECTED
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_bluesky_graceful_partial_results_on_enrichment_failure(plan: QueryPlan) -> None:
+    """When discovery succeeds but enrichment encounters 429, partial results are kept without crashing."""
+    search_data = json.loads(BSKY_SEARCH_FIXTURE_PATH.read_text(encoding="utf-8"))
+
+    respx.get("https://public.api.bsky.app/xrpc/app.bsky.actor.searchActors").mock(
+        return_value=httpx.Response(200, json=search_data)
+    )
+    respx.get("https://public.api.bsky.app/xrpc/app.bsky.actor.getProfiles").mock(
+        return_value=httpx.Response(429, text="Rate Limited")
+    )
+
+    adapter = BlueskyPublicAdapter(min_interval_s=0.0, rate_limit_retries=0, query_delay_s=0.0)
+    result = await adapter.search(plan)
+
+    # Should not crash the pipeline, must retain candidates from searchActors
+    assert result.status in {SourceStatus.PARTIAL, SourceStatus.RATE_LIMITED}
+    assert len(result.candidates) > 0
+    assert result.candidates[0].platform == "bluesky"

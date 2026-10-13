@@ -34,6 +34,8 @@ from .text import extract_links, sanitize_text
 try:
     from .apple import AppleItunesAdapter, AppleSourceAdapter
     from .bluesky import BlueskyPublicAdapter, BlueskySourceAdapter
+    from .google_play import GooglePlaySnapshotAdapter
+    from .serper import SerperSearchAdapter
     from .cache import (
         CachedResponse,
         CacheRepo,
@@ -74,6 +76,8 @@ try:
         "BlockedUrlError",
         "BlueskyPublicAdapter",
         "BlueskySourceAdapter",
+        "GooglePlaySnapshotAdapter",
+        "SerperSearchAdapter",
         "CacheRepo",
         "CachedResponse",
         "DemoAdapter",

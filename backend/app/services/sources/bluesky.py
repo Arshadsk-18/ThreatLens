@@ -6,7 +6,9 @@ Reference: Contract Sections 5.5, 5.6, 11.3, 12, 13.2
 
 from __future__ import annotations
 
+import asyncio
 import contextlib
+import logging
 import os
 import re
 import time
@@ -16,6 +18,8 @@ from typing import Any
 from urllib.parse import urlparse
 
 import httpx
+
+logger = logging.getLogger("threatlens.sources.bluesky")
 
 from app.schemas import (
     AssetType,
@@ -160,15 +164,32 @@ class BlueskyPublicAdapter:
         min_interval_s: float = 1.0,
         client: httpx.AsyncClient | None = None,
         ttl_s: int | None = None,
+        query_delay_s: float | None = None,
+        rate_limit_retries: int | None = None,
     ) -> None:
         self.cache: CacheRepo = cache or InMemoryCacheFake()
         self.timeout_s = timeout_s
+        self.min_interval_s = min_interval_s
         if rate_limiter is not None:
             self.rate_limiter = rate_limiter
         elif min_interval_s == 1.0:
             self.rate_limiter = BLUESKY_LIMITER
         else:
             self.rate_limiter = AsyncRateLimiter(min_interval_s=min_interval_s)
+
+        # Inter-query delay between search query dispatches (default 1.5s in live/Render mode)
+        if query_delay_s is not None:
+            self.query_delay_s = query_delay_s
+        else:
+            env_delay = os.environ.get("BLUESKY_QUERY_DELAY_SECONDS")
+            self.query_delay_s = float(env_delay) if env_delay is not None else (1.5 if min_interval_s > 0.0 else 0.0)
+
+        # Retry attempts with exponential backoff on HTTP 429
+        if rate_limit_retries is not None:
+            self.rate_limit_retries = rate_limit_retries
+        else:
+            env_retries = os.environ.get("BLUESKY_429_RETRIES")
+            self.rate_limit_retries = int(env_retries) if env_retries is not None else (2 if min_interval_s > 0.0 else 0)
 
         self._external_client = client
         try:
@@ -274,44 +295,63 @@ class BlueskyPublicAdapter:
         search_url = "https://public.api.bsky.app/xrpc/app.bsky.actor.searchActors"
         request_params = {"q": term, "limit": limit}
 
-        try:
-            now_utc = datetime.now(UTC)
-            data = await request_json(
-                client,
-                "GET",
-                search_url,
-                params=request_params,
-                timeout=self.timeout_s,
-                limiter=self.rate_limiter,
-            )
+        max_attempts = 1 + max(0, self.rate_limit_retries)
+        backoff_delay = 2.0
 
-            if (
-                not isinstance(data, dict)
-                or "actors" not in data
-                or not isinstance(data["actors"], list)
-            ):
-                raise ProviderError(
-                    ProviderErrorCode.INVALID_RESPONSE,
-                    "Malformed response from Bluesky searchActors: actors array missing.",
+        for attempt in range(max_attempts):
+            try:
+                now_utc = datetime.now(UTC)
+                data = await request_json(
+                    client,
+                    "GET",
+                    search_url,
+                    params=request_params,
+                    timeout=self.timeout_s,
+                    limiter=self.rate_limiter,
                 )
 
-            self.cache.put(cache_key, self.source_id, request_params, data)
-            cached_rec = self.cache.get(cache_key, max_age_s=None)
-            stored_time = cached_rec.retrieved_at if cached_rec else now_utc
-            return data, SourceMode.LIVE, stored_time, False, None
-
-        except ProviderError as err:
-            if allow_stale_cache:
-                stale = self.cache.get(cache_key, max_age_s=None)
-                if stale is not None and isinstance(stale.response, dict):
-                    return (
-                        stale.response,
-                        SourceMode.CACHED,
-                        stale.retrieved_at,
-                        True,
-                        err.error_code,
+                if (
+                    not isinstance(data, dict)
+                    or "actors" not in data
+                    or not isinstance(data["actors"], list)
+                ):
+                    raise ProviderError(
+                        ProviderErrorCode.INVALID_RESPONSE,
+                        "Malformed response from Bluesky searchActors: actors array missing.",
                     )
-            raise
+
+                self.cache.put(cache_key, self.source_id, request_params, data)
+                cached_rec = self.cache.get(cache_key, max_age_s=None)
+                stored_time = cached_rec.retrieved_at if cached_rec else now_utc
+                return data, SourceMode.LIVE, stored_time, False, None
+
+            except ProviderError as err:
+                if (
+                    err.error_code == ProviderErrorCode.RATE_LIMITED
+                    and attempt < max_attempts - 1
+                ):
+                    logger.warning(
+                        "Bluesky rate limit (429) on query '%s'. Backing off for %.1fs (attempt %d/%d)...",
+                        term,
+                        backoff_delay,
+                        attempt + 1,
+                        max_attempts,
+                    )
+                    await asyncio.sleep(backoff_delay)
+                    backoff_delay *= 2.0
+                    continue
+
+                if allow_stale_cache:
+                    stale = self.cache.get(cache_key, max_age_s=None)
+                    if stale is not None and isinstance(stale.response, dict):
+                        return (
+                            stale.response,
+                            SourceMode.CACHED,
+                            stale.retrieved_at,
+                            True,
+                            err.error_code,
+                        )
+                raise
 
     async def _enrich_profiles_batch(
         self,
@@ -343,52 +383,70 @@ class BlueskyPublicAdapter:
         enrich_url = "https://public.api.bsky.app/xrpc/app.bsky.actor.getProfiles"
         request_params = [("actors", d) for d in dids]
 
-        try:
-            now_utc = datetime.now(UTC)
-            data = await request_json(
-                client,
-                "GET",
-                enrich_url,
-                params=request_params,
-                timeout=self.timeout_s,
-                limiter=self.rate_limiter,
-            )
+        max_attempts = 1 + max(0, self.rate_limit_retries)
+        backoff_delay = 2.0
 
-            if (
-                not isinstance(data, dict)
-                or "profiles" not in data
-                or not isinstance(data["profiles"], list)
-            ):
-                raise ProviderError(
-                    ProviderErrorCode.INVALID_RESPONSE,
-                    "Malformed response from Bluesky getProfiles: profiles array missing.",
+        for attempt in range(max_attempts):
+            try:
+                now_utc = datetime.now(UTC)
+                data = await request_json(
+                    client,
+                    "GET",
+                    enrich_url,
+                    params=request_params,
+                    timeout=self.timeout_s,
+                    limiter=self.rate_limiter,
                 )
 
-            self.cache.put(cache_key, self.source_id, {"actors": sorted(dids)}, data)
-            return (
-                {
-                    p.get("did", ""): p
-                    for p in data.get("profiles", [])
-                    if isinstance(p, dict)
-                },
-                SourceMode.LIVE,
-                now_utc,
-            )
-
-        except ProviderError:
-            if allow_stale_cache:
-                stale = self.cache.get(cache_key, max_age_s=None)
-                if stale is not None and isinstance(stale.response, dict):
-                    return (
-                        {
-                            p.get("did", ""): p
-                            for p in stale.response.get("profiles", [])
-                            if isinstance(p, dict)
-                        },
-                        SourceMode.CACHED,
-                        stale.retrieved_at,
+                if (
+                    not isinstance(data, dict)
+                    or "profiles" not in data
+                    or not isinstance(data["profiles"], list)
+                ):
+                    raise ProviderError(
+                        ProviderErrorCode.INVALID_RESPONSE,
+                        "Malformed response from Bluesky getProfiles: profiles array missing.",
                     )
-            raise
+
+                self.cache.put(cache_key, self.source_id, {"actors": sorted(dids)}, data)
+                return (
+                    {
+                        p.get("did", ""): p
+                        for p in data.get("profiles", [])
+                        if isinstance(p, dict)
+                    },
+                    SourceMode.LIVE,
+                    now_utc,
+                )
+
+            except ProviderError as err:
+                if (
+                    err.error_code == ProviderErrorCode.RATE_LIMITED
+                    and attempt < max_attempts - 1
+                ):
+                    logger.warning(
+                        "Bluesky rate limit (429) during profile enrichment. Backing off for %.1fs (attempt %d/%d)...",
+                        backoff_delay,
+                        attempt + 1,
+                        max_attempts,
+                    )
+                    await asyncio.sleep(backoff_delay)
+                    backoff_delay *= 2.0
+                    continue
+
+                if allow_stale_cache:
+                    stale = self.cache.get(cache_key, max_age_s=None)
+                    if stale is not None and isinstance(stale.response, dict):
+                        return (
+                            {
+                                p.get("did", ""): p
+                                for p in stale.response.get("profiles", [])
+                                if isinstance(p, dict)
+                            },
+                            SourceMode.CACHED,
+                            stale.retrieved_at,
+                        )
+                raise
 
     async def search(
         self,
@@ -434,114 +492,126 @@ class BlueskyPublicAdapter:
         stale_cache_time: datetime | None = None
         stale_error_code: ProviderErrorCode | None = None
 
-        async with self._get_client() as client:
-            # 1. Discovery phase
-            for term in planned_terms:
-                try:
-                    (
-                        data,
-                        mode,
-                        fetched_at,
-                        is_stale,
-                        err_code,
-                    ) = await self._fetch_search_query(
-                        client,
-                        term,
-                        query_limit,
-                        force_refresh=force_refresh,
-                        allow_stale_cache=allow_stale_cache,
-                    )
-                    queries_succeeded += 1
-                    consecutive_failures = 0
-                    if mode == SourceMode.LIVE:
-                        live_requests_count += 1
-                        self._record_health(
-                            SourceStatus.CONNECTED,
-                            "Live public profile search and enrichment available.",
+        try:
+            async with self._get_client() as client:
+                # 1. Discovery phase
+                for idx, term in enumerate(planned_terms):
+                    # Asynchronous delay between each query dispatch to respect rate limits
+                    if idx > 0 and self.query_delay_s > 0:
+                        await asyncio.sleep(self.query_delay_s)
+
+                    try:
+                        (
+                            data,
+                            mode,
+                            fetched_at,
+                            is_stale,
+                            err_code,
+                        ) = await self._fetch_search_query(
+                            client,
+                            term,
+                            query_limit,
+                            force_refresh=force_refresh,
+                            allow_stale_cache=allow_stale_cache,
                         )
-                    else:
-                        cache_hits_count += 1
-                        if is_stale:
-                            stale_records_used = True
-                            stale_cache_time = fetched_at
-                            stale_error_code = err_code
-
-                    for actor in data.get("actors", []):
-                        if not isinstance(actor, dict):
-                            continue
-                        did = actor.get("did")
-                        if not did:
-                            continue
-
-                        # Check self-label !no-unauthenticated
-                        if is_self_labelled_no_unauth(actor):
-                            skipped_self_labelled += 1
-                            continue
-
-                        # Deduplicate across queries; remember matched_queries in order
-                        if did not in actor_map:
-                            if len(actor_map) < 50:
-                                actor_map[did] = actor
-                                matched_queries_by_did[did] = [term]
-                                actor_modes_by_did[did] = (mode, fetched_at)
+                        queries_succeeded += 1
+                        consecutive_failures = 0
+                        if mode == SourceMode.LIVE:
+                            live_requests_count += 1
+                            self._record_health(
+                                SourceStatus.CONNECTED,
+                                "Live public profile search and enrichment available.",
+                            )
                         else:
-                            if term not in matched_queries_by_did[did]:
-                                matched_queries_by_did[did].append(term)
+                            cache_hits_count += 1
+                            if is_stale:
+                                stale_records_used = True
+                                stale_cache_time = fetched_at
+                                stale_error_code = err_code
 
-                except ProviderError as err:
-                    consecutive_failures += 1
-                    failures.append((err.error_code, err.message))
+                        for actor in data.get("actors", []):
+                            if not isinstance(actor, dict):
+                                continue
+                            did = actor.get("did")
+                            if not did:
+                                continue
 
-                    if err.error_code == ProviderErrorCode.RATE_LIMITED:
-                        self._record_health(
-                            SourceStatus.RATE_LIMITED, "Provider rate limit active."
-                        )
-                    elif err.error_code == ProviderErrorCode.AUTH_REQUIRED:
-                        self._record_health(
-                            SourceStatus.ERROR, "Provider authentication failed."
-                        )
-                    else:
-                        self._record_health(
-                            SourceStatus.ERROR, "Provider unavailable or timed out."
-                        )
+                            # Check self-label !no-unauthenticated
+                            if is_self_labelled_no_unauth(actor):
+                                skipped_self_labelled += 1
+                                continue
 
-                    if should_abort_remaining_queries(
-                        consecutive_failures, err.error_code
-                    ):
+                            # Deduplicate across queries; remember matched_queries in order
+                            if did not in actor_map:
+                                if len(actor_map) < 50:
+                                    actor_map[did] = actor
+                                    matched_queries_by_did[did] = [term]
+                                    actor_modes_by_did[did] = (mode, fetched_at)
+                            else:
+                                if term not in matched_queries_by_did[did]:
+                                    matched_queries_by_did[did].append(term)
+
+                    except ProviderError as err:
+                        consecutive_failures += 1
+                        failures.append((err.error_code, err.message))
+
+                        if err.error_code == ProviderErrorCode.RATE_LIMITED:
+                            self._record_health(
+                                SourceStatus.RATE_LIMITED, "Provider rate limit active."
+                            )
+                        elif err.error_code == ProviderErrorCode.AUTH_REQUIRED:
+                            self._record_health(
+                                SourceStatus.ERROR, "Provider authentication failed."
+                            )
+                        else:
+                            self._record_health(
+                                SourceStatus.ERROR, "Provider unavailable or timed out."
+                            )
+
+                        if should_abort_remaining_queries(
+                            consecutive_failures, err.error_code
+                        ):
+                            break
+
+                # 2. Enrichment phase: getProfiles in batches of 25 DIDs
+                all_dids = list(actor_map.keys())
+                enriched_profiles: dict[str, dict[str, Any]] = {}
+                enrichment_failure: tuple[ProviderErrorCode, str] | None = None
+
+                batch_size = 25
+                for i in range(0, len(all_dids), batch_size):
+                    if i > 0 and self.query_delay_s > 0:
+                        await asyncio.sleep(self.query_delay_s)
+
+                    chunk = all_dids[i : i + batch_size]
+                    try:
+                        (
+                            batch_res,
+                            enrich_mode,
+                            _enrich_time,
+                        ) = await self._enrich_profiles_batch(
+                            client,
+                            chunk,
+                            force_refresh=force_refresh,
+                            allow_stale_cache=allow_stale_cache,
+                        )
+                        enriched_profiles.update(batch_res)
+                        if enrich_mode == SourceMode.CACHED:
+                            cache_hits_count += 1
+                        else:
+                            live_requests_count += 1
+                    except ProviderError as err:
+                        # Keep basic candidates with counts=None; mark outcome PARTIAL
+                        if enrichment_failure is None:
+                            enrichment_failure = (err.error_code, err.message)
+                        failures.append(
+                            (err.error_code, f"Enrichment batch failed: {err.message}")
+                        )
                         break
 
-            # 2. Enrichment phase: getProfiles in batches of 25 DIDs
-            all_dids = list(actor_map.keys())
-            enriched_profiles: dict[str, dict[str, Any]] = {}
-            enrichment_failure: tuple[ProviderErrorCode, str] | None = None
-
-            batch_size = 25
-            for i in range(0, len(all_dids), batch_size):
-                chunk = all_dids[i : i + batch_size]
-                try:
-                    (
-                        batch_res,
-                        enrich_mode,
-                        _enrich_time,
-                    ) = await self._enrich_profiles_batch(
-                        client,
-                        chunk,
-                        force_refresh=force_refresh,
-                        allow_stale_cache=allow_stale_cache,
-                    )
-                    enriched_profiles.update(batch_res)
-                    if enrich_mode == SourceMode.CACHED:
-                        cache_hits_count += 1
-                    else:
-                        live_requests_count += 1
-                except ProviderError as err:
-                    # Keep basic candidates with counts=None; mark outcome PARTIAL
-                    if enrichment_failure is None:
-                        enrichment_failure = (err.error_code, err.message)
-                    failures.append(
-                        (err.error_code, f"Enrichment batch failed: {err.message}")
-                    )
-                    break
+        except Exception as exc:
+            logger.exception("Unexpected exception in Bluesky search adapter: %s", exc)
+            failures.append((ProviderErrorCode.PROVIDER_UNAVAILABLE, str(exc)))
 
         candidates: list[NormalizedCandidate] = []
         for did, actor in actor_map.items():
