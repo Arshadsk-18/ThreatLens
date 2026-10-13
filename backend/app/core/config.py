@@ -63,6 +63,8 @@ class Settings(BaseSettings):
     LLM_MODEL: str | None = None
     BLUESKY_APP_PASSWORD: str | None = None
     BLUESKY_HANDLE: str | None = None
+    SERPER_API_KEY: str | None = None
+    BRAVE_API_KEY: str | None = None
 
 
 settings = Settings()
